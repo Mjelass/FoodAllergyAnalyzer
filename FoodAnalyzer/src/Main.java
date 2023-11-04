@@ -39,16 +39,16 @@ public class Main {
 	 * main menu commands.
 	 */
 	public static void mainMenu() {
-		System.out.println("1. Check list of all food and Allergies associated");
-		System.out.println("2. Check list of food suitable with my Allergies");
+		System.out.println("1. Login if you already have an account");
+		System.out.println("2. Create an account");
 		System.out.println("0. Exit\n");
 
 		//Get user input
 		int userInput = inputOutput("Please press the number that corresponds to what you would like the food analyzer to do.");
 
 		if (userInput >= 0 && userInput <=2) {
-			//if (userInput == 1) AllListFoodAllergy();
-			//if (userInput == 2) FoodSuitableAllergy();
+			if (userInput == 1) UserLogin();
+			if (userInput == 2) CreateAccount();
 			if (userInput == 0) System.exit(0);
 		} else {
 			System.out.println("Please enter a number from 0 - 4");

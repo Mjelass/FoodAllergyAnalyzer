@@ -3,6 +3,8 @@ public class Food {
 	private String name;
 	private String [] ingridients;
 	private String [] allergies;
+	private String Category;
+	private Long Price;
 	
 	public Food(String name, String[] ingridients, String[] allergies) {
 		super();
