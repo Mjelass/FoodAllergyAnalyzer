@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+
 import java.io.IOException;
 import java.io.InputStreamReader;
 
@@ -45,10 +46,10 @@ public class Main {
 
 		//Get user input
 		int userInput = inputOutput("Please press the number that corresponds to what you would like the food analyzer to do.");
-
+		MehdiSprintOne mm=new MehdiSprintOne();
 		if (userInput >= 0 && userInput <=2) {
-			if (userInput == 1) UserLogin();
-			if (userInput == 2) CreateAccount();
+			if (userInput == 1) mm.UserLogin();
+			if (userInput == 2) mm.CreateUserAccount();
 			if (userInput == 0) System.exit(0);
 		} else {
 			System.out.println("Please enter a number from 0 - 4");
