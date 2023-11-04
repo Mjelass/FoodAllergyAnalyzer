@@ -4,13 +4,21 @@ public class User {
 	private String UserName;
 	private String Password;
 	private String[] Allergies;
+	private String Role;
 	
-	public User(String name, String userName, String password, String[] allergies) {
+	public String getRole() {
+		return Role;
+	}
+	public void setRole(String role) {
+		Role = role;
+	}
+	public User(String name, String userName, String password, String[] allergies, String role) {
 		super();
 		this.name = name;
 		UserName = userName;
 		Password = password;
 		Allergies = allergies;
+		Role = role;
 	}
 	public String getName() {
 		return name;
