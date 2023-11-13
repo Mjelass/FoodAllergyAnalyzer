@@ -49,6 +49,7 @@ public class DavidSprintOne {
         case 0:
             return null;
         case 1:
+    		System.out.println("Here are the categories of food : " );
         	return new Categories();
 		}
 	}
@@ -70,14 +71,19 @@ public class DavidSprintOne {
 		case 0 : 
 			return null;
 		case 1:
+			System.out.println("Here are the bakery foods :" );
             return Bakery;
         case 2:
-            return Meat;
+			System.out.println("Here are the meats :" );
+			return Meat;
         case 3:
+			System.out.println("Here are the drinks :" );
             return Drinks;
         case 4:
-            return FruitsAndVegetables;
+			System.out.println("Here are the fruits and vegetables :" );
+			return FruitsAndVegetables;
         case 5:
+			System.out.println("Here are the rest of foods analysable :" );
             return Others;
         default:
             return new ArrayList<>();
@@ -89,6 +95,23 @@ public class DavidSprintOne {
 	 * @return name of a food based on a number
 	 */
 	public Food chooseAFood(int Number) {
+		System.out.println("Which food who you like to look into ?" );
+		switch (choice) {
+		case 0 : 
+			return null;
+		case 1:
+			return Bakery(Number);
+        case 2:
+			return Meat(Number);
+		case 3:
+			return Drinks(Number);
+        case 4:
+			return FruitsAndVegetables(Number);
+        case 5:
+			return Others(Number);
+        default:
+            return new ArrayList<>();
+		}
 		return null;
 	}
 	/**
