@@ -1,4 +1,6 @@
 
+
+
 public class User {
 	private String name;
 	private String UserName;
@@ -42,7 +44,7 @@ public class User {
 		return Allergies;
 	}
 	public void setAllergies(String[] allergies) {
-		Allergies = allergies;
+		this.Allergies = allergies;
 	}
 	
 	
