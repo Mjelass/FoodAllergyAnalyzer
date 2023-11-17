@@ -33,5 +33,18 @@ public class Food {
 	public void setAllergies(String[] allergies) {
 		this.allergies = allergies;
 	}
+	public Long getPrice() {
+        return Price;
+    }
+
+    public void setPrice(Long price) {
+        this.Price = price;
+    }
+    
+    private FoodDatabase foodDatabase;
+
+    public FoodController() {
+        this.foodDatabase = new FoodDatabase();
+    }
 	
 }
