@@ -1,4 +1,6 @@
 package main.java.model;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -6,7 +8,7 @@ public class User {
 	private String name;
 	private String UserName;
 	private String Password;
-	private String[] Allergies;
+	private List<String> Allergies;
 	private String Role;
 	
 	public String getRole() {
@@ -19,7 +21,7 @@ public class User {
 	public User(String name,
              String userName,
              String password,
-             String[] allergies,
+             List<String> allergies,
              String role) {
 		super();
 		this.name = name;
@@ -46,10 +48,10 @@ public class User {
 	public void setPassword(String password) {
 		Password = password;
 	}
-	public String[] getAllergies() {
+	public List<String> getAllergies() {
 		return Allergies;
 	}
-	public void setAllergies(String[] allergies) {
+	public void setAllergies(List<String> allergies) {
 		Allergies = allergies;
 	}
 	

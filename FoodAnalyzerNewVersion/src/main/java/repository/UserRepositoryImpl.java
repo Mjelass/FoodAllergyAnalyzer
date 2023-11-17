@@ -54,7 +54,7 @@ public class UserRepositoryImpl implements UserRepository {
             Document document = new Document("name", user.getName())
                     .append("userName", user.getUserName())
                     .append("PasswordHash", user.getPassword()) // Consider using a secure hash, not plain text
-                    //.append("allergies", user.getAllergies())
+                    .append("allergies", user.getAllergies())
                     .append("Role", user.getRole());
 
             collection.insertOne(document);
@@ -68,6 +68,28 @@ public class UserRepositoryImpl implements UserRepository {
         //users.add(user);
         //saveUsers();
     }
+
+	@Override
+	public Document findUserbyUsername(String Username) {
+		try (MongoClient mongoClient = MongoClients.create(connectionString)) {
+            // Connect to the "cluster0" database
+            MongoDatabase database = mongoClient.getDatabase("cluster0");
+
+            // Create a collection (if not exists)
+            MongoCollection<Document> collection = database.getCollection("UsersSoftMes");
+
+         // Create a query to find a user by username
+            Document query = new Document("userName", Username);
+
+            // Execute the query and retrieve the result
+            return collection.find(query).first();
+
+        } catch (Exception e) {
+            // Log the exception or handle it more gracefully
+            e.printStackTrace();
+        }
+		return null;
+	}
 
     /*private void saveUsers() {
         try {

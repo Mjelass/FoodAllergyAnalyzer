@@ -3,6 +3,9 @@ import java.io.BufferedReader;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 import main.java.model.User;
@@ -46,10 +49,30 @@ public class Main {
         String password_k = scanner.nextLine();
         System.out.print("Please enter your allergies(write the numbers separated by ','): ");
         String allergies_k = scanner.nextLine();
+        String[] elementsArray = allergies_k.split(",");
+        List<String> allergies = new ArrayList<>(Arrays.asList(elementsArray));
         UserController uc=new UserController();
-        String[] allergies = new String[]{"Milk"};
         uc.createUserAccount(name_k,userName_k,password_k,allergies);
         System.out.print("Congratulation, Account created !!");
+	}
+	
+	private static void UserLogin() {
+		Scanner scanner = new Scanner(System.in);
+        System.out.print("Please enter your userName: ");
+        String userName_k = scanner.nextLine();
+        System.out.print("Please enter your password: ");
+        String password_k = scanner.nextLine();
+        UserController uc=new UserController();
+        /*boolean res = uc.UserLogin(userName_k,password_k);
+        if(res) {
+        	System.out.print("Congratulation, You are Loged IN !!");
+        }else {
+        	System.out.print("Sorry UserName or Password false !!");
+        }*/
+        String kk = uc.hashPassword("rr");
+        System.out.print("res  -> "+uc.checkPassword("rr",kk));
+        
+        
 	}
 	
 	
@@ -72,7 +95,7 @@ public class Main {
 		UserController uc=new UserController();
 		String[] allergies;
 		if (userInput >= 0 && userInput <=2) {
-			//if (userInput == 1) uc.UserLogin();
+			if (userInput == 1) UserLogin();
 			if (userInput == 2)  UserRegister();
 			if (userInput == 0) System.exit(0);
 		} else {
