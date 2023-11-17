@@ -3,6 +3,8 @@ import java.io.BufferedReader;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Scanner;
+
 import main.java.model.User;
 import main.java.controller.UserController;
 
@@ -33,6 +35,24 @@ public class Main {
 		}
 		return returnValue;
 	}
+	
+	private static void UserRegister() {
+		Scanner scanner = new Scanner(System.in);
+        System.out.print("Please enter your name: ");
+        String name_k = scanner.nextLine();
+        System.out.print("Please enter your userName: ");
+        String userName_k = scanner.nextLine();
+        System.out.print("Please enter your password: ");
+        String password_k = scanner.nextLine();
+        System.out.print("Please enter your allergies(write the numbers separated by ','): ");
+        String allergies_k = scanner.nextLine();
+        UserController uc=new UserController();
+        String[] allergies = new String[]{"Milk"};
+        uc.createUserAccount(name_k,userName_k,password_k,allergies);
+        System.out.print("Congratulation, Account created !!");
+	}
+	
+	
 
 
 
@@ -52,9 +72,8 @@ public class Main {
 		UserController uc=new UserController();
 		String[] allergies;
 		if (userInput >= 0 && userInput <=2) {
-			if (userInput == 1) uc.UserLogin();
-			String[] alergies = {"Milk"};
-			if (userInput == 2) uc.createUserAccount("test57","test","test",alergies);
+			//if (userInput == 1) uc.UserLogin();
+			if (userInput == 2)  UserRegister();
 			if (userInput == 0) System.exit(0);
 		} else {
 			System.out.println("Please enter a number from 0 - 4");

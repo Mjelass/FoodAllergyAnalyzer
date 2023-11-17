@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="FoodAnalyzerNewVersion/PastFiles"/>
+	<classpathentry kind="src" path="FoodAnalyzerNewVersion/src"/>
+	<classpathentry kind="src" path="FoodAnalyzerOldVersion/src"/>
+	<classpathentry kind="lib" path="FoodAnalyzerNewVersion/bin/lib/hamcrest-core-1.3.jar"/>
+	<classpathentry kind="lib" path="FoodAnalyzerNewVersion/bin/lib/junit-4.12.jar"/>
+	<classpathentry kind="lib" path="FoodAnalyzerNewVersion/lib/hamcrest-core-1.3.jar"/>
+	<classpathentry kind="lib" path="FoodAnalyzerNewVersion/lib/junit-4.12.jar"/>
+	<classpathentry kind="lib" path="FoodAnalyzerOldVersion/lib/hamcrest-core-1.3.jar"/>
+	<classpathentry kind="lib" path="FoodAnalyzerOldVersion/lib/junit-4.12.jar"/>
+	<classpathentry kind="output" path="FoodAnalyzerNewVersion/target/classes"/>
+</classpath>

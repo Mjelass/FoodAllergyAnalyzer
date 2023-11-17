@@ -15,12 +15,12 @@ public class User {
 	public void setRole(String role) {
 		Role = role;
 	}
-	@JsonCreator
-	public User(@JsonProperty("name") String name,
-            @JsonProperty("userName") String userName,
-            @JsonProperty("password") String password,
-            @JsonProperty("allergies") String[] allergies,
-            @JsonProperty("role") String role) {
+	
+	public User(String name,
+             String userName,
+             String password,
+             String[] allergies,
+             String role) {
 		super();
 		this.name = name;
 		UserName = userName;
