@@ -22,24 +22,12 @@ public class UserRepositoryImpl implements UserRepository {
 
     public UserRepositoryImpl() {
         //users = loadUsers();
-        connectionString = "mongodb+srv://admin:jelassia@cluster0.bhohcl2.mongodb.net/cluster0?retryWrites=true&w=majority"; // Modify this based on your MongoDB server configuration
+        connectionString = "mongodb+srv://smagroup475:poiuy98765@cluster0.rz7navz.mongodb.net/?retryWrites=true&w=majority"; // Modify this based on your MongoDB server configuration
 
         
     }
 
-    private List<User> loadUsers() {
-        try {
-            File file = new File(filePath);
-            if (!file.exists()) {
-                file.createNewFile();
-                return new ArrayList<>();
-            }
-            return objectMapper.readValue(file, new TypeReference<List<User>>() {});
-        } catch (IOException e) {
-            e.printStackTrace();
-            return new ArrayList<>();
-        }
-    }
+  
 
     @Override
     public void addUser(User user) {
@@ -90,12 +78,27 @@ public class UserRepositoryImpl implements UserRepository {
         }
 		return null;
 	}
+	
+	@Override
+	public void deleteUserbyUsername(String Username) {
+		try (MongoClient mongoClient = MongoClients.create(connectionString)) {
+            // Connect to the "cluster0" database
+            MongoDatabase database = mongoClient.getDatabase("cluster0");
 
-    /*private void saveUsers() {
-        try {
-            objectMapper.writeValue(new File(filePath), users);
-        } catch (IOException e) {
+            // Create a collection (if not exists)
+            MongoCollection<Document> collection = database.getCollection("UsersSoftMes");
+
+         // Specify the filter to find the user to delete
+            Document filter = new Document("userName", Username);
+
+            // Perform the delete
+            collection.deleteOne(filter);
+            System.out.println("Succefully deleated");
+        } catch (Exception e) {
+            // Log the exception or handle it more gracefully
             e.printStackTrace();
         }
-    }*/
+		
+	}
+
 }

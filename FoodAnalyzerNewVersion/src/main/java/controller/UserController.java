@@ -8,6 +8,7 @@ import java.util.Scanner;
 import java.util.UUID;
 
 import org.bson.Document;
+import org.mindrot.jbcrypt.BCrypt;
 
 import main.java.model.User;
 import main.java.repository.UserRepository;
@@ -19,64 +20,15 @@ public class UserController {
 	public UserController() {
         this.userRepository =  new UserRepositoryImpl();
     }
-	 public String hashPassword(String password) {
-	        try {
-	            // Generate a random salt
-	            SecureRandom secureRandom = new SecureRandom();
-	            byte[] salt = new byte[16];
-	            secureRandom.nextBytes(salt);
+	 // Hash a password
+    public static String hashPassword(String password) {
+        return BCrypt.hashpw(password, BCrypt.gensalt());
+    }
 
-	            // Combine password and salt
-	            byte[] combined = concatenateByteArrays(salt, password.getBytes());
+    public static boolean checkPassword(String plainPassword, String hashedPassword) {
+        return BCrypt.checkpw(plainPassword, hashedPassword);
+    }
 
-	            // Create MessageDigest instance for SHA-256
-	            MessageDigest md = MessageDigest.getInstance("SHA-256");
-
-	            // Update the digest with the combined bytes
-	            byte[] hashedBytes = md.digest(combined);
-
-	            // Encode the hashed bytes as a Base64 string
-	            return Base64.getEncoder().encodeToString(concatenateByteArrays(salt, hashedBytes));
-	        } catch (NoSuchAlgorithmException e) {
-	            e.printStackTrace();
-	            // Handle the exception according to your needs
-	            return null;
-	        }
-	    }
-
-	    public static boolean checkPassword(String userInputPassword, String storedHashedPassword) {
-	        // Decode the stored hashed password from Base64
-	        byte[] storedHashBytes = Base64.getDecoder().decode(storedHashedPassword);
-
-	        // Extract the salt from the stored hash
-	        byte[] salt = new byte[16];
-	        System.arraycopy(storedHashBytes, 0, salt, 0, 16);
-
-	        // Combine the provided password and the stored salt
-	        byte[] combined = concatenateByteArrays(salt, userInputPassword.getBytes());
-
-	        try {
-	            // Create MessageDigest instance for SHA-256
-	            MessageDigest md = MessageDigest.getInstance("SHA-256");
-
-	            // Update the digest with the combined bytes
-	            byte[] hashedBytes = md.digest(combined);
-
-	            // Compare the generated hash with the stored hash
-	            return MessageDigest.isEqual(storedHashBytes, Base64.getDecoder().decode(Base64.getEncoder().encodeToString(hashedBytes)));
-	        } catch (NoSuchAlgorithmException e) {
-	            e.printStackTrace();
-	            // Handle the exception according to your needs
-	            return false;
-	        }
-	    }
-
-	    private static byte[] concatenateByteArrays(byte[] a, byte[] b) {
-	        byte[] result = new byte[a.length + b.length];
-	        System.arraycopy(a, 0, result, 0, a.length);
-	        System.arraycopy(b, 0, result, a.length, b.length);
-	        return result;
-	    }
 	/**
 	 * take username and password form user
 	 * check username and password in db and return the user
@@ -122,7 +74,7 @@ public class UserController {
 	 * 
 	 */
 	public void deleteUserAccount(String UserName) {
-		//userRepository.deleteUser(UserName);
+		userRepository.deleteUserbyUsername(UserName);
 	}
 	/**
 	 * Update a user and  into the DB 
@@ -143,6 +95,7 @@ public class UserController {
 	 * @return User
 	 */
 	public void CheckUserAccount(String UserName) {
-		//User user = userRepository.getUser(UserName);
+		Document res = userRepository.findUserbyUsername(UserName);
+		
 	}
 }

@@ -63,22 +63,14 @@ public class Main {
         System.out.print("Please enter your password: ");
         String password_k = scanner.nextLine();
         UserController uc=new UserController();
-        /*boolean res = uc.UserLogin(userName_k,password_k);
+        boolean res = uc.UserLogin(userName_k,password_k);
         if(res) {
         	System.out.print("Congratulation, You are Loged IN !!");
         }else {
         	System.out.print("Sorry UserName or Password false !!");
-        }*/
-        String kk = uc.hashPassword("rr");
-        System.out.print("res  -> "+uc.checkPassword("rr",kk));
-        
-        
+        }
 	}
 	
-	
-
-
-
 
 
 	/**

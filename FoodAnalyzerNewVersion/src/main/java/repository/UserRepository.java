@@ -7,5 +7,6 @@ public interface UserRepository {
     
     void addUser(User newUser);
     Document findUserbyUsername(String Username);
+    void deleteUserbyUsername(String Username);
     
 }
