@@ -2,6 +2,7 @@ package main.java.controller;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
 import java.util.Scanner;
@@ -15,7 +16,7 @@ import main.java.repository.UserRepository;
 import main.java.repository.UserRepositoryImpl;
 
 public class UserController {
-	private final UserRepository userRepository;
+	public final UserRepository userRepository;
 	
 	public UserController() {
         this.userRepository =  new UserRepositoryImpl();
@@ -85,7 +86,23 @@ public class UserController {
 	 * @return User
 	 */
 	public void UpdateUserAccount(String name,String UserName,String Password,String[] Allergies) {
-		//User user = userRepository.getUser(UserName);
+	    // Retrieve the existing user document from the repository
+	    Document existingUserDocument = userRepository.findUserbyUsername(UserName);
+
+	    // Check if the user exists
+	    if (existingUserDocument != null) {
+	        // Update the relevant fields
+	        existingUserDocument.put("name", name);
+	        existingUserDocument.put("PasswordHash", hashPassword(Password));
+	        existingUserDocument.put("allergies", Arrays.asList(Allergies));
+
+	        // Update the user document in the repository
+	        userRepository.updateUser(UserName, existingUserDocument);
+	        
+	        System.out.println("User updated successfully.");
+	    } else {
+	        System.out.println("User not found. Update failed.");
+	    }
 	
 	}
 	/**

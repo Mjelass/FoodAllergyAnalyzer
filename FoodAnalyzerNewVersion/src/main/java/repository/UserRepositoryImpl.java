@@ -1,7 +1,9 @@
 package main.java.repository;
 import com.mongodb.client.MongoClients;
+import static com.mongodb.client.model.Filters.*;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.result.UpdateResult;
 import com.mongodb.client.MongoCollection;
 import org.bson.Document;
 
@@ -15,9 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserRepositoryImpl implements UserRepository {
-    private final String filePath = "src\\main\\resources\\data\\users.json";
-    private final ObjectMapper objectMapper = new ObjectMapper();
-    private List<User> users;
+
     private String connectionString;
 
     public UserRepositoryImpl() {
@@ -37,24 +37,30 @@ public class UserRepositoryImpl implements UserRepository {
 
             // Create a collection (if not exists)
             MongoCollection<Document> collection = database.getCollection("UsersSoftMes");
+            
+            Document existingUser = collection.find(eq("userName", user.getUserName())).first();
 
-            // Insert a document into the collection
-            Document document = new Document("name", user.getName())
-                    .append("userName", user.getUserName())
-                    .append("PasswordHash", user.getPassword()) // Consider using a secure hash, not plain text
-                    .append("allergies", user.getAllergies())
-                    .append("Role", user.getRole());
 
-            collection.insertOne(document);
+            if (existingUser == null) {
+                // Insert a document into the collection
+                Document document = new Document("name", user.getName())
+                        .append("userName", user.getUserName())
+                        .append("PasswordHash", user.getPassword()) 
+                        .append("allergies", user.getAllergies())
+                        .append("Role", user.getRole());
 
-            System.out.println("Document inserted successfully.");
+                collection.insertOne(document);
+
+                System.out.println("User inserted successfully.");
+            } else {
+                System.out.println("Username already exists. Please choose a different username.");
+            }
 
         } catch (Exception e) {
             // Log the exception or handle it more gracefully
             e.printStackTrace();
         }
-        //users.add(user);
-        //saveUsers();
+        
     }
 
 	@Override
@@ -98,6 +104,39 @@ public class UserRepositoryImpl implements UserRepository {
             // Log the exception or handle it more gracefully
             e.printStackTrace();
         }
+		
+	}
+
+
+
+	@Override
+	public void updateUser(String userName, Document existingUserDocument) {
+		 try (MongoClient mongoClient = MongoClients.create(connectionString)) {
+		        // Connect to the "cluster0" database
+		        MongoDatabase database = mongoClient.getDatabase("cluster0");
+
+		        // Create a collection (if not exists)
+		        MongoCollection<Document> collection = database.getCollection("UsersSoftMes");
+
+		        // Specify the filter to find the user to update
+		        Document filter = new Document("userName", userName);
+
+		        // Create an update document with the modified fields
+		        Document updateDocument = new Document("$set", existingUserDocument);
+
+		        // Perform the update
+		        UpdateResult updateResult = collection.updateOne(filter, updateDocument);
+
+		        if (updateResult.getModifiedCount() > 0) {
+		            System.out.println("User updated successfully.");
+		        } else {
+		            System.out.println("User not found or no changes made. Update failed.");
+		        }
+
+		    } catch (Exception e) {
+		        // Log the exception or handle it more gracefully
+		        e.printStackTrace();
+		    }
 		
 	}
 

@@ -47,13 +47,13 @@ public class Main {
         String userName_k = scanner.nextLine();
         System.out.print("Please enter your password: ");
         String password_k = scanner.nextLine();
-        System.out.print("Please enter your allergies(write the numbers separated by ','): ");
+        System.out.print("Please enter your allergies(write the allergies separated by ','): ");
         String allergies_k = scanner.nextLine();
         String[] elementsArray = allergies_k.split(",");
         List<String> allergies = new ArrayList<>(Arrays.asList(elementsArray));
         UserController uc=new UserController();
         uc.createUserAccount(name_k,userName_k,password_k,allergies);
-        System.out.print("Congratulation, Account created !!");
+        mainMenu();
 	}
 	
 	private static void UserLogin() {
@@ -66,6 +66,7 @@ public class Main {
         boolean res = uc.UserLogin(userName_k,password_k);
         if(res) {
         	System.out.print("Congratulation, You are Loged IN !!");
+        	afterLogin();
         }else {
         	System.out.print("Sorry UserName or Password false !!");
         }
@@ -80,6 +81,25 @@ public class Main {
 	public static void mainMenu() {
 		System.out.println("1. Login if you already have an account");
 		System.out.println("2. Create an account");
+		System.out.println("0. Exit\n");
+
+		//Get user input
+		int userInput = inputOutput("Please press the number that corresponds to what you would like the food analyzer to do.");
+		UserController uc=new UserController();
+		String[] allergies;
+		if (userInput >= 0 && userInput <=2) {
+			if (userInput == 1) UserLogin();
+			if (userInput == 2)  UserRegister();
+			if (userInput == 0) System.exit(0);
+		} else {
+			System.out.println("Please enter a number from 0 - 4");
+			mainMenu();
+		}
+	}
+	
+	public static void afterLogin() {
+		System.out.println("1. check the information of my account");
+		System.out.println("2. update the information of my account");
 		System.out.println("0. Exit\n");
 
 		//Get user input
