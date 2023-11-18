@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import main.java.model.User;
+import main.java.controller.CategoriesController;
 import main.java.controller.UserController;
 
 /**

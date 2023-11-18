@@ -41,10 +41,10 @@ public class Food {
         this.Price = price;
     }
     
-    private FoodDatabase foodDatabase;
+    //private FoodDatabase foodDatabase;
 
-    public FoodController() {
-        this.foodDatabase = new FoodDatabase();
-    }
+    //public FoodController() {
+        //this.foodDatabase = new FoodDatabase();
+    //}
 	
 }
