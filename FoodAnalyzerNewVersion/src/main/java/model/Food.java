@@ -48,5 +48,5 @@ public class Food {
     public void setPrice(Long price) {
         this.Price = price;
     }
-	
+
 }
