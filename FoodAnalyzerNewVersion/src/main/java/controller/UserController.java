@@ -26,6 +26,7 @@ public class UserController {
         return BCrypt.hashpw(password, BCrypt.gensalt());
     }
 
+    
     public static boolean checkPassword(String plainPassword, String hashedPassword) {
         return BCrypt.checkpw(plainPassword, hashedPassword);
     }
@@ -88,9 +89,14 @@ public class UserController {
 	public void UpdateUserAccount(String name,String UserName,String Password,List<String> Allergies,String CurrentUserName) {
 	    // Retrieve the existing user document from the repository
 	    Document existingUserDocument = userRepository.findUserbyUsername(CurrentUserName);
+	    Document takenUserName = null;
+	    if(!UserName.equals(CurrentUserName)) {
+	    	takenUserName = userRepository.findUserbyUsername(UserName);
+	    }
+
 
 	    // Check if the user exists
-	    if (existingUserDocument != null) {
+	    if (existingUserDocument != null && takenUserName == null) {
 	        // Update the relevant fields
 	        existingUserDocument.put("name", name);
 	        existingUserDocument.put("userName", UserName);
@@ -102,7 +108,7 @@ public class UserController {
 	        
 	        System.out.println("User updated successfully.");
 	    } else {
-	        System.out.println("User not found. Update failed.");
+	        System.out.println("User not found or the new Username is taken already. Update failed.");
 	    }
 	
 	}

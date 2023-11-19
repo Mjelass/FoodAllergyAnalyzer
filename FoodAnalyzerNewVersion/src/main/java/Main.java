@@ -79,13 +79,14 @@ public class Main {
         System.out.print("Please enter your password: ");
         String password_k = scanner.nextLine();
         if("admin".equals(userName_k) && "admin".equals(password_k)) {
+        	loggedUSername="admin";
         	afterLoginAdmin();
     	}
         boolean res = uc.UserLogin(userName_k,password_k);
         if(res) {
         	loggedUSername = userName_k;
         	System.out.println("Congratulation, You are Loged IN As a User!!");
-        	afterLogin();
+        	afterLoginUser();
         }else {
         	System.out.println("Sorry UserName or Password false !!");
         	mainMenu();
@@ -106,12 +107,28 @@ public class Main {
 		//Get user input
 		int userInput = inputOutput("Please press the number that corresponds to what you would like the food analyzer to do.");
 		if (userInput >= 0 && userInput <=6) {
-			if (userInput == 1) fd.checkproduct();
-			if (userInput == 2)  UpdateUserInformation();
-			if (userInput == 3) CheckAccount(loggedUSername);
-			if (userInput == 4)  UpdateUserInformation();
-			if (userInput == 5) CheckAccount(loggedUSername);
-			if (userInput == 6)  UpdateUserInformation();
+			if (userInput == 1) checkProd();
+			if (userInput == 2) 
+				{
+				fd.editfoodinfo();
+				int Input = inputOutput("Please press the number 0 to return.");
+				if (Input == 0) {afterLoginAdmin();}else {afterLoginAdmin();}
+				};
+			if (userInput == 3)  {fd.deletefood();afterLoginAdmin();}
+			if (userInput == 4)  {
+				Scanner scanner = new Scanner(System.in);
+		        System.out.print("Please enter the username of the account you wanna check: ");
+		        String userName_k = scanner.nextLine();
+		        CheckAccount(userName_k);
+			};
+			if (userInput == 5) UpdateUserInformation();
+			if (userInput == 6)  {
+				Scanner scanner = new Scanner(System.in);
+		        System.out.print("Please enter the username of the account you wanna delete: ");
+		        String userName_k = scanner.nextLine();
+				uc.deleteUserAccount(userName_k);
+				afterLoginAdmin();
+			};
 			if (userInput == 0) System.exit(0);
 		} else {
 			System.out.println("Please enter a number from 0 - 6");
@@ -120,8 +137,24 @@ public class Main {
 		
 	}
 
-	private static void CheckAccount(String loggedUSername) {
-		Document res = uc.CheckUserAccount(loggedUSername);
+	private static void checkProd() {
+		fd.checkproduct();
+		int userInput = inputOutput("Please press the number 0 to return.");
+		if (userInput == 0) {
+		if(loggedUSername.equals("admin")) {
+			afterLoginAdmin();
+		}else {
+			afterLoginUser();
+		}
+		}else {
+			System.out.println("Error , please enter 0 next time ");
+			mainMenu();
+		};
+		
+	}
+
+	private static void CheckAccount(String username) {
+		Document res = uc.CheckUserAccount(username);
 		System.out.println("name :"+res.getString("name"));
 		System.out.println("userName :"+res.getString("userName"));
 		List<String> allergyList = res.getList("allergies", String.class);
@@ -134,27 +167,48 @@ public class Main {
 		System.out.println("allergies :"+s);
 		System.out.println("Role :"+res.getString("Role"));
 		int userInput = inputOutput("Please press the number 0 to return.");
-		if (userInput == 0) afterLogin();
+		if (userInput == 0) {
+			if(loggedUSername.equals("admin")) {
+				afterLoginAdmin();
+			}else {
+				afterLoginUser();
+			}
+		}else {
+			System.out.println("Error , please enter 0 next time ");
+			mainMenu();
+		};
 	}
 	
 	private static void UpdateUserInformation() {
 		Scanner scanner = new Scanner(System.in);
-        System.out.print("Please enter your New name: ");
+        System.out.print("Please enter the New name: ");
         String name_k = scanner.nextLine();
-        System.out.print("Please enter your New userName: ");
+        System.out.print("Please enter the New userName: ");
         String userName_k = scanner.nextLine();
-        System.out.print("Please enter your New password: ");
+        System.out.print("Please enter the New password: ");
         String password_k = scanner.nextLine();
-        System.out.print("Please enter your New allergies(write the allergies separated by ','): ");
+        System.out.print("Please enter youther New allergies(write the allergies separated by ','): ");
         String allergies_k = scanner.nextLine();
         String[] elementsArray = allergies_k.split(",");
         List<String> allergies = new ArrayList<>(Arrays.asList(elementsArray));
         uc.UpdateUserAccount(name_k,userName_k,password_k,allergies,loggedUSername);
-        loggedUSername = userName_k;
-        System.out.println("Your new information is : ");
-        CheckAccount(loggedUSername);
+        if(!loggedUSername.equals("admin")) {
+        	loggedUSername = userName_k;
+        }
+        
+        System.out.println("the new information is : ");
+        CheckAccount(userName_k);
         int userInput = inputOutput("Please press the number 0 to return.");
-		if (userInput == 0) afterLogin();
+        if (userInput == 0) {
+			if(loggedUSername.equals("admin")) {
+				afterLoginAdmin();
+			}else {
+				afterLoginUser();
+			}
+		}else {
+			System.out.println("Error , please enter 0 next time ");
+			mainMenu();
+		};
         
 	}
 	
@@ -181,16 +235,18 @@ public class Main {
 		}
 	}
 	
-	public static void afterLogin() {
+	public static void afterLoginUser() {
 		System.out.println("1. check the information of my account");
 		System.out.println("2. update the information of my account");
+		System.out.println("3. check the information of a product");
 		System.out.println("0. Exit\n");
 
 		//Get user input
 		int userInput = inputOutput("Please press the number that corresponds to what you would like the food analyzer to do.");
-		if (userInput >= 0 && userInput <=2) {
+		if (userInput >= 0 && userInput <=3) {
 			if (userInput == 1) CheckAccount(loggedUSername);
 			if (userInput == 2)  UpdateUserInformation();
+			if (userInput == 3)  checkProd();
 			if (userInput == 0) System.exit(0);
 		} else {
 			System.out.println("Please enter a number from 0 - 4");
