@@ -85,19 +85,20 @@ public class UserController {
 	 * @param Allergies
 	 * @return User
 	 */
-	public void UpdateUserAccount(String name,String UserName,String Password,String[] Allergies) {
+	public void UpdateUserAccount(String name,String UserName,String Password,List<String> Allergies,String CurrentUserName) {
 	    // Retrieve the existing user document from the repository
-	    Document existingUserDocument = userRepository.findUserbyUsername(UserName);
+	    Document existingUserDocument = userRepository.findUserbyUsername(CurrentUserName);
 
 	    // Check if the user exists
 	    if (existingUserDocument != null) {
 	        // Update the relevant fields
 	        existingUserDocument.put("name", name);
+	        existingUserDocument.put("userName", UserName);
 	        existingUserDocument.put("PasswordHash", hashPassword(Password));
-	        existingUserDocument.put("allergies", Arrays.asList(Allergies));
+	        existingUserDocument.put("allergies", Allergies);
 
 	        // Update the user document in the repository
-	        userRepository.updateUser(UserName, existingUserDocument);
+	        userRepository.updateUser(CurrentUserName, existingUserDocument);
 	        
 	        System.out.println("User updated successfully.");
 	    } else {
@@ -111,8 +112,8 @@ public class UserController {
 	 * @param password
 	 * @return User
 	 */
-	public void CheckUserAccount(String UserName) {
-		Document res = userRepository.findUserbyUsername(UserName);
+	public Document CheckUserAccount(String UserName) {
+		return userRepository.findUserbyUsername(UserName);
 		
 	}
 }

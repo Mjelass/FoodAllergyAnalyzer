@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import main.java.model.Categories;
+import main.java.model.Categorie;
 import main.java.model.Food;
 
 public class CategoriesController {
@@ -11,7 +11,7 @@ public class CategoriesController {
 	 * Input a number and look up a list of categories
 	 * @return list of categories
 	 */
-	public Categories lookUpCategoriesList() {
+	public Categorie lookUpCategoriesList() {
 		System.out.println("Please choose a topic :" );
 		System.out.println("1) Search allergies by food" );
 		System.out.println("2) Search foods by my allergies" );
@@ -25,7 +25,7 @@ public class CategoriesController {
             return null;
         case 1:
     		System.out.println("Here are the categories of food : " );
-        	return new Categories();
+        	return new Categorie();
         default:
             System.out.println("Invalid choice");
             return null;

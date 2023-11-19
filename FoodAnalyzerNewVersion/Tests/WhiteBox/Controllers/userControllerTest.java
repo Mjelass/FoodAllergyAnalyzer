@@ -100,7 +100,7 @@ public class userControllerTest {
 	        userController.userRepository.addUser(userToUpdate);
 
 	        // Perform the test
-	        userController.UpdateUserAccount("New Name", userNameToUpdate, "newPassword", new String[]{"allergy"});
+	        userController.UpdateUserAccount("New Name", userNameToUpdate, "newPassword", Arrays.asList("allergy"),userNameToUpdate);
 
 	        // Verify that the user is updated
 	        Document updatedUser = userController.userRepository.findUserbyUsername(userNameToUpdate);

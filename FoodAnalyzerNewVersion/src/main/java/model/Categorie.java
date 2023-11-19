@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import main.java.model.Food;
 
-public class Categories {
+public class Categorie {
+	
 
-    List<Food> Bakery = new ArrayList<>();
+    /*List<Food> Bakery = new ArrayList<>();
     List<Food> Meat = new ArrayList<>();
     List<Food> Drinks = new ArrayList<>();
     List<Food> FruitsAndVegetables = new ArrayList<>();
@@ -115,5 +116,5 @@ public class Categories {
 		Others.add(Eggs);//eggs
 		Others.add(Rice);
 		Others.add(Mustard);//Vinegar
-	}
+	}*/
 }	       
