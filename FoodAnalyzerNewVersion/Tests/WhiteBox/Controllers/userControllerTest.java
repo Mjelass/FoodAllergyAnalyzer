@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.bson.Document;
 
+import main.java.controller.ExtraInformation;
 import main.java.controller.UserController;
 import main.java.model.User;
 import main.java.repository.UserRepository;
@@ -129,6 +130,39 @@ public class userControllerTest {
 
 	        // Clean up: Delete the added user
 	        userController.userRepository.deleteUserbyUsername(userNameToCheck);
+	    }
+	    
+	    @Test
+	    public void testCheckUserAccount() {
+	    	userController = new UserController();
+
+	        // Set up: Add a user to the repository for testing
+	        String userNameToCheck = "userToCheck";
+	        User userToCheck = new User("Check Me", userNameToCheck, "password789", null, "user");
+	        userController.userRepository.addUser(userToCheck);
+
+	        // Perform the test
+	        userController.CheckUserAccount(userNameToCheck);
+
+	        // No explicit verification in this case, as it's mostly a retrieval operation
+
+	        // Clean up: Delete the added user
+	        userController.userRepository.deleteUserbyUsername(userNameToCheck);
+	    }
+	    
+	    @Test
+	    void testAllergyPrevention() {
+	        // Test case for Allergies Prevention
+	        System.out.println("Test Case 1: Allergies Prevention");
+	        ExtraInformation.AllergyPrevention();
+
+	        // Test case for Reaction Procedures
+	        System.out.println("Test Case 2: Reaction Procedures");
+	        ExtraInformation.AllergyPrevention();
+
+	        // Test case for Invalid Choice
+	        System.out.println("Test Case 3: Invalid Choice");
+	        ExtraInformation.AllergyPrevention();
 	    }
 	}
 

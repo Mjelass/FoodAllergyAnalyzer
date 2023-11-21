@@ -11,6 +11,7 @@ import java.util.Scanner;
 import org.bson.Document;
 
 import main.java.model.User;
+import main.java.controller.ExtraInformation;
 import main.java.controller.FoodController;
 import main.java.controller.UserController;
 
@@ -154,18 +155,18 @@ public class Main {
 	}
 
 	private static void CheckAccount(String username) {
-		Document res = uc.CheckUserAccount(username);
-		System.out.println("name :"+res.getString("name"));
-		System.out.println("userName :"+res.getString("userName"));
-		List<String> allergyList = res.getList("allergies", String.class);
-		String s="";
-		if(allergyList != null) {
-			for (String allergy : allergyList) {
-	            s= s +" "+allergy;
-	        }
-		}
-		System.out.println("allergies :"+s);
-		System.out.println("Role :"+res.getString("Role"));
+		//Document res = uc.CheckUserAccount(username);
+		//System.out.println("name :"+res.getString("name"));
+		//System.out.println("userName :"+res.getString("userName"));
+		//List<String> allergyList = res.getList("allergies", String.class);
+		//String s="";
+		//if(allergyList != null) {
+		//	for (String allergy : allergyList) {
+	   //         s= s +" "+allergy;
+	   //     }
+		//}
+		//System.out.println("allergies :"+s);
+		//System.out.println("Role :"+res.getString("Role"));
 		int userInput = inputOutput("Please press the number 0 to return.");
 		if (userInput == 0) {
 			if(loggedUSername.equals("admin")) {
@@ -260,6 +261,7 @@ public class Main {
 	 */
 	public static void main(String[] args) {	
 		System.out.println("Welcome to the FoodAnalyzer!\n");
-		mainMenu();
+		//mainMenu();
+		ExtraInformation.AllergyPrevention();
 	}
 }
