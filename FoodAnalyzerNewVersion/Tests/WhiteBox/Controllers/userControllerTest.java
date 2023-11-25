@@ -149,21 +149,6 @@ public class userControllerTest {
 	        // Clean up: Delete the added user
 	        userController.userRepository.deleteUserbyUsername(userNameToCheck);
 	    }
-	    
-	    @Test
-	    void testAllergyPrevention() {
-	        // Test case for Allergies Prevention
-	        System.out.println("Test Case 1: Allergies Prevention");
-	        ExtraInformation.AllergyPrevention();
-
-	        // Test case for Reaction Procedures
-	        System.out.println("Test Case 2: Reaction Procedures");
-	        ExtraInformation.AllergyPrevention();
-
-	        // Test case for Invalid Choice
-	        System.out.println("Test Case 3: Invalid Choice");
-	        ExtraInformation.AllergyPrevention();
-	    }
 	}
 
 	

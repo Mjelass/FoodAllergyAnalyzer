@@ -18,7 +18,7 @@ import java.util.List;
 
 public class UserRepositoryImpl implements UserRepository {
 
-    private String connectionString;
+    private static String connectionString;
 
     public UserRepositoryImpl() {
         //users = loadUsers();
@@ -140,5 +140,34 @@ public class UserRepositoryImpl implements UserRepository {
 		    }
 		
 	}
+	//New methods 25.11.2023
+	public static List<String> getUserAllergiesByUsername(String username) {
+        try (MongoClient mongoClient = MongoClients.create(connectionString)) {
+            // Connect to the "cluster0" database
+            MongoDatabase database = mongoClient.getDatabase("cluster0");
+
+            // Create a collection (if not exists)
+            MongoCollection<Document> collection = database.getCollection("UsersSoftMes");
+
+            // Create a query to find a user by username
+            Document query = new Document("userName", username);
+
+            // Execute the query and retrieve the result
+            Document userDocument = collection.find(query).first();
+
+            if (userDocument != null) {
+                // Retrieve and return the user's allergies
+                return userDocument.getList("allergies", String.class);
+            } else {
+                System.out.println("User not found.");
+            }
+
+        } catch (Exception e) {
+            // Log the exception or handle it more gracefully
+            e.printStackTrace();
+        }
+
+        return null;
+    }
 
 }

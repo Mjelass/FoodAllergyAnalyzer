@@ -11,6 +11,7 @@ import java.util.Scanner;
 import org.bson.Document;
 
 import main.java.model.User;
+import main.java.controller.CategoriesController;
 import main.java.controller.ExtraInformation;
 import main.java.controller.FoodController;
 import main.java.controller.UserController;
@@ -262,6 +263,7 @@ public class Main {
 	public static void main(String[] args) {	
 		System.out.println("Welcome to the FoodAnalyzer!\n");
 		//mainMenu();
+		CategoriesController.lookUpCategoriesList();
 		ExtraInformation.AllergyPrevention();
 	}
 }
