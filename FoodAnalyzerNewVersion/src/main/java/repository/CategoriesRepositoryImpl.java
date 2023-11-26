@@ -1,22 +1,29 @@
 package main.java.repository;
+import com.mongodb.client.MongoClients;
+import static com.mongodb.client.model.Filters.*;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.result.UpdateResult;
+import com.mongodb.client.MongoCollection;
+import org.bson.Document;
 
-import static com.mongodb.client.model.Filters.eq;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
+import main.java.model.Food;
+import main.java.model.User;
+
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.bson.Document;
-
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.result.UpdateResult;
-
-import main.java.model.Food;
-
 public class CategoriesRepositoryImpl {
 	private static String connectionString;
+	
+    public CategoriesRepositoryImpl() {
+        connectionString = "mongodb+srv://smagroup475:poiuy98765@cluster0.rz7navz.mongodb.net/?retryWrites=true&w=majority"; 
+    }
 
 	public static List<List<Food>> getAllCategories() {
 	    List<List<Food>> categories = new ArrayList<>();
@@ -39,12 +46,12 @@ public class CategoriesRepositoryImpl {
 	            List<Food> foodsInCategory = new ArrayList<>();
 	            for (Document foodDocument : foodDocuments) {
 	                String name = foodDocument.getString("name");
-	                List<String> ingredients = foodDocument.getList("ingridients", String.class);
+	                List<String> ingridients = foodDocument.getList("ingridients", String.class);
 	                List<String> allergies = foodDocument.getList("allergies", String.class);
 	                String foodCategory = foodDocument.getString("Category");
 	                Long price = foodDocument.getLong("Price");
 
-	                Food food = new Food(name, ingredients, allergies, foodCategory, price);
+	                Food food = new Food(name, ingridients, allergies, foodCategory, price);
 	                foodsInCategory.add(food);
 	            }
 
@@ -69,21 +76,24 @@ public class CategoriesRepositoryImpl {
 		        MongoCollection<Document> collection = database.getCollection("Food");
 
 		        // Create a query to find foods by category
-		        Document query = new Document("Category", category);
+		        if (!category.isEmpty()) {
+		            String categoryValue = category.get(0).getCategory();
+		            Document query = new Document("Category", categoryValue);
 
-		        // Execute the query and retrieve the results
-		        List<Document> foodDocuments = collection.find(query).into(new ArrayList<>());
-
-		        // Convert the document results to Food objects
-		        for (Document foodDocument : foodDocuments) {
-		            String name = foodDocument.getString("name");
-		            List<String> ingredients = foodDocument.getList("ingridients", String.class);
-		            List<String> allergies = foodDocument.getList("allergies", String.class);
-		            String foodCategory = foodDocument.getString("Category");
-		            Long price = foodDocument.getLong("Price");
-
-		            Food food = new Food(name, ingredients, allergies, foodCategory, price);
-		            foodsInCategory.add(food);
+			        // Execute the query and retrieve the results
+			        List<Document> foodDocuments = collection.find(query).into(new ArrayList<>());
+	
+			        // Convert the document results to Food objects
+			        for (Document foodDocument : foodDocuments) {
+			            String name = foodDocument.getString("name");
+			            List<String> ingredients = foodDocument.getList("ingridients", String.class);
+			            List<String> allergies = foodDocument.getList("allergies", String.class);
+			            String foodCategory = foodDocument.getString("Category");
+			            Long price = foodDocument.getLong("Price");
+	
+			            Food food = new Food(name, ingredients, allergies, foodCategory, price);
+			            foodsInCategory.add(food);
+			        }
 		        }
 
 		    } catch (Exception e) {
