@@ -1,127 +1,80 @@
 package WhiteBox.Controllers;
-
-import static org.junit.Assert.*;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
 import java.io.PrintStream;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 
+import org.junit.Test;
+
+import main.java.Main;
 import main.java.controller.CategoriesController;
 import main.java.model.Food;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CategoriesControllerTest {
 
 	@Test
-	public void testLookUpCategoriesList() {
-	    // Set up
-	    String input = "1\n";
-	    InputStream in = new ByteArrayInputStream(input.getBytes());
-
-	    // Act and Assert
-	    try {
-	        CategoriesController.lookUpCategoriesList();
-	        // You may add assertions based on the expected behavior of this method
-	    } catch (Exception e) {
-	        fail("Unexpected exception thrown during lookUpCategoriesList: " + e.getMessage());
-	    }
-	}
-
-    @Test
-    public void testGetFoodsInCategory() {
-        // Set up
-        List<Food> sampleCategory = new ArrayList<>(); 
+	public void testUserChoosesToExit() {
+        // Arrange
         String input = "0\n";
-        InputStream in = new ByteArrayInputStream(input.getBytes());
+        ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
 
-        // Act and Assert
-        try {
-            CategoriesController.getFoodsInCategory(sampleCategory);
-        } catch (Exception e) {
-            fail("Unexpected exception thrown during getFoodsInCategory: " + e.getMessage());
-        }
+        // Act
+        CategoriesController.lookUpCategoriesList();
+
+        // Assert
+        assertTrue(outContent.toString().contains("Exiting."), "Expected 'Exiting' message");
+        Main.afterLoginUser();
+
+        // Clean up
+        System.setIn(System.in);
+        System.setOut(System.out);
     }
 
     @Test
-    public void testChooseFoodToLookInto() {
-        // Set up
-        List<Food> sampleFoods = new ArrayList<>(); 
-        String input = "0\n";
-        InputStream in = new ByteArrayInputStream(input.getBytes());
+    public void testUserChoosesValidCategory() {
+        // Arrange
+        String input = "2\n";  // Assuming there are at least two categories
+        ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
 
-        // Act and Assert
-        try {
-            CategoriesController.chooseFoodToLookInto(sampleFoods);
-        } catch (Exception e) {
-            fail("Unexpected exception thrown during chooseFoodToLookInto: " + e.getMessage());
-        }
+        // Act
+        CategoriesController.lookUpCategoriesList();
+
+        // Assert
+        assertTrue(outContent.toString().contains("Enter the number of the category you want to explore"), 
+                   "Expected prompt for category choice");
+
+        // Clean up
+        System.setIn(System.in);
+        System.setOut(System.out);
     }
 
     @Test
-    public void testCheckingFoodAllergies() {
-        // Set up
-        Food sampleFood = new Food("Strawberry Jam",Arrays.asList("Strawberries","Sugar"), Arrays.asList("Wheat"), "Jam", 2) ;
-        String input = "0\n";
-        InputStream in = new ByteArrayInputStream(input.getBytes());
+    public void testUserChoosesInvalidCategory() {
+        // Arrange
+        String input = "-1\n";
+        ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
 
-        // Act and Assert
-        try {
-            CategoriesController.checkingFoodAllergies(sampleFood);
-        } catch (Exception e) {
-            fail("Unexpected exception thrown during checkingFoodAllergies: " + e.getMessage());
-        }
-    }
+        // Act
+        CategoriesController.lookUpCategoriesList();
 
-    @Test
-    public void testChooseFoodsByAllergies() {
-        // Set up
-        String input = "0\n";
-        InputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
+        // Assert
+        assertTrue(outContent.toString().contains("Invalid choice. Exiting."), "Expected 'Invalid choice' message");
 
-        // Act and Assert
-        try {
-            CategoriesController.chooseFoodsByAllergies("Jack");
-        } catch (Exception e) {
-            fail("Unexpected exception thrown during chooseFoodsByAllergies: " + e.getMessage());
-        }
-    }
-
-    @Test
-    public void testGetFoodsToAvoid() {
-        // Set up
-        List<Food> allFoods = new ArrayList<>(); 
-        List<String> userAllergies = Arrays.asList("Wheat", "Mushrooms");
-
-        // Act and Assert
-        try {
-            CategoriesController.getFoodsToAvoid(allFoods, userAllergies);
-        } catch (Exception e) {
-            fail("Unexpected exception thrown during getFoodsToAvoid: " + e.getMessage());
-        }
-    }
-
-    @Test
-    public void testGetSafeFoods() {
-        // Set up
-        List<Food> allFoods = new ArrayList<>(); 
-        List<String> userAllergies = Arrays.asList("Wheat", "Mushrooms");
-
-        // Act and Assert
-        try {
-            CategoriesController.getSafeFoods(allFoods, userAllergies);
-        } catch (Exception e) {
-            fail("Unexpected exception thrown during getSafeFoods: " + e.getMessage());
-        }
+        // Clean up
+        System.setIn(System.in);
+        System.setOut(System.out);
     }
 }

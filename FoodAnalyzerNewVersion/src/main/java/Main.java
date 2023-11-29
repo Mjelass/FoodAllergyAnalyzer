@@ -156,18 +156,18 @@ public class Main {
 	}
 
 	private static void CheckAccount(String username) {
-		//Document res = uc.CheckUserAccount(username);
-		//System.out.println("name :"+res.getString("name"));
-		//System.out.println("userName :"+res.getString("userName"));
-		//List<String> allergyList = res.getList("allergies", String.class);
-		//String s="";
-		//if(allergyList != null) {
-		//	for (String allergy : allergyList) {
-	   //         s= s +" "+allergy;
-	   //     }
-		//}
-		//System.out.println("allergies :"+s);
-		//System.out.println("Role :"+res.getString("Role"));
+		Document res = uc.CheckUserAccount(username);
+		System.out.println("name :"+res.getString("name"));
+		System.out.println("userName :"+res.getString("userName"));
+		List<String> allergyList = res.getList("allergies", String.class);
+		String s="";
+		if(allergyList != null) {
+			for (String allergy : allergyList) {
+	            s= s +" "+allergy;
+	        }
+		}
+		System.out.println("allergies :"+s);
+		System.out.println("Role :"+res.getString("Role"));
 		int userInput = inputOutput("Please press the number 0 to return.");
 		if (userInput == 0) {
 			if(loggedUSername.equals("admin")) {
@@ -241,15 +241,19 @@ public class Main {
 		System.out.println("1. check the information of my account");
 		System.out.println("2. update the information of my account");
 		System.out.println("3. check the information of a product");
+		System.out.println("4. Search up foods");
+		System.out.println("5. Check foods by my allergies");
 		System.out.println("0. Exit\n");
 
 		//Get user input
 		int userInput = inputOutput("Please press the number that corresponds to what you would like the food analyzer to do.");
-		if (userInput >= 0 && userInput <=3) {
+		if (userInput >= 0 && userInput <=5) {
 			if (userInput == 1) CheckAccount(loggedUSername);
 			if (userInput == 2)  UpdateUserInformation();
 			if (userInput == 3)  checkProd();
 			if (userInput == 0) System.exit(0);
+			if (userInput == 4) CategoriesController.lookUpCategoriesList();
+			if (userInput == 5) CategoriesController.chooseFoodsByAllergies(loggedUSername);
 		} else {
 			System.out.println("Please enter a number from 0 - 4");
 			mainMenu();
