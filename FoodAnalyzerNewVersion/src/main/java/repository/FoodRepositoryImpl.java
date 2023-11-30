@@ -161,7 +161,8 @@ public class FoodRepositoryImpl implements FoodRepository {
         		System.out.println("Category :"+res.getString("Category"));
         		System.out.println("Price :"+res.getLong("Price"));
             }else {
-        		System.out.println("The product "+nameFoodTocheck+" Does not exist");
+        		System.out.println("ERROR, The product "+nameFoodTocheck+" Does not exist");
+        		System.exit(0);
             }
     		
 

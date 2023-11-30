@@ -2,6 +2,7 @@ package main.java.controller;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
@@ -12,21 +13,26 @@ import org.bson.Document;
 import org.mindrot.jbcrypt.BCrypt;
 
 import main.java.model.User;
+import main.java.repository.FoodRepository;
+import main.java.repository.FoodRepositoryImpl;
 import main.java.repository.UserRepository;
 import main.java.repository.UserRepositoryImpl;
 
 public class UserController {
 	public final UserRepository userRepository;
+	public final FoodRepository foodRepository;
+	private Scanner scanner;
 	
 	public UserController() {
         this.userRepository =  new UserRepositoryImpl();
+        this.scanner=new Scanner(System.in);
+		this.foodRepository = new FoodRepositoryImpl();
     }
 	 // Hash a password
     public static String hashPassword(String password) {
         return BCrypt.hashpw(password, BCrypt.gensalt());
     }
 
-    
     public static boolean checkPassword(String plainPassword, String hashedPassword) {
         return BCrypt.checkpw(plainPassword, hashedPassword);
     }
@@ -67,7 +73,7 @@ public class UserController {
 	 */
 	public void createUserAccount(String name, String userName, String password, List<String> allergies) {
 		String PasswordHash = hashPassword(password);
-        User newUser = new User(name, userName, PasswordHash, allergies, "user"); // Create a new user
+        User newUser = new User(name, userName, PasswordHash, allergies, "user",null); // Create a new user
         userRepository.addUser(newUser); // Add the user to the repository
     }
 	/**
@@ -89,14 +95,9 @@ public class UserController {
 	public void UpdateUserAccount(String name,String UserName,String Password,List<String> Allergies,String CurrentUserName) {
 	    // Retrieve the existing user document from the repository
 	    Document existingUserDocument = userRepository.findUserbyUsername(CurrentUserName);
-	    Document takenUserName = null;
-	    if(!UserName.equals(CurrentUserName)) {
-	    	takenUserName = userRepository.findUserbyUsername(UserName);
-	    }
-
 
 	    // Check if the user exists
-	    if (existingUserDocument != null && takenUserName == null) {
+	    if (existingUserDocument != null) {
 	        // Update the relevant fields
 	        existingUserDocument.put("name", name);
 	        existingUserDocument.put("userName", UserName);
@@ -108,7 +109,7 @@ public class UserController {
 	        
 	        System.out.println("User updated successfully.");
 	    } else {
-	        System.out.println("User not found or the new Username is taken already. Update failed.");
+	        System.out.println("User not found. Update failed.");
 	    }
 	
 	}
@@ -120,6 +121,52 @@ public class UserController {
 	 */
 	public Document CheckUserAccount(String UserName) {
 		return userRepository.findUserbyUsername(UserName);
+		
+	}
+	
+	public void addFavList(String UserName, String Prod) {
+		foodRepository.checkFoodByName(Prod);
+		Document existingUserDocument = userRepository.findUserbyUsername(UserName);
+		List<String> favList = existingUserDocument.getList("FavoriteList", String.class);
+		if(favList != null && favList.contains(Prod)) {
+			System.out.println("Sorry but "+Prod+" already included in your list.");
+		} else {
+			if (favList == null) {
+		        favList = new ArrayList<>();
+		    }
+			favList.add(Prod);
+			existingUserDocument.put("FavoriteList", favList);
+			userRepository.updateUser(UserName, existingUserDocument);
+			System.out.println("product added succesfully to your favorite List");
+		}
+		
+		
+	}
+	public void deleteFavList(String UserName, String Produ) {
+		foodRepository.checkFoodByName(Produ);
+		Document existingUserDocument = userRepository.findUserbyUsername(UserName);
+		List<String> favList = existingUserDocument.getList("FavoriteList", String.class);
+		if(favList != null && favList.contains(Produ)) {
+			favList.remove(Produ);
+			existingUserDocument.put("FavoriteList", favList);
+			userRepository.updateUser(UserName, existingUserDocument);
+			System.out.println("product deleated succesfully from your favorite List");
+		} else {
+			System.out.println("Sorry but "+Produ+" dosen't exist in your  favorite list.");
+		}
+		
+	}
+	public void checkFavList(String UserName) {
+		Document existingUserDocument = userRepository.findUserbyUsername(UserName);
+		List<String> favList = existingUserDocument.getList("FavoriteList", String.class);
+		if (favList != null && !favList.isEmpty()) {
+		    System.out.println("Content of your favorite list:");
+		    for (String item : favList) {
+		        System.out.println(item);
+		    }
+		} else {
+		    System.out.println("Your favorite list is empty");
+		}
 		
 	}
 }

@@ -19,89 +19,90 @@ import org.junit.Test;
 
 public class userRepositoryTest {
 
-	   @Test
-	    public void testAddUser() {
-	        UserRepositoryImpl userRepository = new UserRepositoryImpl();
+	@Test
+    public void testAddUser() {
+        UserRepositoryImpl userRepository = new UserRepositoryImpl();
 
-	        // Create a user for testing
-	        User userToAdd = new User("John Doe", "johndoe", "password123", null, "user");
+        // Create a user for testing
+        User userToAdd = new User("John Doe", "johndoe", "password123", null, "user",null);
 
-	        // Add the user
-	        userRepository.addUser(userToAdd);
+        // Add the user
+        userRepository.addUser(userToAdd);
 
-	        // Retrieve the added user
-	        Document retrievedUser = userRepository.findUserbyUsername("johndoe");
+        // Retrieve the added user
+        Document retrievedUser = userRepository.findUserbyUsername("johndoe");
 
-	        // Check if the user was added successfully
-	        assertEquals("John Doe", retrievedUser.getString("name"));
-	        assertEquals("johndoe", retrievedUser.getString("userName"));
-	        assertEquals("password123", retrievedUser.getString("PasswordHash"));
-	        assertNull(retrievedUser.get("allergies"));
-	        assertEquals("user", retrievedUser.getString("Role"));
+        // Check if the user was added successfully
+        assertNotNull(retrievedUser);
+        assertEquals("John Doe", retrievedUser.getString("name"));
+        assertEquals("johndoe", retrievedUser.getString("userName"));
+        assertEquals("password123", retrievedUser.getString("PasswordHash"));
+        assertNull(retrievedUser.get("allergies"));
+        assertEquals("user", retrievedUser.getString("Role"));
 
-	        // Clean up: Delete the added user
-	        userRepository.deleteUserbyUsername("johndoe");
-	    }
+        // Clean up: Delete the added user
+        userRepository.deleteUserbyUsername("johndoe");
+    }
 
-	    @Test
-	    public void testFindUserbyUsername() {
-	        UserRepositoryImpl userRepository = new UserRepositoryImpl();
+    @Test
+    public void testFindUserbyUsernameNonexistent() {
+        UserRepositoryImpl userRepository = new UserRepositoryImpl();
 
-	        // Attempt to find a user that doesn't exist
-	        Document result = userRepository.findUserbyUsername("nonexistentuser");
+        // Attempt to find a user that doesn't exist
+        Document result = userRepository.findUserbyUsername("nonexistentuser");
 
-	        // Check that the result is null for a nonexistent user
-	        assertNull(result);
-	    }
+        // Check that the result is null for a nonexistent user
+        assertNull(result);
+    }
 
-	    @Test
-	    public void testDeleteUserbyUsername() {
-	        UserRepositoryImpl userRepository = new UserRepositoryImpl();
+    @Test
+    public void testDeleteUserbyUsername() {
+        UserRepositoryImpl userRepository = new UserRepositoryImpl();
 
-	        // Create a user for testing
-	        User userToDelete = new User("Jane Doe", "janedoe", "password456", null, "admin");
+        // Create a user for testing
+        User userToDelete = new User("Jane Doe", "janedoe", "password456", null, "admin",null);
 
-	        // Add the user
-	        userRepository.addUser(userToDelete);
+        // Add the user
+        userRepository.addUser(userToDelete);
 
-	        // Delete the added user
-	        userRepository.deleteUserbyUsername("janedoe");
+        // Delete the added user
+        userRepository.deleteUserbyUsername("janedoe");
 
-	        // Attempt to find the deleted user
-	        Document result = userRepository.findUserbyUsername("janedoe");
+        // Attempt to find the deleted user
+        Document result = userRepository.findUserbyUsername("janedoe");
 
-	        // Check that the result is null for a deleted user
-	        assertNull(result);
-	    }
-	    
-	    @Test
-	    public void testUpdateUser() {
-	        UserRepositoryImpl userRepository = new UserRepositoryImpl();
+        // Check that the result is null for a deleted user
+        assertNull(result);
+    }
 
-	        // Add a user for testing
-	        User userToAdd = new User("existinguser", "existinguser", "password123", null, "user");
-	        userRepository.addUser(userToAdd);
+    @Test
+    public void testUpdateUser() {
+        UserRepositoryImpl userRepository = new UserRepositoryImpl();
 
-	        // Create an existing user document with modified fields
-	        Document existingUserDocument = new Document("name", "Updated Name")
-	                .append("allergies", Collections.singletonList("New Allergy"));
+        // Add a user for testing
+        User userToAdd = new User("existinguser", "existinguser", "password123", null, "user",null);
+        userRepository.addUser(userToAdd);
 
-	        // Perform the update
-	        userRepository.updateUser("existinguser", existingUserDocument);
+        // Create an existing user document with modified fields
+        Document existingUserDocument = new Document("name", "Updated Name")
+                .append("allergies", Collections.singletonList("New Allergy"));
 
-	        // Retrieve the updated user
-	        Document updatedUser = userRepository.findUserbyUsername("existinguser");
+        // Perform the update
+        userRepository.updateUser("existinguser", existingUserDocument);
 
-	        // Check if the user's name is updated correctly
-	        assertEquals("Updated Name", updatedUser.getString("name"));
+        // Retrieve the updated user
+        Document updatedUser = userRepository.findUserbyUsername("existinguser");
 
-	        // Check if the user's allergies are updated correctly
-	        List<?> allergies = (List<?>) updatedUser.get("allergies");
-	        assertNotNull(allergies);
-	        assertEquals(1, allergies.size());
-	        assertEquals("New Allergy", allergies.get(0));
+        // Check if the user's name is updated correctly
+        assertEquals("Updated Name", updatedUser.getString("name"));
 
-	        // Clean up: Delete the added user
-	        userRepository.deleteUserbyUsername("existinguser");
-	    }
+        // Check if the user's allergies are updated correctly
+        List<?> allergies = (List<?>) updatedUser.get("allergies");
+        assertNotNull(allergies);
+        assertEquals(1, allergies.size());
+        assertEquals("New Allergy", allergies.get(0));
+
+        // Clean up: Delete the added user
+        userRepository.deleteUserbyUsername("existinguser");
+    }
 }

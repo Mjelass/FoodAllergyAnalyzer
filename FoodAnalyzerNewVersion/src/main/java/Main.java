@@ -24,6 +24,8 @@ public class Main {
 	private static String loggedUSername;
 	private static UserController uc=new UserController();
 	private static FoodController fd=new FoodController();
+	private static Scanner scanner;
+	
 
 
 	/**
@@ -47,6 +49,52 @@ public class Main {
 			mainMenu();
 		}
 		return returnValue;
+	}
+	
+	private static void manageFavList() {
+		System.out.println("1. check your favorite list");
+		System.out.println("2. add product to your your favorite list");
+		System.out.println("3. delete a product form your favorite list");
+		System.out.println("0. return");
+		//Get user input
+				int userInput = inputOutput("Please press the number that corresponds to what you would like the food analyzer to do.");
+				if (userInput >= 0 && userInput <=3) {
+					if (userInput == 1) {uc.checkFavList(loggedUSername);manageFavList();}
+					if (userInput == 2)  {
+						scanner=new Scanner(System.in);
+						String Prod;
+						do {
+				            System.out.print("Enter product name to add to your favorite List: ");
+				            Prod = scanner.nextLine();
+
+				            if (Prod.isEmpty()) {
+				                System.out.println("Product name cannot be empty. Please try again.");
+				            }
+
+				        } while (Prod.isEmpty());
+						uc.addFavList(loggedUSername,Prod);
+						manageFavList();
+						}
+					if (userInput == 3) {
+						scanner=new Scanner(System.in);
+						String Prod;
+						do {
+				            System.out.print("Enter product name to add to your favorite List: ");
+				            Prod = scanner.nextLine();
+
+				            if (Prod.isEmpty()) {
+				                System.out.println("Product name cannot be empty. Please try again.");
+				            }
+
+				        } while (Prod.isEmpty());
+						uc.deleteFavList(loggedUSername,Prod);
+						manageFavList();
+						}
+					if (userInput == 0) afterLoginUser();
+				} else {
+					System.out.println("Please enter a number from 0 - 6");
+					afterLoginAdmin();
+				}
 	}
 	
 	private static void UserRegister() {
@@ -243,17 +291,19 @@ public class Main {
 		System.out.println("3. check the information of a product");
 		System.out.println("4. Search up foods");
 		System.out.println("5. Check foods by my allergies");
+		System.out.println("6. manage your favorite list");
 		System.out.println("0. Exit\n");
 
 		//Get user input
 		int userInput = inputOutput("Please press the number that corresponds to what you would like the food analyzer to do.");
-		if (userInput >= 0 && userInput <=5) {
+		if (userInput >= 0 && userInput <=6) {
 			if (userInput == 1) CheckAccount(loggedUSername);
 			if (userInput == 2)  UpdateUserInformation();
-			if (userInput == 3)  checkProd();
-			if (userInput == 0) System.exit(0);
+			if (userInput == 3)  checkProd();		
 			if (userInput == 4) CategoriesController.lookUpCategoriesList();
 			if (userInput == 5) CategoriesController.chooseFoodsByAllergies(loggedUSername);
+			if (userInput == 6)  manageFavList();
+			if (userInput == 0) System.exit(0);
 		} else {
 			System.out.println("Please enter a number from 0 - 4");
 			mainMenu();

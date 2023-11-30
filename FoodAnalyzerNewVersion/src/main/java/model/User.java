@@ -8,7 +8,14 @@ public class User {
 	private String Password;
 	private List<String> Allergies;
 	private String Role;
+	private List<String> FavoriteList;
 	
+	public List<String> getFavoriteList() {
+		return FavoriteList;
+	}
+	public void setFavoriteList(List<String> favoriteList) {
+		FavoriteList = favoriteList;
+	}
 	public String getRole() {
 		return Role;
 	}
@@ -16,17 +23,15 @@ public class User {
 		Role = role;
 	}
 	
-	public User(String name,
-             String userName,
-             String password,
-             List<String> allergies,
-             String role) {
+	public User(String name, String userName, String password, List<String> allergies, String role,
+			List<String> favoriteList) {
 		super();
 		this.name = name;
 		UserName = userName;
 		Password = password;
 		Allergies = allergies;
 		Role = role;
+		FavoriteList = favoriteList;
 	}
 	public String getName() {
 		return name;
