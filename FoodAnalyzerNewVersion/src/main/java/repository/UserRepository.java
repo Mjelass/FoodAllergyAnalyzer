@@ -9,5 +9,4 @@ public interface UserRepository {
     Document findUserbyUsername(String Username);
     void deleteUserbyUsername(String Username);
 	void updateUser(String userName, Document existingUserDocument);
-    
 }

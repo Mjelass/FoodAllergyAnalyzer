@@ -123,6 +123,7 @@ public class UserController {
 		return userRepository.findUserbyUsername(UserName);
 		
 	}
+<<<<<<< HEAD
 	
 	public void addFavList(String UserName, String Prod) {
 		foodRepository.checkFoodByName(Prod);
@@ -168,5 +169,41 @@ public class UserController {
 		    System.out.println("Your favorite list is empty");
 		}
 		
+=======
+
+	public void updatePassword(String userName, String newPassword) {
+		Document existingUserDocument = userRepository.findUserbyUsername(userName);
+
+	    if (existingUserDocument != null) {
+	        existingUserDocument.put("PasswordHash", hashPassword(newPassword));
+	        userRepository.updateUser(userName, existingUserDocument);
+	        System.out.println("Password updated successfully.");
+	    } else {
+	        System.out.println("User not found. Update failed.");
+	    }
+	}
+
+	public void updateName(String userName, String newName) {
+	    Document existingUserDocument = userRepository.findUserbyUsername(userName);
+	    
+	    if (existingUserDocument != null) {
+	        existingUserDocument.put("name", newName);
+	        userRepository.updateUser(userName, existingUserDocument);
+	        System.out.println("Name updated successfully.");
+	    } else {
+	        System.out.println("User not found. Update failed.");
+	    }
+	}
+	public void updateUserName(String userName, String newUserName) {
+	    Document existingUserDocument = userRepository.findUserbyUsername(userName);
+
+	    if (existingUserDocument != null) {
+	        existingUserDocument.put("userName", newUserName);
+	        userRepository.updateUser(userName, existingUserDocument);
+	        System.out.println("Name updated successfully.");
+	    } else {
+	        System.out.println("User not found. Update failed.");
+	    }
+>>>>>>> f13ca6fc1c5e3a9055c526e780439da734f63f50
 	}
 }
