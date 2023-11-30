@@ -123,7 +123,38 @@ public class Main {
 		        String userName_k = scanner.nextLine();
 		        CheckAccount(userName_k);
 			};
-			if (userInput == 5) UpdateUserInformation();
+			if (userInput == 5) {
+				Scanner scanner = new Scanner(System.in);
+				System.out.print("Please enter the username of the account you wanna update information for: ");
+		        String userName_k = scanner.nextLine();
+		        System.out.println("1 - Update username");
+		        System.out.println("2 - Update name");
+		        System.out.println("3 - Update password");
+		        System.out.println("0 - Go back");
+		        int input = inputOutput("Please press the number that corresponds to what you would like to do");
+		        if (input >= 0 && input <=3) {
+		        	if (input == 1) {
+		        		System.out.print("Enter new username");
+		        		String newUsername = scanner.nextLine();
+		        		uc.updateUserName(userName_k,newUsername);
+		        	}
+		        	if (input == 2) {
+		        		System.out.print("Enter new name");
+		        		String newName = scanner.nextLine();
+		        		uc.updateName(userName_k,newName);
+		        		
+		        	}
+		        	if (input == 3) {
+		        		System.out.print("Enter new password");
+		        		String newPassword = scanner.nextLine();
+		        		uc.updatePassword(userName_k,newPassword);
+		        	}
+		        	if (input == 0) {
+		        		afterLoginAdmin();
+		        	}
+		        	
+		        }
+			}
 			if (userInput == 6)  {
 				Scanner scanner = new Scanner(System.in);
 		        System.out.print("Please enter the username of the account you wanna delete: ");
@@ -210,9 +241,9 @@ public class Main {
 		}else {
 			System.out.println("Error , please enter 0 next time ");
 			mainMenu();
-		};
+		}
         
-	}
+		}
 	
 
 

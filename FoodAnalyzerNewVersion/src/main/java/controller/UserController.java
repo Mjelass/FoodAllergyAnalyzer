@@ -122,4 +122,39 @@ public class UserController {
 		return userRepository.findUserbyUsername(UserName);
 		
 	}
+
+	public void updatePassword(String userName, String newPassword) {
+		Document existingUserDocument = userRepository.findUserbyUsername(userName);
+
+	    if (existingUserDocument != null) {
+	        existingUserDocument.put("PasswordHash", hashPassword(newPassword));
+	        userRepository.updateUser(userName, existingUserDocument);
+	        System.out.println("Password updated successfully.");
+	    } else {
+	        System.out.println("User not found. Update failed.");
+	    }
+	}
+
+	public void updateName(String userName, String newName) {
+	    Document existingUserDocument = userRepository.findUserbyUsername(userName);
+	    
+	    if (existingUserDocument != null) {
+	        existingUserDocument.put("name", newName);
+	        userRepository.updateUser(userName, existingUserDocument);
+	        System.out.println("Name updated successfully.");
+	    } else {
+	        System.out.println("User not found. Update failed.");
+	    }
+	}
+	public void updateUserName(String userName, String newUserName) {
+	    Document existingUserDocument = userRepository.findUserbyUsername(userName);
+
+	    if (existingUserDocument != null) {
+	        existingUserDocument.put("userName", newUserName);
+	        userRepository.updateUser(userName, existingUserDocument);
+	        System.out.println("Name updated successfully.");
+	    } else {
+	        System.out.println("User not found. Update failed.");
+	    }
+	}
 }
