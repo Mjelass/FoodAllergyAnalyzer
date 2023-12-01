@@ -12,4 +12,6 @@ public interface CategoriesRepository {
 
     List<Food> getFoodsByCategory(String category);
 
+	List<List<Food>> getAllCategories();
+
 }

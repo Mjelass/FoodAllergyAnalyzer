@@ -323,17 +323,19 @@ public class Main {
 		System.out.println("4. Search up foods");
 		System.out.println("5. Check foods by my allergies");
 		System.out.println("6. manage your favorite list");
+		System.out.println("7. Extra Information");
 		System.out.println("0. Exit\n");
 
 		//Get user input
 		int userInput = inputOutput("Please press the number that corresponds to what you would like the food analyzer to do.");
-		if (userInput >= 0 && userInput <=6) {
+		if (userInput >= 0 && userInput <=7) {
 			if (userInput == 1) CheckAccount(loggedUSername);
-			if (userInput == 2)  UpdateUserInformation();
-			if (userInput == 3)  checkProd();		
-			if (userInput == 4) CategoriesController.lookUpCategoriesList();
-			if (userInput == 5) CategoriesController.chooseFoodsByAllergies(loggedUSername);
-			if (userInput == 6)  manageFavList();
+			if (userInput == 2) UpdateUserInformation();
+			if (userInput == 3) checkProd();		
+			if (userInput == 4) CategoriesController.showCategories();
+			if (userInput == 5) CategoriesController.showOptions(loggedUSername);
+			if (userInput == 6) manageFavList();
+			if (userInput == 7) ExtraInformation.AllergyPrevention();
 			if (userInput == 0) System.exit(0);
 		} else {
 			System.out.println("Please enter a number from 0 - 4");

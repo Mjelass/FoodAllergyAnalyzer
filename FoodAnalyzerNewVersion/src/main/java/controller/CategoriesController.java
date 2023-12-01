@@ -5,124 +5,120 @@ import java.util.Scanner;
 
 import main.java.Main;
 import main.java.model.Food;
+import main.java.repository.CategoriesRepository;
 import main.java.repository.CategoriesRepositoryImpl;
 import main.java.repository.FoodRepositoryImpl;
 import main.java.repository.UserRepositoryImpl;
 
 public class CategoriesController {
 	
-    
-	public static void lookUpCategoriesList() {
+    public static void showCategories() {
         System.out.println("Here are the categories of food with numbers:");
         CategoriesRepositoryImpl categoriesRepository = new CategoriesRepositoryImpl();
-        List<List<Food>> categories = CategoriesRepositoryImpl.getAllCategories();
+        List<List<Food>> categories = categoriesRepository.getAllCategories();
         for (int i = 0; i < categories.size(); i++) {
             List<Food> category = categories.get(i);
             System.out.println((i + 1) + ") " + "Category: " + category.get(0).getCategory());
         }
-
-        // Ask the user to choose a category
         System.out.println("Enter the number of the category you want to explore (0 to exit):");
         Scanner scanner = new Scanner(System.in);
         int userChoice = scanner.nextInt();
-        scanner.nextInt();  
-
-        if (userChoice < 0 || userChoice > categories.size()) {
-            System.out.println("Invalid choice.");
-            lookUpCategoriesList();
-        } else if (userChoice == 0) {
-            System.out.println("Exiting.");
-            Main.afterLoginUser();
-        } else {
-            List<Food> chosenCategory = categories.get(userChoice - 1);
-            getFoodsInCategory(chosenCategory);
-        }
-    }
-
-	public static void getFoodsInCategory(List<Food> chosenCategory) {
-	    CategoriesRepositoryImpl categoriesRepository = new CategoriesRepositoryImpl();
-	    List<Food> foodsInCategory = CategoriesRepositoryImpl.getFoodsByCategory(chosenCategory);
-
-	    System.out.println("Here are the foods in this category :");
-	    for (Food food : foodsInCategory) {
-	        System.out.println(food.getName());
-	    }
-	    chooseFoodToLookInto(foodsInCategory);
-	    
+        chooseCategory(userChoice);
 	}
 	
-	public static void chooseFoodToLookInto(List<Food> foods) {
+	public static void chooseCategory(int userChoice) {
+        CategoriesRepositoryImpl categoriesRepository = new CategoriesRepositoryImpl();
+        List<List<Food>> categories = categoriesRepository.getAllCategories();
+        if (userChoice < 0 || userChoice > categories.size()) {
+            System.out.println("Invalid choice.");
+            showCategories();
+        } else if (userChoice == 0) {
+            System.out.println("Exiting.");
+            
+        } else {
+            List<Food> chosenCategory = categories.get(userChoice - 1);
+            System.out.println("Here are the foods in this category :");
+    	    for (Food food : chosenCategory) {
+    	        System.out.println(food.getName());
+    	    }
+    	    showFoods(chosenCategory);
+        }
+    }
+	    
+	public static void showFoods(List<Food> chosenCategory) {
 	    System.out.println("Choose a food to look into by entering its number (0 to exit):");
-
-	    for (int i = 0; i < foods.size(); i++) {
-	        System.out.println((i + 1) + ") " + foods.get(i).getName());
+	    for (int i = 0; i < chosenCategory.size(); i++) {
+	        System.out.println((i + 1) + ") " + chosenCategory.get(i).getName());
 	    }
-
 	    Scanner scanner = new Scanner(System.in);
-	    int userChoice = scanner.nextInt();
-
-	    if (userChoice < 0 || userChoice > foods.size()) {
+	    int userChoice2 = scanner.nextInt();
+	    chooseFood(userChoice2,chosenCategory);
+	}
+	
+	public static void chooseFood(int userChoice2,List<Food> chosenCategory) {
+	    if (userChoice2 < 0 || userChoice2 > chosenCategory.size()) {
 	        System.out.println("Invalid choice.");
-	        chooseFoodToLookInto(foods);
-	    } else if (userChoice == 0) {
+	        showFoods(chosenCategory);
+	    } else if (userChoice2 == 0) {
 	        System.out.println("Exiting.");
-	        Main.afterLoginUser();
+            exit(0);
 	    } else {
-	        Food chosenFood = foods.get(userChoice-1);
+	        Food chosenFood = chosenCategory.get(userChoice2-1);
 	        System.out.println("You've chosen to look into "+chosenFood.getName());
-	        checkingFoodAllergies(chosenFood);
+	        showInterest(chosenFood);
 	    }
 	}
 
-	public static void checkingFoodAllergies(Food chosenFood) {
+	public static void showInterest(Food chosenFood) {
 		System.out.println("What interests you about this food ?");
 		System.out.println("1) Go back");
-		System.out.println("2) Its information");
-		System.out.println("3) Its list of potential allergies");
+		System.out.println("2) Its list of potential allergies");
 		System.out.println("0) Exit");
-		CategoriesRepositoryImpl categoriesRepository = new CategoriesRepositoryImpl();
-	    FoodRepositoryImpl foodRepository = new FoodRepositoryImpl();
-
 		Scanner scanner = new Scanner(System.in);
 		int userChoice3=scanner.nextInt();	
-        scanner.nextLine();
+        chooseInterest(userChoice3,chosenFood);
+	}
+	
+	public static void chooseInterest(int userChoice3, Food chosenFood) {
 		switch (userChoice3) {
         case 1:
-        	lookUpCategoriesList();
+        	showCategories();
         case 2:
-            System.out.println("Information not implemented yet");
-        case 3:
             System.out.println(chosenFood.getAllergies());
-            System.out.println("Press any key to exit");
-    		scanner.nextLine();
-            Main.afterLoginUser();
+            exit(1);
         case 0:
 	        System.out.println("Exiting.");
-	        Main.afterLoginUser();
+            exit(0);
         default:
             System.out.println("Invalid choice");
-            checkingFoodAllergies(chosenFood);
+            showInterest(chosenFood);
 		}
-        System.out.println("Press any key to exit");
-		scanner.nextLine();
-        Main.afterLoginUser();
+        exit(1);
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
-	public static void chooseFoodsByAllergies(String userName) {
-		    CategoriesRepositoryImpl categoriesRepository = new CategoriesRepositoryImpl();
-		 	List<String> myAllergies = UserRepositoryImpl.getUserAllergiesByUsername(userName);
-	        List<Food> allFoods = CategoriesRepositoryImpl.getAllFoods();
-		 
+	public static void showOptions(String userName) {		 
 	        System.out.println("Choose an option:");
 	        System.out.println("1) Look at foods you must not eat");
 	        System.out.println("2) Look at foods you can eat");
-	        System.out.println("0) Exit");
-	        
+	        System.out.println("0) Exit");	        
 		    Scanner scanner = new Scanner(System.in);
-	        int userChoice = scanner.nextInt();
-	        scanner.nextLine(); // Consume the newline character
-
-	        switch (userChoice) {
+	        int userChoice4 = scanner.nextInt();
+	        chooseOption(userChoice4,userName);
+	        
+	}
+	public static void chooseOption(int userChoice4, String userName) {
+	 	List<String> myAllergies = UserRepositoryImpl.getUserAllergiesByUsername(userName);
+        List<Food> allFoods = CategoriesRepositoryImpl.getAllFoods();
+	        switch (userChoice4) {
 	            case 1:
 	                getFoodsToAvoid(allFoods, myAllergies);
 	                break;
@@ -131,17 +127,15 @@ public class CategoriesController {
 	                break;
 	            case 0:
 	                System.out.println("Exiting."); 
-	    	        Main.afterLoginUser();
+	                exit(0);
 	            default:
 	                System.out.println("Invalid choice. Please rechoose.");
-	    	        chooseFoodsByAllergies(userName);
+	                showOptions(userName);
 	        }
 	    }
 	
     public static void getFoodsToAvoid(List<Food> allFoods, List<String> userAllergies) {
     	List<Food> badFoods = new ArrayList<>();
-	    Scanner scanner = new Scanner(System.in);
-
         for (Food food : allFoods) {
             if (containsAny(food.getAllergies(), userAllergies)) {
             	badFoods.add(food);
@@ -156,16 +150,12 @@ public class CategoriesController {
 	        }	
 		    System.out.println("BEUUURK...");
 	    }
-        System.out.println("Press any key to exit");
-        scanner.nextLine();
-        Main.afterLoginUser();
+        exit(1);
     }
     
 	public static void getSafeFoods(List<Food> allFoods, List<String> userAllergies) {
         List<Food> safeFoods = new ArrayList<>();
-	    Scanner scanner = new Scanner(System.in);
-
-        for (Food food : allFoods) {
+	    for (Food food : allFoods) {
             if (!containsAny(food.getAllergies(), userAllergies)) {
                 safeFoods.add(food);
             }
@@ -180,18 +170,28 @@ public class CategoriesController {
 		    System.out.println("YUMMY !");
 
 	    }
-        System.out.println("Press any key to exit");
-        scanner.nextLine();
-        Main.afterLoginUser();
+        exit(1);
     }
 	
 	public static boolean containsAny(List<String> foodAllergies, List<String> userAllergies) {
         for (String allergy : userAllergies) {
             if (foodAllergies.contains(allergy)) {
-                return true; // Food contains at least one allergy from the user's list
+                return true; 
             }
         }
-        return false; // Food doesn't contain any of the user's allergies
+        return false; 
 
+	}
+	public static void exit(int userChoice0) {
+		if (userChoice0==0) {
+	        System.out.println(" ");
+	        Main.afterLoginUser();
+		}else {
+		    Scanner scanner = new Scanner(System.in);
+	        System.out.println("Press any key to exit");
+	        String exit = scanner.nextLine();
+	        Main.afterLoginUser();
+	        scanner.close();
+		}
 	}
 }
