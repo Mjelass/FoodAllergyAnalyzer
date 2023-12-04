@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Scanner;
 
 import org.bson.Document;
+import main.java.repository.FoodRepositoryImpl;
+import main.java.model.Food;
 
 import main.java.model.User;
 import main.java.controller.CategoriesController;
@@ -148,15 +150,16 @@ public class Main {
 		System.out.println("Congratulation, You are Loged IN As an Admin!!");
 		System.out.println("1. check the information of a product");
 		System.out.println("2. update the information of a product");
-		System.out.println("3. delete a product");
-		System.out.println("4. check the information of a user");
-		System.out.println("5. update the information of a user");
-		System.out.println("6. delete a user");
+		System.out.println("3. Add a new food product");
+		System.out.println("4. delete a product");
+		System.out.println("5. check the information of a user");
+		System.out.println("6. update the information of a user");
+		System.out.println("7. delete a user");
 		System.out.println("0. Exit\n");
 
 		//Get user input
 		int userInput = inputOutput("Please press the number that corresponds to what you would like the food analyzer to do.");
-		if (userInput >= 0 && userInput <=6) {
+		if (userInput >= 0 && userInput <=7) {
 			if (userInput == 1) checkProd();
 			if (userInput == 2) 
 				{
@@ -164,14 +167,15 @@ public class Main {
 				int Input = inputOutput("Please press the number 0 to return.");
 				if (Input == 0) {afterLoginAdmin();}else {afterLoginAdmin();}
 				};
-			if (userInput == 3)  {fd.deletefood();afterLoginAdmin();}
-			if (userInput == 4)  {
+			if (userInput == 3)  {fd.createfood(); afterLoginAdmin();}
+			if (userInput == 4)  {fd.deletefood();afterLoginAdmin();}
+			if (userInput == 5)  {
 				Scanner scanner = new Scanner(System.in);
 		        System.out.print("Please enter the username of the account you wanna check: ");
 		        String userName_k = scanner.nextLine();
 		        CheckAccount(userName_k);
 			};
-			if (userInput == 5) {
+			if (userInput == 6) {
 				Scanner scanner = new Scanner(System.in);
 				System.out.print("Please enter the username of the account you wanna update information for: ");
 		        String userName_k = scanner.nextLine();
@@ -203,7 +207,7 @@ public class Main {
 		        	
 		        }
 			}
-			if (userInput == 6)  {
+			if (userInput == 7)  {
 				Scanner scanner = new Scanner(System.in);
 		        System.out.print("Please enter the username of the account you wanna delete: ");
 		        String userName_k = scanner.nextLine();
@@ -352,4 +356,22 @@ public class Main {
 		mainMenu();
 		
 	}
+	private static void Populatefoods() {
+		FoodRepositoryImpl foodRepository = new FoodRepositoryImpl();
+		List<Food> defaultFoods = Arrays.asList(
+				new Food("Pizza", Arrays.asList("Dough", "Tomato Sauce", "Cheese"), Arrays.asList("Gluten", "Dairy"), "Fast Food", 15L),
+	            new Food("Sushi", Arrays.asList("Rice", "Fish", "Seaweed"), Arrays.asList("Fish"), "Seafood", 20L),
+	            new Food("Caesar Salad", Arrays.asList("Lettuce", "Croutons", "Parmesan Cheese"), Arrays.asList("Gluten", "Dairy"), "Vegetarian", 12L),
+	            new Food("Burger", Arrays.asList("Bread", "Beef Patty", "Lettuce", "Tomato"), Arrays.asList("Gluten", "Beef"), "Fast Food", 10L),
+	            new Food("Snicker's Bar", Arrays.asList("Cacao", "milk", "Peanuts", "Palm oil", "Sugars", "Egg Whites"), Arrays.asList("Poultry", "nuts"), "Candy", 2L),
+	            new Food("Falafel Wrap", Arrays.asList("Falafel Balls", "Pita Bread", "Lettuce", "Tomato"), Arrays.asList("Gluten"), "Sandwich", 12L),
+	            new Food("Vegan chocolate", Arrays.asList("Soy Milk", "Cacao", "Vanilla Extract", "Maple syrup" ), Arrays.asList(""), "Vegan", 3L)
+		);
+		for (Food food : defaultFoods) {
+            if (foodRepository.findFoodByName(food.getName()) == null) {
+                foodRepository.addFood(food);
+            }
+        }
+	}
 }
+

@@ -14,5 +14,7 @@ public interface FoodRepository {
 	void UpdateFoodByName(String nameFoodToEdit,Food newFood);
 
 	void checkFoodByName(String nameFoodTocheck);
+	
+	Food findFoodByName(String name);
 }
 
