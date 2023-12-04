@@ -90,9 +90,10 @@ public class UserController {
 	 * @param UserName
 	 * @param password
 	 * @param Allergies
+	 * @return 
 	 * @return User
 	 */
-	public void UpdateUserAccount(String name,String UserName,String Password,List<String> Allergies,String CurrentUserName) {
+	public Document UpdateUserAccount(String name,String UserName,String Password,List<String> Allergies,String CurrentUserName) {
 	    // Retrieve the existing user document from the repository
 	    Document existingUserDocument = userRepository.findUserbyUsername(CurrentUserName);
 
@@ -108,8 +109,10 @@ public class UserController {
 	        userRepository.updateUser(CurrentUserName, existingUserDocument);
 	        
 	        System.out.println("User updated successfully.");
+	        return userRepository.findUserbyUsername(UserName);
 	    } else {
 	        System.out.println("User not found. Update failed.");
+	        return null;
 	    }
 	
 	}
@@ -127,6 +130,7 @@ public class UserController {
 	public void addFavList(String UserName, String Prod) {
 		foodRepository.checkFoodByName(Prod);
 		Document existingUserDocument = userRepository.findUserbyUsername(UserName);
+		if(existingUserDocument!=null) {
 		List<String> favList = existingUserDocument.getList("FavoriteList", String.class);
 		if(favList != null && favList.contains(Prod)) {
 			System.out.println("Sorry but "+Prod+" already included in your list.");
@@ -138,14 +142,17 @@ public class UserController {
 			existingUserDocument.put("FavoriteList", favList);
 			userRepository.updateUser(UserName, existingUserDocument);
 			System.out.println("product added succesfully to your favorite List");
-		}
+		}}
 		
 		
 	}
 	public void deleteFavList(String UserName, String Produ) {
 		foodRepository.checkFoodByName(Produ);
 		Document existingUserDocument = userRepository.findUserbyUsername(UserName);
-		List<String> favList = existingUserDocument.getList("FavoriteList", String.class);
+		if(existingUserDocument!= null) {
+			List<String> favList = existingUserDocument.getList("FavoriteList", String.class);
+		
+		
 		if(favList != null && favList.contains(Produ)) {
 			favList.remove(Produ);
 			existingUserDocument.put("FavoriteList", favList);
@@ -153,7 +160,7 @@ public class UserController {
 			System.out.println("product deleated succesfully from your favorite List");
 		} else {
 			System.out.println("Sorry but "+Produ+" dosen't exist in your  favorite list.");
-		}
+		}}
 		
 	}
 	public void checkFavList(String UserName) {
