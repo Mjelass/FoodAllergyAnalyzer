@@ -340,7 +340,7 @@ public class Main {
 			if (userInput == 4) CategoriesController.showCategories();
 			if (userInput == 5) CategoriesController.showOptions(loggedUSername);
 			if (userInput == 6) manageFavList();
-			if (userInput == 7) ExtraInformationController.AllergyPrevention();
+			if (userInput == 7) ExtraInformationController.extraInformation();
 			if (userInput == 0) System.exit(0);
 		} else {
 			System.out.println("Please enter a number from 0 - 4");

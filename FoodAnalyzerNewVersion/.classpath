@@ -19,5 +19,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="lib/randoop-all-4.3.2.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

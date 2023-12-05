@@ -11,7 +11,7 @@ import main.java.repository.FoodRepositoryImpl;
 import main.java.repository.UserRepositoryImpl;
 
 public class CategoriesController {
-
+	
 	public static void showCategories() {
         System.out.println("Here are the categories of food with numbers:");
         CategoriesRepositoryImpl categoriesRepository = new CategoriesRepositoryImpl();
@@ -81,20 +81,24 @@ public class CategoriesController {
 	}
 	
 	public static void chooseInterest(int userChoice3, Food chosenFood) {
-		switch (userChoice3) {
-        case 1:
-        	showCategories();
-        case 2:
-            System.out.println(chosenFood.getAllergies());
-            exiting(1);
-        case 0:
-	        System.out.println("Exiting.");
-	        exiting(0);
-        default:
-            System.out.println("Invalid choice");
-            showInterest(chosenFood);
-		}
-		exiting(1);
+	    switch (userChoice3) {
+	        case 1:
+	            System.out.println(" ");
+	            showCategories();
+	            break;
+	        case 2:
+	            System.out.println(chosenFood.getAllergies());
+	            exiting(1);
+	            break;
+	        case 0:
+	            System.out.println("Exiting.");
+	            exiting(0);
+	            break;
+	        default:
+	            System.out.println("Invalid choice");
+	            showInterest(chosenFood);
+	            break;
+	    }
 	}
 	
 	

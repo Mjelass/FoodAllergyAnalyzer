@@ -2,9 +2,13 @@ package main.java.controller;
 
 import java.util.Scanner;
 
-import main.java.Main;
 
 public class ExtraInformationController {
+	
+	public static void extraInformation() {
+		AllergyPrevention();
+		CategoriesController.exiting(1);
+	}
 	
 	public static void AllergyPrevention() {
 		
@@ -22,7 +26,10 @@ public class ExtraInformationController {
     	Scanner scanner = new Scanner(System.in);
     	int userChoice=scanner.nextInt();
     	chooseTopic(userChoice);
+        CategoriesController.exiting(1);
+
     	}
+	
     	public static void chooseTopic(int userChoice) {
         	switch (userChoice) {
         case 1:
@@ -30,7 +37,6 @@ public class ExtraInformationController {
 		    +"Unlike food intolerances, which affect the digestive system, food allergies trigger an immune reaction."
 		    +"Common allergens include peanuts, tree nuts, milk, eggs, wheat, soy, fish, and shellfish."
             +" ");
-            CategoriesController.exiting(1);
             break;
         case 2:
             System.out.println("Allergens, which are usually harmless substances like proteins in certain foods, trigger an immune response."
@@ -43,7 +49,6 @@ public class ExtraInformationController {
             +"Treatment often involves avoiding the allergen, and in severe cases, individuals may carry an epinephrine auto-injector for emergencies."
             +"Ongoing research aims to better understand the genetic and environmental factors influencing allergies and develop new treatments."
             +" ");
-            CategoriesController.exiting(1);
             break;
         case 3:
             System.out.println("In ancient civilizations, individuals experienced adverse effects after consuming specific foods, though the understanding of these reactions remained limited."
@@ -58,7 +63,6 @@ public class ExtraInformationController {
             +"4. Global Collaboration and Advocacy: International efforts have raised awareness about food allergies, fostering understanding and supporting individuals living with this condition."
             +"Challenges persist, including understanding the complex interplay of genetic and environmental factors contributing to food allergies."
             +" ");
-            CategoriesController.exiting(1);
             break;
         case 4:
         	System.out.println("Food Allergies in Numbers:"
@@ -69,7 +73,6 @@ public class ExtraInformationController {
             +"5. Allergen Labeling Awareness: Over 90.5% of consumers actively check food labels for allergen information."
             +"6. Research Funding: Annual research funding for food allergy studies exceeds $ 150.0 million."
             +" ");
-            CategoriesController.exiting(1);
             break;
         case 5:
         	System.out.println("Famous People with Food Allergies:"
@@ -79,7 +82,6 @@ public class ExtraInformationController {
             +"- Billy Bob Thornton: The actor is allergic to Shellfish."
             +"- Halle Berry: The Academy Award-winning actress has a shrimp allergy."
             +" ");
-            CategoriesController.exiting(1);
             break;
         case 6:
             System.out.println("Top 10 Most Common Food Allergies:"
@@ -94,7 +96,6 @@ public class ExtraInformationController {
             +"9. Sesame: Sesame allergies are becoming increasingly recognized, with an estimated prevalence of 0.1-0.2%."
             +"10. Gluten: While celiac disease is distinct, gluten sensitivity affects a small percentage of individuals."
             +" ");
-            CategoriesController.exiting(1);
             break;
        case 7:
         	System.out.println("1. Identify Allergens:"
@@ -108,12 +109,11 @@ public class ExtraInformationController {
 			+"   - Familiarize yourself with alternative names for common allergens listed on product labels.\n"
 			+"4. Communicate Allergies to Others:"
 			+"   - Inform friends, family, coworkers, and school personnel about your allergies."
-			+"   - Encourage open communication to avoid accidental exposure.\n"
+			+"   - Encourage open communication to avoid accidental exposure."
             +" ");
-            CategoriesController.exiting(1);
             break;
 		case 8:
-        	System.out.println("\nReacting to Allergic Reactions:"
+        	System.out.println("Reacting to Allergic Reactions:"
             +"1. Know the Signs:"
             +"   - Recognize the symptoms of an allergic reaction, which may include hives, swelling, difficulty breathing, and anaphylaxis."
             +"   - Act promptly at the first sign of an allergic response.\n"
@@ -125,20 +125,15 @@ public class ExtraInformationController {
             +"   - Administer epinephrine immediately in case of a severe allergic reaction and seek emergency medical help.\n"
             +"4. Seek Emergency Assistance:"
             +"   - Call emergency services (911 or your local emergency number) if you experience a severe allergic reaction."
-            +"   - Do not hesitate to seek professional medical help even after using an epinephrine auto-injector.\n"
+            +"   - Do not hesitate to seek professional medical help even after using an epinephrine auto-injector."
             +" ");
-            CategoriesController.exiting(1);
             break;
 		case 0:
             System.out.println(" ");
-            CategoriesController.exiting(1);
             break;
-
 		default:
-            System.out.println(" "
-            +"Invalid choice");
-            CategoriesController.exiting(1);
+            System.out.println("Invalid choice");
             break;
 		}
-	}
+    }
 }
