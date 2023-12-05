@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.FileDescriptor;
+import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
 
@@ -13,27 +15,11 @@ import main.java.controller.ExtraInformationController;
 
 public class ExtraInformationTest {
 
+	
 	@Test
     public void testChooseTopic() {
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outputStream));
-
         int[] userChoices = {1, 2, 3, 4, 5, 6, 7, 8, 0, 9};
 
-        // Save the original System.in to restore it later
-        InputStream originalSystemIn = System.in;
-
-        for (int userChoice : userChoices) {
-            // Redirect System.in to provide the required input
-            ByteArrayInputStream in = new ByteArrayInputStream("1\n".getBytes());
-            System.setIn(in);
-
-            ExtraInformationController.chooseTopic(userChoice);
-        }
-
-        // Restore the original System.in
-        System.setIn(originalSystemIn);
-        System.setOut(System.out);
         String[] expectedOutputs = {
     		"Food allergies involve an abnormal immune response to proteins in certain foods."
     		+"Unlike food intolerances, which affect the digestive system, food allergies trigger an immune reaction."
@@ -120,9 +106,23 @@ public class ExtraInformationTest {
 	        +"Invalid choice"
 	        };
 
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
         for (int i = 0; i < userChoices.length; i++) {
+            System.setOut(new PrintStream(outputStream));
+
+            ByteArrayInputStream in = new ByteArrayInputStream((userChoices[i] + "\n").getBytes());
+            System.setIn(in);
+
+            ExtraInformationController.chooseTopic(userChoices[i]);
+
+            System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));
+
             assertEquals(expectedOutputs[i], outputStream.toString().trim());
+
             outputStream.reset();
         }
+
 	}
 }

@@ -15,6 +15,7 @@ import main.java.model.Food;
 import main.java.model.User;
 import main.java.controller.CategoriesController;
 import main.java.controller.ExtraInformation;
+import main.java.controller.ExtraInformationController;
 import main.java.controller.FoodController;
 import main.java.controller.UserController;
 
@@ -339,7 +340,7 @@ public class Main {
 			if (userInput == 4) CategoriesController.showCategories();
 			if (userInput == 5) CategoriesController.showOptions(loggedUSername);
 			if (userInput == 6) manageFavList();
-			if (userInput == 7) ExtraInformation.AllergyPrevention();
+			if (userInput == 7) ExtraInformationController.AllergyPrevention();
 			if (userInput == 0) System.exit(0);
 		} else {
 			System.out.println("Please enter a number from 0 - 4");

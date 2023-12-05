@@ -26,109 +26,119 @@ public class ExtraInformationController {
     	public static void chooseTopic(int userChoice) {
         	switch (userChoice) {
         case 1:
-		    System.out.println("Food allergies involve an abnormal immune response to proteins in certain foods.");
-		    System.out.println("Unlike food intolerances, which affect the digestive system, food allergies trigger an immune reaction.");
-		    System.out.println("Common allergens include peanuts, tree nuts, milk, eggs, wheat, soy, fish, and shellfish.");
-            System.out.println(" ");
+		    System.out.println("Food allergies involve an abnormal immune response to proteins in certain foods."
+		    +"Unlike food intolerances, which affect the digestive system, food allergies trigger an immune reaction."
+		    +"Common allergens include peanuts, tree nuts, milk, eggs, wheat, soy, fish, and shellfish."
+            +" ");
             CategoriesController.exiting(1);
+            break;
         case 2:
-            System.out.println("Allergens, which are usually harmless substances like proteins in certain foods, trigger an immune response.");
-            System.out.println("The immune system produces antibodies, such as Immunoglobulin E (IgE), in response to the allergen.");
-            System.out.println("These antibodies attach to mast cells, which are found in various tissues, especially in the skin, lungs, and digestive system.");
-            System.out.println("When the person comes into contact with the allergen again, the antibodies on the mast cells recognize it and release chemicals, such as histamines.");
-            System.out.println("Histamines cause the symptoms of an allergic reaction, including itching, swelling, and inflammation.");
-            System.out.println("The severity of the reaction can range from mild symptoms, like sneezing and hives, to severe reactions, such as anaphylaxis.");
-            System.out.println("Allergies are diagnosed through tests like skin prick tests or blood tests to measure IgE levels.");
-            System.out.println("Treatment often involves avoiding the allergen, and in severe cases, individuals may carry an epinephrine auto-injector for emergencies.");
-            System.out.println("Ongoing research aims to better understand the genetic and environmental factors influencing allergies and develop new treatments.");
-            System.out.println(" ");
+            System.out.println("Allergens, which are usually harmless substances like proteins in certain foods, trigger an immune response."
+            +"The immune system produces antibodies, such as Immunoglobulin E (IgE), in response to the allergen."
+            +"These antibodies attach to mast cells, which are found in various tissues, especially in the skin, lungs, and digestive system."
+            +"When the person comes into contact with the allergen again, the antibodies on the mast cells recognize it and release chemicals, such as histamines."
+            +"Histamines cause the symptoms of an allergic reaction, including itching, swelling, and inflammation."
+            +"The severity of the reaction can range from mild symptoms, like sneezing and hives, to severe reactions, such as anaphylaxis."
+            +"Allergies are diagnosed through tests like skin prick tests or blood tests to measure IgE levels."
+            +"Treatment often involves avoiding the allergen, and in severe cases, individuals may carry an epinephrine auto-injector for emergencies."
+            +"Ongoing research aims to better understand the genetic and environmental factors influencing allergies and develop new treatments."
+            +" ");
             CategoriesController.exiting(1);
+            break;
         case 3:
-            System.out.println("In ancient civilizations, individuals experienced adverse effects after consuming specific foods, though the understanding of these reactions remained limited.");
-            System.out.println("The 20th century marked significant milestones in the recognition and understanding of food allergies:");
-            System.out.println("1. Identification of Allergens: In the early 1900s, researchers started identifying specific proteins in foods responsible for allergic reactions.");
-            System.out.println("2. Peanut Allergy Recognition: Mid-20th century saw increased recognition of peanut allergies as a distinct and potentially severe condition.");
-            System.out.println("3. Standardization of Allergy Testing: Advancements in diagnostic techniques, including skin prick tests and serum IgE measurement, contributed to more accurate diagnoses.");
-            System.out.println("From the late 20th century to the present, several developments have shaped the understanding of food allergies:");
-            System.out.println("1. Rise in Prevalence: The latter half of the 20th century and the early 21st century witnessed a significant increase in the prevalence of food allergies, especially among children.");
-            System.out.println("2. Allergen Labeling Regulations: Governments implemented regulations requiring clear identification of common allergens on food labels to enhance consumer awareness and safety.");
-            System.out.println("3. Research into Immunotherapy: Ongoing research explores various approaches to treat food allergies, including immunotherapy aimed at desensitizing individuals to specific allergens.");
-            System.out.println("4. Global Collaboration and Advocacy: International efforts have raised awareness about food allergies, fostering understanding and supporting individuals living with this condition.");
-            System.out.println("Challenges persist, including understanding the complex interplay of genetic and environmental factors contributing to food allergies.");
-            System.out.println(" ");
+            System.out.println("In ancient civilizations, individuals experienced adverse effects after consuming specific foods, though the understanding of these reactions remained limited."
+            +"The 20th century marked significant milestones in the recognition and understanding of food allergies:"
+            +"1. Identification of Allergens: In the early 1900s, researchers started identifying specific proteins in foods responsible for allergic reactions."
+            +"2. Peanut Allergy Recognition: Mid-20th century saw increased recognition of peanut allergies as a distinct and potentially severe condition."
+            +"3. Standardization of Allergy Testing: Advancements in diagnostic techniques, including skin prick tests and serum IgE measurement, contributed to more accurate diagnoses."
+            +"From the late 20th century to the present, several developments have shaped the understanding of food allergies:"
+            +"1. Rise in Prevalence: The latter half of the 20th century and the early 21st century witnessed a significant increase in the prevalence of food allergies, especially among children."
+            +"2. Allergen Labeling Regulations: Governments implemented regulations requiring clear identification of common allergens on food labels to enhance consumer awareness and safety."
+            +"3. Research into Immunotherapy: Ongoing research explores various approaches to treat food allergies, including immunotherapy aimed at desensitizing individuals to specific allergens."
+            +"4. Global Collaboration and Advocacy: International efforts have raised awareness about food allergies, fostering understanding and supporting individuals living with this condition."
+            +"Challenges persist, including understanding the complex interplay of genetic and environmental factors contributing to food allergies."
+            +" ");
             CategoriesController.exiting(1);
+            break;
         case 4:
-            System.out.println("Food Allergies in Numbers:");
-            System.out.println("1. Global Prevalence: Approximately 3.5% of the world's population has food allergies.");
-            System.out.println("2. Pediatric Prevalence: Among children, the prevalence is higher, with around 8.0% affected.");
-            System.out.println("3. Common Allergens: Peanuts, tree nuts, milk, eggs, wheat, soy, fish, and shellfish are among the most common food allergens.");
-            System.out.println("4. Severe Reactions: Approximately 40 of individuals with food allergies experience severe reactions, including anaphylaxis.");
-            System.out.println("5. Allergen Labeling Awareness: Over 90.5% of consumers actively check food labels for allergen information.");
-            System.out.println("6. Research Funding: Annual research funding for food allergy studies exceeds $ 150.0 million.");
-            System.out.println(" ");
+        	System.out.println("Food Allergies in Numbers:"
+            +"1. Global Prevalence: Approximately 3.5% of the world's population has food allergies."
+            +"2. Pediatric Prevalence: Among children, the prevalence is higher, with around 8.0% affected."
+            +"3. Common Allergens: Peanuts, tree nuts, milk, eggs, wheat, soy, fish, and shellfish are among the most common food allergens."
+            +"4. Severe Reactions: Approximately 40 of individuals with food allergies experience severe reactions, including anaphylaxis."
+            +"5. Allergen Labeling Awareness: Over 90.5% of consumers actively check food labels for allergen information."
+            +"6. Research Funding: Annual research funding for food allergy studies exceeds $ 150.0 million."
+            +" ");
             CategoriesController.exiting(1);
+            break;
         case 5:
-        	System.out.println("Famous People with Food Allergies:");
-            System.out.println("- Serena Williams : The tennis legend is allergic to Peanuts.");
-            System.out.println("- Drew Brees: The NFL quarterback has a gluten allergy, avoiding wheat products.");
-            System.out.println("- Zooey Deschanel: The actress has a dairy allergy, leading to a dairy-free lifestyle.");
-            System.out.println("- Billy Bob Thornton: The actor is allergic to Shellfish.");
-            System.out.println("- Halle Berry: The Academy Award-winning actress has a shrimp allergy.");
-            System.out.println(" ");
+        	System.out.println("Famous People with Food Allergies:"
+            +"- Serena Williams : The tennis legend is allergic to Peanuts."
+            +"- Drew Brees: The NFL quarterback has a gluten allergy, avoiding wheat products."
+            +"- Zooey Deschanel: The actress has a dairy allergy, leading to a dairy-free lifestyle."
+            +"- Billy Bob Thornton: The actor is allergic to Shellfish."
+            +"- Halle Berry: The Academy Award-winning actress has a shrimp allergy."
+            +" ");
             CategoriesController.exiting(1);
+            break;
         case 6:
-            System.out.println("Top 10 Most Common Food Allergies:");
-            System.out.println("1. Peanuts: Approximately 2% of the global population has a peanut allergy.");
-            System.out.println("2. Tree Nuts: Tree nut allergies, including almonds, walnuts, and cashews, affect around 1% of people.");
-            System.out.println("3. Milk: Dairy allergies, particularly cow's milk, are prevalent in about 2-3% of young children.");
-            System.out.println("4. Eggs: Egg allergies impact roughly 1-2% of children, and many outgrow this allergy over time.");
-            System.out.println("5. Wheat: Wheat allergies, distinct from gluten sensitivity, affect approximately 0.4% of the population.");
-            System.out.println("6. Soy: Soy allergies are estimated to affect 0.4% of children and are often outgrown.");
-            System.out.println("7. Fish: Fish allergies are less common, impacting about 0.1-0.2% of the population.");
-            System.out.println("8. Shellfish: Shellfish allergies, including shrimp and crab, affect around 1.2% of the population.");
-            System.out.println("9. Sesame: Sesame allergies are becoming increasingly recognized, with an estimated prevalence of 0.1-0.2%.");
-            System.out.println("10. Gluten: While celiac disease is distinct, gluten sensitivity affects a small percentage of individuals.");
-            System.out.println(" ");
+            System.out.println("Top 10 Most Common Food Allergies:"
+            +"1. Peanuts: Approximately 2% of the global population has a peanut allergy."
+            +"2. Tree Nuts: Tree nut allergies, including almonds, walnuts, and cashews, affect around 1% of people."
+            +"3. Milk: Dairy allergies, particularly cow's milk, are prevalent in about 2-3% of young children."
+            +"4. Eggs: Egg allergies impact roughly 1-2% of children, and many outgrow this allergy over time."
+            +"5. Wheat: Wheat allergies, distinct from gluten sensitivity, affect approximately 0.4% of the population."
+            +"6. Soy: Soy allergies are estimated to affect 0.4% of children and are often outgrown."
+            +"7. Fish: Fish allergies are less common, impacting about 0.1-0.2% of the population."
+            +"8. Shellfish: Shellfish allergies, including shrimp and crab, affect around 1.2% of the population."
+            +"9. Sesame: Sesame allergies are becoming increasingly recognized, with an estimated prevalence of 0.1-0.2%."
+            +"10. Gluten: While celiac disease is distinct, gluten sensitivity affects a small percentage of individuals."
+            +" ");
             CategoriesController.exiting(1);
+            break;
        case 7:
-        	System.out.println("1. Identify Allergens:");
-			System.out.println("   - Work with an allergist to identify specific allergens that trigger your reactions.");
-			System.out.println("   - Be aware of common allergens such as pollen, dust mites, pet dander, certain foods, and insect stings.\n");
-			System.out.println("2. Control Your Environment:");
-			System.out.println("   - Keep living spaces clean and well-ventilated to reduce exposure to indoor allergens.");
-			System.out.println("   - Use air purifiers and allergen-proof bedding to create a safer environment.\n");
-			System.out.println("3. Read Labels Carefully:");
-			System.out.println("   - Scrutinize food labels for potential allergens, and be cautious with skincare and household products.");
-			System.out.println("   - Familiarize yourself with alternative names for common allergens listed on product labels.\n");
-			System.out.println("4. Communicate Allergies to Others:");
-			System.out.println("   - Inform friends, family, coworkers, and school personnel about your allergies.");
-			System.out.println("   - Encourage open communication to avoid accidental exposure.\n");
-            System.out.println(" ");
+        	System.out.println("1. Identify Allergens:"
+			+"   - Work with an allergist to identify specific allergens that trigger your reactions."
+			+"   - Be aware of common allergens such as pollen, dust mites, pet dander, certain foods, and insect stings.\n"
+			+"2. Control Your Environment:"
+			+"   - Keep living spaces clean and well-ventilated to reduce exposure to indoor allergens."
+			+"   - Use air purifiers and allergen-proof bedding to create a safer environment.\n"
+			+"3. Read Labels Carefully:"
+			+"   - Scrutinize food labels for potential allergens, and be cautious with skincare and household products."
+			+"   - Familiarize yourself with alternative names for common allergens listed on product labels.\n"
+			+"4. Communicate Allergies to Others:"
+			+"   - Inform friends, family, coworkers, and school personnel about your allergies."
+			+"   - Encourage open communication to avoid accidental exposure.\n"
+            +" ");
             CategoriesController.exiting(1);
+            break;
 		case 8:
-        	System.out.println("\nReacting to Allergic Reactions:");
-            System.out.println("1. Know the Signs:");
-            System.out.println("   - Recognize the symptoms of an allergic reaction, which may include hives, swelling, difficulty breathing, and anaphylaxis.");
-            System.out.println("   - Act promptly at the first sign of an allergic response.\n");
-            System.out.println("2. Carry Medications:");
-            System.out.println("   - Always have prescribed allergy medications on hand, such as antihistamines or epinephrine.");
-            System.out.println("   - Ensure that family members, friends, and coworkers are aware of the location of your medications.\n");
-            System.out.println("3. Use Epinephrine as Directed:");
-            System.out.println("   - If prescribed an epinephrine auto-injector, learn how to use it correctly.");
-            System.out.println("   - Administer epinephrine immediately in case of a severe allergic reaction and seek emergency medical help.\n");
-            System.out.println("4. Seek Emergency Assistance:");
-            System.out.println("   - Call emergency services (911 or your local emergency number) if you experience a severe allergic reaction.");
-            System.out.println("   - Do not hesitate to seek professional medical help even after using an epinephrine auto-injector.\n");
-            System.out.println(" ");
+        	System.out.println("\nReacting to Allergic Reactions:"
+            +"1. Know the Signs:"
+            +"   - Recognize the symptoms of an allergic reaction, which may include hives, swelling, difficulty breathing, and anaphylaxis."
+            +"   - Act promptly at the first sign of an allergic response.\n"
+            +"2. Carry Medications:"
+            +"   - Always have prescribed allergy medications on hand, such as antihistamines or epinephrine."
+            +"   - Ensure that family members, friends, and coworkers are aware of the location of your medications.\n"
+            +"3. Use Epinephrine as Directed:"
+            +"   - If prescribed an epinephrine auto-injector, learn how to use it correctly."
+            +"   - Administer epinephrine immediately in case of a severe allergic reaction and seek emergency medical help.\n"
+            +"4. Seek Emergency Assistance:"
+            +"   - Call emergency services (911 or your local emergency number) if you experience a severe allergic reaction."
+            +"   - Do not hesitate to seek professional medical help even after using an epinephrine auto-injector.\n"
+            +" ");
             CategoriesController.exiting(1);
+            break;
 		case 0:
             System.out.println(" ");
             CategoriesController.exiting(1);
+            break;
 
 		default:
-            System.out.println(" ");
-            System.out.println("Invalid choice");
+            System.out.println(" "
+            +"Invalid choice");
             CategoriesController.exiting(1);
+            break;
 		}
 	}
 }

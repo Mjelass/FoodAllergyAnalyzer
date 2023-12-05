@@ -109,32 +109,16 @@ public class CategoriesRepositoryImpl implements CategoriesRepository{
 		    return foodsInCategory;
 		}
 	 
-	 public static List<Food> getAllFoods() {
-	        List<List<Food>> categories = CategoriesRepositoryImpl.getAllCategories();
-	        List<Food> allFoods = new ArrayList<>();
+	 public List<Food> getAllFoods() {
+		    CategoriesRepositoryImpl repository = new CategoriesRepositoryImpl();
+		    List<List<Food>> categories = repository.getAllCategories();
+		    List<Food> allFoods = new ArrayList<>();
 
-	        for (List<Food> category : categories) {
-	            allFoods.addAll(category);
-	        }
+		    for (List<Food> category : categories) {
+		        allFoods.addAll(category);
+		    }
 
-	        return allFoods;
-	    }
+		    return allFoods;
+		}
 
-	@Override
-	public List<List<Food>> getCategories() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Food> getAllFoods() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Food> getFoodsByCategory(String category) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
