@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import main.java.Main;
 
-public class ExtraInformation {
+public class ExtraInformationController {
 	
 	public static void AllergyPrevention() {
 		
@@ -30,7 +30,7 @@ public class ExtraInformation {
 		    System.out.println("Unlike food intolerances, which affect the digestive system, food allergies trigger an immune reaction.");
 		    System.out.println("Common allergens include peanuts, tree nuts, milk, eggs, wheat, soy, fish, and shellfish.");
             System.out.println(" ");
-            CategoriesController.exit(1);
+            CategoriesController.exiting(1);
         case 2:
             System.out.println("Allergens, which are usually harmless substances like proteins in certain foods, trigger an immune response.");
             System.out.println("The immune system produces antibodies, such as Immunoglobulin E (IgE), in response to the allergen.");
@@ -42,7 +42,7 @@ public class ExtraInformation {
             System.out.println("Treatment often involves avoiding the allergen, and in severe cases, individuals may carry an epinephrine auto-injector for emergencies.");
             System.out.println("Ongoing research aims to better understand the genetic and environmental factors influencing allergies and develop new treatments.");
             System.out.println(" ");
-            CategoriesController.exit(1);
+            CategoriesController.exiting(1);
         case 3:
             System.out.println("In ancient civilizations, individuals experienced adverse effects after consuming specific foods, though the understanding of these reactions remained limited.");
             System.out.println("The 20th century marked significant milestones in the recognition and understanding of food allergies:");
@@ -56,41 +56,26 @@ public class ExtraInformation {
             System.out.println("4. Global Collaboration and Advocacy: International efforts have raised awareness about food allergies, fostering understanding and supporting individuals living with this condition.");
             System.out.println("Challenges persist, including understanding the complex interplay of genetic and environmental factors contributing to food allergies.");
             System.out.println(" ");
-            CategoriesController.exit(1);
+            CategoriesController.exiting(1);
         case 4:
             System.out.println("Food Allergies in Numbers:");
-            double globalPrevalence = 3.5; 
-            System.out.println("1. Global Prevalence: Approximately " + globalPrevalence + "% of the world's population has food allergies.");
-            double pediatricPrevalence = 8.0; 
-            System.out.println("2. Pediatric Prevalence: Among children, the prevalence is higher, with around " + pediatricPrevalence + "% affected.");
+            System.out.println("1. Global Prevalence: Approximately 3.5% of the world's population has food allergies.");
+            System.out.println("2. Pediatric Prevalence: Among children, the prevalence is higher, with around 8.0% affected.");
             System.out.println("3. Common Allergens: Peanuts, tree nuts, milk, eggs, wheat, soy, fish, and shellfish are among the most common food allergens.");
-            int severeReactions = 40; 
-            System.out.println("4. Severe Reactions: Approximately " + severeReactions + "% of individuals with food allergies experience severe reactions, including anaphylaxis.");
-            double labelingAwareness = 90.5; 
-            System.out.println("5. Allergen Labeling Awareness: Over " + labelingAwareness + "% of consumers actively check food labels for allergen information.");
-            double researchFunding = 150.0; 
-            System.out.println("6. Research Funding: Annual research funding for food allergy studies exceeds $" + researchFunding + " million.");
+            System.out.println("4. Severe Reactions: Approximately 40 of individuals with food allergies experience severe reactions, including anaphylaxis.");
+            System.out.println("5. Allergen Labeling Awareness: Over 90.5% of consumers actively check food labels for allergen information.");
+            System.out.println("6. Research Funding: Annual research funding for food allergy studies exceeds $ 150.0 million.");
             System.out.println(" ");
-            CategoriesController.exit(1);
+            CategoriesController.exiting(1);
         case 5:
         	System.out.println("Famous People with Food Allergies:");
-            String serenaWilliams = "Serena Williams";
-            String serenaAllergen = "Peanuts";
-            System.out.println("1. " + serenaWilliams + ": The tennis legend is allergic to " + serenaAllergen + ".");
-            String drewBrees = "Drew Brees";
-            String drewAllergen = "Gluten (Wheat)";
-            System.out.println("2. " + drewBrees + ": The NFL quarterback has a gluten allergy, avoiding wheat products.");
-            String zooeyDeschanel = "Zooey Deschanel";
-            String zooeyAllergen = "Dairy";
-            System.out.println("3. " + zooeyDeschanel + ": The actress has a dairy allergy, leading to a dairy-free lifestyle.");
-            String billyBobThornton = "Billy Bob Thornton";
-            String billyBobAllergen = "Shellfish";
-            System.out.println("4. " + billyBobThornton + ": The actor is allergic to " + billyBobAllergen + ".");
-            String halleBerry = "Halle Berry";
-            String halleAllergen = "Shrimp";
-            System.out.println("5. " + halleBerry + ": The Academy Award-winning actress has a shrimp allergy.");
+            System.out.println("- Serena Williams : The tennis legend is allergic to Peanuts.");
+            System.out.println("- Drew Brees: The NFL quarterback has a gluten allergy, avoiding wheat products.");
+            System.out.println("- Zooey Deschanel: The actress has a dairy allergy, leading to a dairy-free lifestyle.");
+            System.out.println("- Billy Bob Thornton: The actor is allergic to Shellfish.");
+            System.out.println("- Halle Berry: The Academy Award-winning actress has a shrimp allergy.");
             System.out.println(" ");
-            CategoriesController.exit(1);
+            CategoriesController.exiting(1);
         case 6:
             System.out.println("Top 10 Most Common Food Allergies:");
             System.out.println("1. Peanuts: Approximately 2% of the global population has a peanut allergy.");
@@ -104,7 +89,7 @@ public class ExtraInformation {
             System.out.println("9. Sesame: Sesame allergies are becoming increasingly recognized, with an estimated prevalence of 0.1-0.2%.");
             System.out.println("10. Gluten: While celiac disease is distinct, gluten sensitivity affects a small percentage of individuals.");
             System.out.println(" ");
-            CategoriesController.exit(1);
+            CategoriesController.exiting(1);
        case 7:
         	System.out.println("1. Identify Allergens:");
 			System.out.println("   - Work with an allergist to identify specific allergens that trigger your reactions.");
@@ -119,7 +104,7 @@ public class ExtraInformation {
 			System.out.println("   - Inform friends, family, coworkers, and school personnel about your allergies.");
 			System.out.println("   - Encourage open communication to avoid accidental exposure.\n");
             System.out.println(" ");
-            CategoriesController.exit(1);
+            CategoriesController.exiting(1);
 		case 8:
         	System.out.println("\nReacting to Allergic Reactions:");
             System.out.println("1. Know the Signs:");
@@ -135,15 +120,15 @@ public class ExtraInformation {
             System.out.println("   - Call emergency services (911 or your local emergency number) if you experience a severe allergic reaction.");
             System.out.println("   - Do not hesitate to seek professional medical help even after using an epinephrine auto-injector.\n");
             System.out.println(" ");
-            CategoriesController.exit(1);
+            CategoriesController.exiting(1);
 		case 0:
             System.out.println(" ");
-            CategoriesController.exit(1);
+            CategoriesController.exiting(1);
 
 		default:
             System.out.println(" ");
             System.out.println("Invalid choice");
-            AllergyPrevention();
+            CategoriesController.exiting(1);
 		}
 	}
 }

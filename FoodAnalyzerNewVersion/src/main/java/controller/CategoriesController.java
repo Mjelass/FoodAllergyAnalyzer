@@ -11,8 +11,8 @@ import main.java.repository.FoodRepositoryImpl;
 import main.java.repository.UserRepositoryImpl;
 
 public class CategoriesController {
-	
-    public static void showCategories() {
+
+	public static void showCategories() {
         System.out.println("Here are the categories of food with numbers:");
         CategoriesRepositoryImpl categoriesRepository = new CategoriesRepositoryImpl();
         List<List<Food>> categories = categoriesRepository.getAllCategories();
@@ -26,7 +26,7 @@ public class CategoriesController {
         chooseCategory(userChoice);
 	}
 	
-	public static void chooseCategory(int userChoice) {
+	public static String chooseCategory(int userChoice) {
         CategoriesRepositoryImpl categoriesRepository = new CategoriesRepositoryImpl();
         List<List<Food>> categories = categoriesRepository.getAllCategories();
         if (userChoice < 0 || userChoice > categories.size()) {
@@ -34,7 +34,7 @@ public class CategoriesController {
             showCategories();
         } else if (userChoice == 0) {
             System.out.println("Exiting.");
-            
+            exiting(0);
         } else {
             List<Food> chosenCategory = categories.get(userChoice - 1);
             System.out.println("Here are the foods in this category :");
@@ -43,6 +43,7 @@ public class CategoriesController {
     	    }
     	    showFoods(chosenCategory);
         }
+		return null;
     }
 	    
 	public static void showFoods(List<Food> chosenCategory) {
@@ -61,7 +62,7 @@ public class CategoriesController {
 	        showFoods(chosenCategory);
 	    } else if (userChoice2 == 0) {
 	        System.out.println("Exiting.");
-            exit(0);
+	        exiting(0);
 	    } else {
 	        Food chosenFood = chosenCategory.get(userChoice2-1);
 	        System.out.println("You've chosen to look into "+chosenFood.getName());
@@ -85,15 +86,15 @@ public class CategoriesController {
         	showCategories();
         case 2:
             System.out.println(chosenFood.getAllergies());
-            exit(1);
+            exiting(1);
         case 0:
 	        System.out.println("Exiting.");
-            exit(0);
+	        exiting(0);
         default:
             System.out.println("Invalid choice");
             showInterest(chosenFood);
 		}
-        exit(1);
+		exiting(1);
 	}
 	
 	
@@ -112,27 +113,31 @@ public class CategoriesController {
 	        System.out.println("0) Exit");	        
 		    Scanner scanner = new Scanner(System.in);
 	        int userChoice4 = scanner.nextInt();
-	        chooseOption(userChoice4,userName);
-	        
+	        chooseOption(userChoice4,userName);      
 	}
+	
 	public static void chooseOption(int userChoice4, String userName) {
-	 	List<String> myAllergies = UserRepositoryImpl.getUserAllergiesByUsername(userName);
-        List<Food> allFoods = CategoriesRepositoryImpl.getAllFoods();
-	        switch (userChoice4) {
-	            case 1:
-	                getFoodsToAvoid(allFoods, myAllergies);
-	                break;
-	            case 2:
-	                getSafeFoods(allFoods, myAllergies);
-	                break;
-	            case 0:
-	                System.out.println("Exiting."); 
-	                exit(0);
-	            default:
-	                System.out.println("Invalid choice. Please rechoose.");
-	                showOptions(userName);
-	        }
+		CategoriesRepositoryImpl categoriesRepository = new CategoriesRepositoryImpl();
+	    List<String> myAllergies = UserRepositoryImpl.getUserAllergiesByUsername(userName);
+	    List<Food> allFoods = categoriesRepository.getAllFoods();
+
+	    switch (userChoice4) {
+	        case 1:
+	            getFoodsToAvoid(allFoods, myAllergies);
+	            break;
+	        case 2:
+	            getSafeFoods(allFoods, myAllergies);
+	            break;
+	        case 0:
+	            System.out.println("Exiting.");
+	            exiting(0);
+	            break;
+	        default:
+	            System.out.println("Invalid choice. Please rechoose.");
+	            showOptions(userName);
 	    }
+	}
+
 	
     public static void getFoodsToAvoid(List<Food> allFoods, List<String> userAllergies) {
     	List<Food> badFoods = new ArrayList<>();
@@ -150,7 +155,7 @@ public class CategoriesController {
 	        }	
 		    System.out.println("BEUUURK...");
 	    }
-        exit(1);
+		exiting(1);
     }
     
 	public static void getSafeFoods(List<Food> allFoods, List<String> userAllergies) {
@@ -170,7 +175,7 @@ public class CategoriesController {
 		    System.out.println("YUMMY !");
 
 	    }
-        exit(1);
+        exiting(1);
     }
 	
 	public static boolean containsAny(List<String> foodAllergies, List<String> userAllergies) {
@@ -182,7 +187,7 @@ public class CategoriesController {
         return false; 
 
 	}
-	public static void exit(int userChoice0) {
+	public static void exiting(int userChoice0) {
 		if (userChoice0==0) {
 	        System.out.println(" ");
 	        Main.afterLoginUser();
