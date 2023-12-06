@@ -1,4 +1,4 @@
-package White_Box.StatmentCoverage.model;
+package White_Box.StatmentCoverage;
 
 import static org.junit.jupiter.api.Assertions.*;
 

@@ -121,4 +121,16 @@ public class CategoriesRepositoryImpl implements CategoriesRepository{
 		    return allFoods;
 		}
 
+	@Override
+	public List<List<Food>> getCategories() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Food> getFoodsByCategory(String category) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -1,4 +1,4 @@
-package White_Box.BranchCoverage.model;
+package White_Box.BranchCoverage;
 
 import static org.junit.jupiter.api.Assertions.*;
 

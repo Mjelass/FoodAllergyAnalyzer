@@ -1,4 +1,4 @@
-package Black_Box.Specification.controller;
+package Black_Box.Specification;
 
 import main.java.model.Food;
 import main.java.repository.CategoriesRepositoryImpl;

@@ -14,7 +14,6 @@ import main.java.model.Food;
 
 import main.java.model.User;
 import main.java.controller.CategoriesController;
-import main.java.controller.ExtraInformation;
 import main.java.controller.ExtraInformationController;
 import main.java.controller.FoodController;
 import main.java.controller.UserController;

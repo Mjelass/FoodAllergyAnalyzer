@@ -172,5 +172,10 @@ public class FoodRepositoryImpl implements FoodRepository {
         }
 		
 	}
+	@Override
+	public Food findFoodByName(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
 
