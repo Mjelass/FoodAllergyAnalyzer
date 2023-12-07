@@ -223,4 +223,24 @@ public class CategoriesController {
 	        scanner.close();
 		}
 	}
+	
+	public static List<Food> getfoodinCategories() {
+	    System.out.println("Here are the categories available:");
+	    CategoriesRepositoryImpl categoriesRepository = new CategoriesRepositoryImpl();
+	    List<List<Food>> categories = categoriesRepository.getAllCategories();
+	    for (int i = 0; i < categories.size(); i++) {
+	        List<Food> category = categories.get(i);
+	        System.out.println((i + 1) + ") " + "Category: " + category.get(0).getCategory());
+	    }
+	    System.out.println("Enter choice of category by number:");
+	    Scanner scanner = new Scanner(System.in);
+	    int userChoice = scanner.nextInt();
+	    if (userChoice < 0 || userChoice > categories.size()) {
+	        return new ArrayList<>(); 
+	    } else if (userChoice == 0) {
+	        return new ArrayList<>(); 
+	    } else {
+	        return categories.get(userChoice - 1);
+	    }
+	}
 }

@@ -5,11 +5,13 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
 import org.bson.Document;
 import main.java.repository.FoodRepositoryImpl;
+import main.java.repository.UserRepositoryImpl;
 import main.java.model.Food;
 
 import main.java.model.User;
@@ -328,11 +330,12 @@ public class Main {
 		System.out.println("5. Check foods by my allergies");
 		System.out.println("6. manage your favorite list");
 		System.out.println("7. Extra Information");
+		System.out.println("8. User preference search based on Category and User allergy ");
 		System.out.println("0. Exit\n");
 
 		//Get user input
 		int userInput = inputOutput("Please press the number that corresponds to what you would like the food analyzer to do.");
-		if (userInput >= 0 && userInput <=7) {
+		if (userInput >= 0 && userInput <=8) {
 			if (userInput == 1) CheckAccount(loggedUSername);
 			if (userInput == 2) UpdateUserInformation();
 			if (userInput == 3) checkProd();		
@@ -340,23 +343,41 @@ public class Main {
 			if (userInput == 5) CategoriesController.showOptions(loggedUSername);
 			if (userInput == 6) manageFavList();
 			if (userInput == 7) ExtraInformationController.extraInformation();
+			if (userInput == 8) showPreference();
 			if (userInput == 0) System.exit(0);
 		} else {
 			System.out.println("Please enter a number from 0 - 4");
 			mainMenu(); 
 		}
 	}
+	
+	private static void showPreference() {
+	    List<Food> suggestedFoods = CategoriesController.getfoodinCategories();
+	    List<String> userAllergies = UserRepositoryImpl.getUserAllergiesByUsername(loggedUSername); // Replace 'loggedUsername' with the actual variable
+	    List<Food> filteredFoods = filterFoodsWithAllergy(suggestedFoods, userAllergies);
 
-	/**
-	 * Starts the coffee maker program.
-	 * @param args
-	 */
+	    System.out.println("Products based on you preference:");
+	    for (Food food : filteredFoods) {
+	        System.out.println(food.getName()); 
+	    }
+	}
+	private static List<Food> filterFoodsWithAllergy(List<Food> foods, List<String> allergies) {
+	    List<Food> filteredFoods = new ArrayList<>();
+	    for (Food food : foods) {
+	        if (Collections.disjoint(food.getAllergies(), allergies)) {
+	            filteredFoods.add(food);
+	        }
+	    }
+	    return filteredFoods;
+	}
+
+	
 	public static void main(String[] args) {	
 		System.out.println("Welcome to the FoodAnalyzer!\n");
 		mainMenu();
 		
 	}
-	private static void Populatefoods() {
+	/*private static void Populatefoods() {
 		FoodRepositoryImpl foodRepository = new FoodRepositoryImpl();
 		List<Food> defaultFoods = Arrays.asList( 
 				new Food("Pizza", Arrays.asList("Dough", "Tomato Sauce", "Cheese"), Arrays.asList("Gluten", "Dairy"), "Fast Food", 15L),
@@ -372,6 +393,6 @@ public class Main {
                 foodRepository.addFood(food);
             }
         }
-	} 
+	} */
 }
 
