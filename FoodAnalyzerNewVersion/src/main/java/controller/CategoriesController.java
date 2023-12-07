@@ -49,6 +49,7 @@ public class CategoriesController {
     	    for (Food food : chosenCategory) {
     	        System.out.print(food.getName());
     	    }
+    	    
         }
 		return null;
     }
@@ -78,15 +79,15 @@ public class CategoriesController {
 	        System.out.println("Exiting.");
 	    } else {
 	        Food chosenFood = chosenCategory.get(userChoice2-1);
-	        System.out.println("You've chosen to look into "+chosenFood.getName());
-	    }
+	        System.out.println("You've chosen to look into "+chosenFood.getName()
+	        +"What interests you about this food ?"
+			+"1) Go back"
+			+"2) Its list of potential allergies"
+			+"0) Exit");
+	    } 
 	}
 
 	public static void showInterest(Food chosenFood) {
-		System.out.println("What interests you about this food ?");
-		System.out.println("1) Go back");
-		System.out.println("2) Its list of potential allergies");
-		System.out.println("0) Exit");
 		Scanner scanner = new Scanner(System.in);
 		int userChoice3=scanner.nextInt();	
         chooseInterest(userChoice3,chosenFood);
@@ -103,13 +104,13 @@ public class CategoriesController {
         default:
             showInterest(chosenFood);
             break;
-    }
+    } 
 	}
 	
 	public static void chooseInterest(int userChoice3, Food chosenFood) {
 	    switch (userChoice3) {
 	        case 1:
-	            System.out.println(" ");
+	            System.out.println("Going back.");
 	            break;
 	        case 2:
 	            System.out.println(chosenFood.getAllergies());
@@ -133,37 +134,44 @@ public class CategoriesController {
 	
 
 	public static void showOptions(String userName) {		 
-	        System.out.println("Choose an option:");
-	        System.out.println("1) Look at foods you must not eat");
-	        System.out.println("2) Look at foods you can eat");
-	        System.out.println("0) Exit");	        
+			CategoriesRepositoryImpl categoriesRepository = new CategoriesRepositoryImpl();
+		    List<String> myAllergies = UserRepositoryImpl.getUserAllergiesByUsername(userName);
+		    List<Food> allFoods = categoriesRepository.getAllFoods();
 		    Scanner scanner = new Scanner(System.in);
 	        int userChoice4 = scanner.nextInt();
-	        chooseOption(userChoice4,userName);      
-	}
-	
-	public static void chooseOption(int userChoice4, String userName) {
-		CategoriesRepositoryImpl categoriesRepository = new CategoriesRepositoryImpl();
-	    List<String> myAllergies = UserRepositoryImpl.getUserAllergiesByUsername(userName);
-	    List<Food> allFoods = categoriesRepository.getAllFoods();
-
-	    switch (userChoice4) {
+	        chooseOption(userChoice4,userName);
+	        switch (userChoice4) {
 	        case 1:
 	            getFoodsToAvoid(allFoods, myAllergies);
 	            break;
 	        case 2:
 	            getSafeFoods(allFoods, myAllergies);
-	            break;
+	            break; 
 	        case 0:
-	            System.out.println("Exiting.");
 	            exiting(0);
 	            break;
 	        default:
-	            System.out.println("Invalid choice. Please rechoose.");
-	            showOptions(userName);
+	            showOptions(userName); 
 	    }
 	}
-
+	
+	
+	public static void chooseOption(int userChoice4, String userName) {
+		switch (userChoice4) {
+	        case 1:
+	            System.out.println(" ");
+	            break;
+	        case 2:
+	            System.out.println(" ");
+	            break; 
+	        case 0:
+	            System.out.println("Exiting.");
+	            break;
+	        default:
+	            System.out.println("Invalid choice. Please rechoose.");
+	    }
+	}
+ 
 	
     public static void getFoodsToAvoid(List<Food> allFoods, List<String> userAllergies) {
     	List<Food> badFoods = new ArrayList<>();
@@ -245,6 +253,7 @@ public class CategoriesController {
 	        return categories.get(userChoice - 1);
 	    }
 	}
+<<<<<<< HEAD
 	
 	public static void RankCategories() {
 	    CategoriesRepositoryImpl categoriesRepository = new CategoriesRepositoryImpl();
@@ -265,3 +274,6 @@ public class CategoriesController {
 	    }
 	}
 }
+=======
+}
+>>>>>>> 2493c4c75f0ab241608780f71f6460d7d70cbb91
