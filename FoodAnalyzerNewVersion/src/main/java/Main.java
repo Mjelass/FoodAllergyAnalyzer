@@ -379,22 +379,6 @@ public class Main {
 		mainMenu();
 		
 	}
-	/*private static void Populatefoods() {
-		FoodRepositoryImpl foodRepository = new FoodRepositoryImpl();
-		List<Food> defaultFoods = Arrays.asList( 
-				new Food("Pizza", Arrays.asList("Dough", "Tomato Sauce", "Cheese"), Arrays.asList("Gluten", "Dairy"), "Fast Food", 15L),
-	            new Food("Sushi", Arrays.asList("Rice", "Fish", "Seaweed"), Arrays.asList("Fish"), "Seafood", 20L),
-	            new Food("Caesar Salad", Arrays.asList("Lettuce", "Croutons", "Parmesan Cheese"), Arrays.asList("Gluten", "Dairy"), "Vegetarian", 12L),
-	            new Food("Burger", Arrays.asList("Bread", "Beef Patty", "Lettuce", "Tomato"), Arrays.asList("Gluten", "Beef"), "Fast Food", 10L),
-	            new Food("Snicker's Bar", Arrays.asList("Cacao", "milk", "Peanuts", "Palm oil", "Sugars", "Egg Whites"), Arrays.asList("Poultry", "nuts"), "Candy", 2L),
-	            new Food("Falafel Wrap", Arrays.asList("Falafel Balls", "Pita Bread", "Lettuce", "Tomato"), Arrays.asList("Gluten"), "Sandwich", 12L),
-	            new Food("Vegan chocolate", Arrays.asList("Soy Milk", "Cacao", "Vanilla Extract", "Maple syrup" ), Arrays.asList(""), "Vegan", 3L)
-		);
-		for (Food food : defaultFoods) {
-            if (foodRepository.findFoodByName(food.getName()) == null) {
-                foodRepository.addFood(food);
-            }
-        }
-	} */
+
 }
 
