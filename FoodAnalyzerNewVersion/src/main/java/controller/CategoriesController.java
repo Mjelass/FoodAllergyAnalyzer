@@ -24,24 +24,29 @@ public class CategoriesController {
         Scanner scanner = new Scanner(System.in);
         int userChoice = scanner.nextInt();
         chooseCategory(userChoice);
+        if (userChoice < 0 || userChoice > categories.size()) {
+            showCategories();
+        } else if (userChoice == 0) {
+            exiting(0);
+        } else {
+            List<Food> chosenCategory = categories.get(userChoice - 1);
+    	    showFoods(chosenCategory);
+        }
 	}
 	
 	public static String chooseCategory(int userChoice) {
         CategoriesRepositoryImpl categoriesRepository = new CategoriesRepositoryImpl();
         List<List<Food>> categories = categoriesRepository.getAllCategories();
         if (userChoice < 0 || userChoice > categories.size()) {
-            System.out.println("Invalid choice.");
-            showCategories();
+            System.out.print("Invalid choice.");
         } else if (userChoice == 0) {
-            System.out.println("Exiting.");
-            exiting(0);
+            System.out.print("Exiting.");
         } else {
             List<Food> chosenCategory = categories.get(userChoice - 1);
-            System.out.println("Here are the foods in this category :");
+            System.out.print("Here are the foods in this category : ");
     	    for (Food food : chosenCategory) {
-    	        System.out.println(food.getName());
+    	        System.out.print(food.getName());
     	    }
-    	    showFoods(chosenCategory);
         }
 		return null;
     }
@@ -54,19 +59,24 @@ public class CategoriesController {
 	    Scanner scanner = new Scanner(System.in);
 	    int userChoice2 = scanner.nextInt();
 	    chooseFood(userChoice2,chosenCategory);
+	    if (userChoice2 < 0 || userChoice2 > chosenCategory.size()) {
+	        showFoods(chosenCategory);
+	    } else if (userChoice2 == 0) {
+	        exiting(0);
+	    } else {
+	        Food chosenFood = chosenCategory.get(userChoice2-1);
+	        showInterest(chosenFood);
+	    }
 	}
 	
 	public static void chooseFood(int userChoice2,List<Food> chosenCategory) {
 	    if (userChoice2 < 0 || userChoice2 > chosenCategory.size()) {
 	        System.out.println("Invalid choice.");
-	        showFoods(chosenCategory);
 	    } else if (userChoice2 == 0) {
 	        System.out.println("Exiting.");
-	        exiting(0);
 	    } else {
 	        Food chosenFood = chosenCategory.get(userChoice2-1);
 	        System.out.println("You've chosen to look into "+chosenFood.getName());
-	        showInterest(chosenFood);
 	    }
 	}
 
@@ -78,25 +88,35 @@ public class CategoriesController {
 		Scanner scanner = new Scanner(System.in);
 		int userChoice3=scanner.nextInt();	
         chooseInterest(userChoice3,chosenFood);
+	    switch (userChoice3) {
+        case 1:
+            showCategories();
+            break;
+        case 2:
+            exiting(1);
+            break;
+        case 0:
+            exiting(0);
+            break;
+        default:
+            showInterest(chosenFood);
+            break;
+    }
 	}
 	
 	public static void chooseInterest(int userChoice3, Food chosenFood) {
 	    switch (userChoice3) {
 	        case 1:
 	            System.out.println(" ");
-	            showCategories();
 	            break;
 	        case 2:
 	            System.out.println(chosenFood.getAllergies());
-	            exiting(1);
 	            break;
 	        case 0:
 	            System.out.println("Exiting.");
-	            exiting(0);
 	            break;
 	        default:
 	            System.out.println("Invalid choice");
-	            showInterest(chosenFood);
 	            break;
 	    }
 	}

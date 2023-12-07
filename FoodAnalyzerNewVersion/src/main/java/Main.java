@@ -14,7 +14,6 @@ import main.java.model.Food;
 
 import main.java.model.User;
 import main.java.controller.CategoriesController;
-import main.java.controller.ExtraInformation;
 import main.java.controller.ExtraInformationController;
 import main.java.controller.FoodController;
 import main.java.controller.UserController;
@@ -344,7 +343,7 @@ public class Main {
 			if (userInput == 0) System.exit(0);
 		} else {
 			System.out.println("Please enter a number from 0 - 4");
-			mainMenu();
+			mainMenu(); 
 		}
 	}
 
@@ -359,7 +358,7 @@ public class Main {
 	}
 	private static void Populatefoods() {
 		FoodRepositoryImpl foodRepository = new FoodRepositoryImpl();
-		List<Food> defaultFoods = Arrays.asList(
+		List<Food> defaultFoods = Arrays.asList( 
 				new Food("Pizza", Arrays.asList("Dough", "Tomato Sauce", "Cheese"), Arrays.asList("Gluten", "Dairy"), "Fast Food", 15L),
 	            new Food("Sushi", Arrays.asList("Rice", "Fish", "Seaweed"), Arrays.asList("Fish"), "Seafood", 20L),
 	            new Food("Caesar Salad", Arrays.asList("Lettuce", "Croutons", "Parmesan Cheese"), Arrays.asList("Gluten", "Dairy"), "Vegetarian", 12L),
@@ -373,6 +372,6 @@ public class Main {
                 foodRepository.addFood(food);
             }
         }
-	}
+	} 
 }
 

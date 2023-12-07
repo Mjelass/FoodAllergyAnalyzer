@@ -10,7 +10,7 @@ import main.java.model.User;
 
 class UserStatmentTest {
 
-	 @Test
+	 @Test 
 	    public void testStatementCoverage() {
 	        // Test constructor and getters
 	        User user = new User("John Doe", "john.doe", "password123", Arrays.asList("Peanuts"), "User", Arrays.asList("Movie1"));

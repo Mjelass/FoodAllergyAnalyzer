@@ -23,7 +23,7 @@ public class ExtraInformationTest {
 	            + "Common allergens include peanuts, tree nuts, milk, eggs, wheat, soy, fish, and shellfish.";
 	    assertEquals(expectedOutput, actualOutput.trim());
 	}
-	@Test
+	@Test 
 	public void testChooseTopic2() {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));

@@ -12,9 +12,11 @@ import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class CategoriesControllerTest {
+public class CategoriesControllerTest { 
 
     static class FakeCategoriesRepository extends CategoriesRepositoryImpl {
         @Override
@@ -22,10 +24,10 @@ public class CategoriesControllerTest {
             List<Food> category1 = Arrays.asList(
             new Food("Food1", Arrays.asList("Ingredient1"), Arrays.asList("Allergy1"), "Category1", 100L)
             );
-            return Arrays.asList(category1);
+            return Arrays.asList(category1); 
         }
-    }
-    @Test
+    } 
+    @Test 
     public void testChooseCategory() {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
@@ -36,8 +38,17 @@ public class CategoriesControllerTest {
         try {
             for (int i = 0; i < userInputs.length; i++) {
                 CategoriesController.chooseCategory(i - 1);
-                validateOutput(i - 1, outputStream.toString());
-                outputStream.reset();
+                CategoriesRepositoryImpl categoriesRepository = new CategoriesRepositoryImpl();
+                List<List<Food>> categories = categoriesRepository.getAllCategories();
+ 
+                if (i - 1 < 0 || i - 1 >= categories.size()) {
+                    assertEquals("Invalid choice.", outputStream.toString());
+                } else if (i - 1 == 0) {
+                    assertEquals("Exiting.", outputStream.toString());
+                } else {
+                    assertEquals("Here are the foods in this category : Chicken and Mushroom", outputStream.toString());
+                }
+                outputStream.reset(); 
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -46,22 +57,7 @@ public class CategoriesControllerTest {
             System.setIn(System.in);
         }
     }
-    private void validateOutput(int userChoice, String output) {
-        CategoriesRepositoryImpl categoriesRepository = new CategoriesRepositoryImpl();
-        List<List<Food>> categories = categoriesRepository.getAllCategories();
 
-        if (userChoice < 0 || userChoice >= categories.size()) {
-            assertEquals("Invalid choice.\n", output);
-        } else if (userChoice == 0) {
-            assertEquals("Exiting.\n", output);
-        } else {
-            List<Food> chosenCategory = categories.get(userChoice);
-            assertEquals("Here are the foods in this category :\n", output);
-            for (Food food : chosenCategory) {
-                assertEquals(food.getName() + "\n", output);
-            }
-        }
-    }
     @Test
     public void testChooseFood() {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -106,19 +102,42 @@ public class CategoriesControllerTest {
     public void testChooseOption() {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
-        String[] userInputs = {"-1\n", "0\n", "1\n", "2\n", "3\n"};//Different inputs  
+
+        String[] userInputs = {"1\n", "2\n", "0\n","-1\n"};
         InputStream inputStream = new ByteArrayInputStream(String.join("\n", userInputs).getBytes());
         System.setIn(inputStream);
-        CategoriesRepositoryImpl categoriesRepository = new FakeCategoriesRepository();
+
         try {
-            for (int i = 0; i < userInputs.length; i++) {
-                CategoriesController.chooseOption(i - 1, "testUser");
+            CategoriesController.chooseOption(1, "mockUserName");
+            if (outputStream.toString().contains("foods you should not eat")) {
+                assertTrue(outputStream.toString().contains("BEUUURK"));
+            } else {
+                fail("Expected output for case 1 not found");
             }
-        } catch (Exception e) {
+            outputStream.reset();
+            CategoriesController.chooseOption(2, "mockUserName");
+            if (outputStream.toString().contains("foods you can eat")) {
+                assertTrue(outputStream.toString().contains("YUMMY"));
+            } else {
+                fail("Expected output for case 2 not found");
+            }
+            outputStream.reset();
+            CategoriesController.chooseOption(0, "mockUserName");
+            if (outputStream.toString().contains("Exiting")) {
+            } else {
+                fail("Expected output for case 0 not found");
+            }
+            CategoriesController.chooseOption(-1, "mockUserName");
+            if (outputStream.toString().contains("Invalid choice")) {
+            } else {
+                fail("Expected output for default case not found");
+            }
+            } catch (Exception e) {
             e.printStackTrace();
         } finally {
             System.setOut(System.out);
             System.setIn(System.in);
         }
-    }
+    } 
+ 
 }

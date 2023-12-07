@@ -9,7 +9,7 @@ public class ExtraInformationController {
 		AllergyPrevention();
 		CategoriesController.exiting(1);
 	}
-	
+	 
 	public static void AllergyPrevention() {
 		
 		System.out.println("Which topic interests you ?");
