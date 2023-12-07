@@ -13,6 +13,7 @@ import org.bson.Document;
 import main.java.repository.FoodRepositoryImpl;
 import main.java.repository.UserRepositoryImpl;
 import main.java.model.Food;
+import main.java.repository.Food_API;
 
 import main.java.model.User;
 import main.java.controller.CategoriesController;
@@ -332,6 +333,7 @@ public class Main {
 		System.out.println("7. Extra Information");
 		System.out.println("8. User preference search based on Category and User allergy ");
 		System.out.println("9. Show Most Common Types of Foods");
+		System.out.println("10. Food Alerts From Govt.");
 		System.out.println("0. Exit\n");
 
 		//Get user input
@@ -345,7 +347,8 @@ public class Main {
 			if (userInput == 6) manageFavList();
 			if (userInput == 7) ExtraInformationController.extraInformation();
 			if (userInput == 8) showPreference();
-			if (userInput == 9) CategoriesController.RankCategories();			    
+			if (userInput == 9) CategoriesController.RankCategories();		
+			if (userInput == 9) Food_API.main(null);	
 			if (userInput == 0) System.exit(0);
 		} else {
 			System.out.println("Please enter a number from 0 - 4");
@@ -381,4 +384,3 @@ public class Main {
 	}
 
 }
-
