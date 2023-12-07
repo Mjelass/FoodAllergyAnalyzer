@@ -1,4 +1,4 @@
-package White_Box.MutationCoverage.repository;
+package White_Box.MutationCoverage;
 
 import static org.junit.jupiter.api.Assertions.*;
 
