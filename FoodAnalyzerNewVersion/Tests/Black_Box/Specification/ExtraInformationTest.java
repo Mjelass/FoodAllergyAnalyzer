@@ -163,7 +163,7 @@ public class ExtraInformationTest {
         System.setOut(new PrintStream(outputStream));
         ExtraInformationController.chooseTopic(9);
         String actualOutput = outputStream.toString();
-	    String expectedOutput =  "Invalid choice";
+	    String expectedOutput =  "Invalid choice.";
 	    assertEquals(expectedOutput, actualOutput.trim());
 	}
 

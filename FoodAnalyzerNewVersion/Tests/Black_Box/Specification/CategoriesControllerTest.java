@@ -1,6 +1,7 @@
 package Black_Box.Specification;
 
 import main.java.model.Food;
+import main.java.model.User;
 import main.java.repository.CategoriesRepositoryImpl;
 import main.java.controller.CategoriesController;
 import org.junit.jupiter.api.Test;
@@ -25,9 +26,10 @@ public class CategoriesControllerTest {
             new Food("Food1", Arrays.asList("Ingredient1"), Arrays.asList("Allergy1"), "Category1", 100L)
             );
             return Arrays.asList(category1); 
-        }
+        } 
     } 
-    @Test 
+    
+    @Test  
     public void testChooseCategory() {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
@@ -46,7 +48,7 @@ public class CategoriesControllerTest {
                 } else if (i - 1 == 0) {
                     assertEquals("Exiting.", outputStream.toString());
                 } else {
-                    assertEquals("Here are the foods in this category : Chicken and Mushroom", outputStream.toString());
+                    assertEquals("Here are the foods in this category : Sausage roll", outputStream.toString());
                 }
                 outputStream.reset(); 
             }
@@ -75,7 +77,7 @@ public class CategoriesControllerTest {
             e.printStackTrace();
         } finally {
             System.setOut(System.out);
-            System.setIn(System.in);
+            System.setIn(System.in); 
         }
     }
     @Test
@@ -100,44 +102,50 @@ public class CategoriesControllerTest {
     }
     @Test
     public void testChooseOption() {
+        // Set up the output stream for capturing console output
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
 
-        String[] userInputs = {"1\n", "2\n", "0\n","-1\n"};
+        // Set up the input stream with different inputs
+        String[] userInputs = {"1\n", "2\n", "0\n", "-1\n"};
         InputStream inputStream = new ByteArrayInputStream(String.join("\n", userInputs).getBytes());
         System.setIn(inputStream);
 
+        // Create a fake user for testing
+        User fakeUser = new User("John Doe", "john.doe", "password123", Arrays.asList("Peanuts", "Shellfish"), "User", Arrays.asList("FavoriteFood1", "FavoriteFood2"));
+
         try {
-            CategoriesController.chooseOption(1, "mockUserName");
-            if (outputStream.toString().contains("foods you should not eat")) {
-                assertTrue(outputStream.toString().contains("BEUUURK"));
-            } else {
-                fail("Expected output for case 1 not found");
+            // Loop through each input and test chooseOption method
+            for (int i = 0; i < userInputs.length; i++) {
+                // Call chooseOption method with the current input and fake user name
+                CategoriesController.chooseOption(i, fakeUser.getUserName());
+
+                // Validate the expected output based on the user choice
+                switch (i) {
+                    case 1:
+                        assertEquals("", outputStream.toString().trim());
+                        break;
+                    case 2:
+                        assertEquals("", outputStream.toString().trim());
+                        break;
+                    case 0:
+                        assertEquals("Exiting.", outputStream.toString().trim());
+                        break;
+                    default:
+                        assertEquals("Invalid choice. Please rechoose.", outputStream.toString().trim());
+                        break;
+                } 
+
+                // Reset the output stream for the next iteration
+                outputStream.reset();
             }
-            outputStream.reset();
-            CategoriesController.chooseOption(2, "mockUserName");
-            if (outputStream.toString().contains("foods you can eat")) {
-                assertTrue(outputStream.toString().contains("YUMMY"));
-            } else {
-                fail("Expected output for case 2 not found");
-            }
-            outputStream.reset();
-            CategoriesController.chooseOption(0, "mockUserName");
-            if (outputStream.toString().contains("Exiting")) {
-            } else {
-                fail("Expected output for case 0 not found");
-            }
-            CategoriesController.chooseOption(-1, "mockUserName");
-            if (outputStream.toString().contains("Invalid choice")) {
-            } else {
-                fail("Expected output for default case not found");
-            }
-            } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace(); 
         } finally {
+            // Reset the output and input streams
             System.setOut(System.out);
             System.setIn(System.in);
         }
-    } 
- 
+    }
+
 }

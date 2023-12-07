@@ -10,7 +10,7 @@ public class ExtraInformationController {
 		CategoriesController.exiting(1);
 	}
 	 
-	public static void AllergyPrevention() {
+	public static void AllergyPrevention() { 
 		
 		System.out.println("Which topic interests you ?");
     	System.out.println("1) Definition of food allergies");
@@ -132,7 +132,7 @@ public class ExtraInformationController {
             System.out.println(" ");
             break;
 		default:
-            System.out.println("Invalid choice");
+            System.out.println("Invalid choice.");
             break;
 		}
     }
