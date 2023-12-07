@@ -1,6 +1,8 @@
 package main.java.controller;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 import main.java.Main;
@@ -225,7 +227,7 @@ public class CategoriesController {
 	}
 	
 	public static List<Food> getfoodinCategories() {
-	    System.out.println("Here are the categories available:");
+	    System.out.println("Available Categories:");
 	    CategoriesRepositoryImpl categoriesRepository = new CategoriesRepositoryImpl();
 	    List<List<Food>> categories = categoriesRepository.getAllCategories();
 	    for (int i = 0; i < categories.size(); i++) {
@@ -241,6 +243,25 @@ public class CategoriesController {
 	        return new ArrayList<>(); 
 	    } else {
 	        return categories.get(userChoice - 1);
+	    }
+	}
+	
+	public static void RankCategories() {
+	    CategoriesRepositoryImpl categoriesRepository = new CategoriesRepositoryImpl();
+	    List<List<Food>> categories = categoriesRepository.getAllCategories();
+	   
+	    Map<String, Integer> categoryCounts = new HashMap<>();
+	    for (List<Food> category : categories) {
+	        if (!category.isEmpty()) {
+	            String categoryName = category.get(0).getCategory();
+	            categoryCounts.put(categoryName, category.size());
+	        }
+	    }	    
+	    List<String> sortedCategories = new ArrayList<>(categoryCounts.keySet());
+	    sortedCategories.sort((c1, c2) -> categoryCounts.get(c2).compareTo(categoryCounts.get(c1)));	    
+	    System.out.println("Most common types of food:");
+	    for (String categoryName : sortedCategories) {
+	        System.out.println("Category: " + categoryName);
 	    }
 	}
 }

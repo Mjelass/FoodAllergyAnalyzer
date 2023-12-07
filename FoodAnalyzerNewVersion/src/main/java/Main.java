@@ -331,11 +331,12 @@ public class Main {
 		System.out.println("6. manage your favorite list");
 		System.out.println("7. Extra Information");
 		System.out.println("8. User preference search based on Category and User allergy ");
+		System.out.println("9. Show Most Common Types of Foods");
 		System.out.println("0. Exit\n");
 
 		//Get user input
 		int userInput = inputOutput("Please press the number that corresponds to what you would like the food analyzer to do.");
-		if (userInput >= 0 && userInput <=8) {
+		if (userInput >= 0 && userInput <=9) {
 			if (userInput == 1) CheckAccount(loggedUSername);
 			if (userInput == 2) UpdateUserInformation();
 			if (userInput == 3) checkProd();		
@@ -344,6 +345,7 @@ public class Main {
 			if (userInput == 6) manageFavList();
 			if (userInput == 7) ExtraInformationController.extraInformation();
 			if (userInput == 8) showPreference();
+			if (userInput == 9) CategoriesController.RankCategories();			    
 			if (userInput == 0) System.exit(0);
 		} else {
 			System.out.println("Please enter a number from 0 - 4");
