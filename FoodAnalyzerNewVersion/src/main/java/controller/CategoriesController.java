@@ -42,7 +42,7 @@ public class CategoriesController {
         if (userChoice < 0 || userChoice > categories.size()) {
             System.out.print("Invalid choice.");
         } else if (userChoice == 0) {
-            System.out.print("Exiting.");
+            System.out.print("Exiting."); 
         } else {
             List<Food> chosenCategory = categories.get(userChoice - 1);
             System.out.print("Here are the foods in this category : ");
@@ -253,7 +253,6 @@ public class CategoriesController {
 	        return categories.get(userChoice - 1);
 	    }
 	}
-<<<<<<< HEAD
 	
 	public static void RankCategories() {
 	    CategoriesRepositoryImpl categoriesRepository = new CategoriesRepositoryImpl();
@@ -273,7 +272,5 @@ public class CategoriesController {
 	        System.out.println("Category: " + categoryName);
 	    }
 	}
+
 }
-=======
-}
->>>>>>> 2493c4c75f0ab241608780f71f6460d7d70cbb91

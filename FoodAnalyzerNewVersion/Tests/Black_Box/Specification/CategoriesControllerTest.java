@@ -31,26 +31,30 @@ public class CategoriesControllerTest {
     
     @Test  
     public void testChooseCategory() {
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outputStream));
-        String[] userInputs = {"-1\n", "0\n", "1\n"};//Different inputs 
+        String[] userInputs = {"-1\n", "0\n", "1\n"}; // Different inputs
         InputStream inputStream = new ByteArrayInputStream(String.join("\n", userInputs).getBytes());
         System.setIn(inputStream);
 
         try {
             for (int i = 0; i < userInputs.length; i++) {
+                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                System.setOut(new PrintStream(outputStream));
+
                 CategoriesController.chooseCategory(i - 1);
                 CategoriesRepositoryImpl categoriesRepository = new CategoriesRepositoryImpl();
                 List<List<Food>> categories = categoriesRepository.getAllCategories();
- 
-                if (i - 1 < 0 || i - 1 >= categories.size()) {
-                    assertEquals("Invalid choice.", outputStream.toString());
+
+
+                // Use assertEquals with exact string matches
+                if (i - 1 < 0 || i-1 > categories.size()) {
+                    assertEquals("Invalid choice.", outputStream.toString().trim());
                 } else if (i - 1 == 0) {
-                    assertEquals("Exiting.", outputStream.toString());
-                } else {
-                    assertEquals("Here are the foods in this category : Sausage roll", outputStream.toString());
+                    assertEquals("Exiting.", outputStream.toString().trim());
+                } else if (i - 1 == 1) {
+                    assertEquals("Here are the foods in this category : Sausage roll", outputStream.toString().trim());
                 }
-                outputStream.reset(); 
+
+                outputStream.reset();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -59,6 +63,7 @@ public class CategoriesControllerTest {
             System.setIn(System.in);
         }
     }
+
 
     @Test
     public void testChooseFood() {
@@ -76,8 +81,7 @@ public class CategoriesControllerTest {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            System.setOut(System.out);
-            System.setIn(System.in); 
+            System.setIn(System.in);  
         }
     }
     @Test

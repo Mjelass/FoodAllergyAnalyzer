@@ -59,7 +59,7 @@ public class CategoriesRepositoryImpl implements CategoriesRepository{
 	                foodsInCategory.add(food);
 	            }
 
-	            categories.add(foodsInCategory);
+	            categories.add(foodsInCategory); 
 	        }
 
 	    } catch (Exception e) {
