@@ -48,7 +48,6 @@ class CategoriesBranchTest {
     @Test
     void testChooseFood() {
 
-        // Prepare user inputs for the test
         String[] userInputs = {"-1\n", "0\n", "1\n"}; // Different inputs
         InputStream inputStream = new ByteArrayInputStream(String.join("\n", userInputs).getBytes());
         System.setIn(inputStream);

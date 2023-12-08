@@ -44,8 +44,6 @@ public class CategoriesControllerTest {
                 CategoriesRepositoryImpl categoriesRepository = new CategoriesRepositoryImpl();
                 List<List<Food>> categories = categoriesRepository.getAllCategories();
 
-
-                // Use assertEquals with exact string matches
                 if (i - 1 < 0 || i-1 > categories.size()) {
                     assertEquals("Invalid choice.", outputStream.toString().trim());
                 } else if (i - 1 == 0) {
@@ -106,25 +104,19 @@ public class CategoriesControllerTest {
     }
     @Test
     public void testChooseOption() {
-        // Set up the output stream for capturing console output
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
 
-        // Set up the input stream with different inputs
-        String[] userInputs = {"1\n", "2\n", "0\n", "-1\n"};
+        String[] userInputs = {"1\n", "2\n", "0\n", "-1\n"};//different inputs
         InputStream inputStream = new ByteArrayInputStream(String.join("\n", userInputs).getBytes());
         System.setIn(inputStream);
 
-        // Create a fake user for testing
         User fakeUser = new User("John Doe", "john.doe", "password123", Arrays.asList("Peanuts", "Shellfish"), "User", Arrays.asList("FavoriteFood1", "FavoriteFood2"));
 
         try {
-            // Loop through each input and test chooseOption method
             for (int i = 0; i < userInputs.length; i++) {
-                // Call chooseOption method with the current input and fake user name
                 CategoriesController.chooseOption(i, fakeUser.getUserName());
 
-                // Validate the expected output based on the user choice
                 switch (i) {
                     case 1:
                         assertEquals("", outputStream.toString().trim());
@@ -140,13 +132,11 @@ public class CategoriesControllerTest {
                         break;
                 } 
 
-                // Reset the output stream for the next iteration
                 outputStream.reset();
             }
         } catch (Exception e) {
             e.printStackTrace(); 
         } finally {
-            // Reset the output and input streams
             System.setOut(System.out);
             System.setIn(System.in);
         }
