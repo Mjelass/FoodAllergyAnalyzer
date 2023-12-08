@@ -340,7 +340,7 @@ public class Main {
 
 		//Get user input
 		int userInput = inputOutput("Please press the number that corresponds to what you would like the food analyzer to do.");
-		if (userInput >= 0 && userInput <=9) {
+		if (userInput >= 0 && userInput <=10) {
 			if (userInput == 1) CheckAccount(loggedUSername);
 			if (userInput == 2) UpdateUserInformation();
 			if (userInput == 3) checkProd();		
@@ -350,7 +350,7 @@ public class Main {
 			if (userInput == 7) ExtraInformationController.extraInformation();
 			if (userInput == 8) showPreference();
 			if (userInput == 9) CategoriesController.RankCategories();		
-			if (userInput == 9) Food_API.main(null);	
+			if (userInput == 10) Food_API.main(null);	
 			if (userInput == 0) System.exit(0);
 		} else {
 			System.out.println("Please enter a number from 0 - 4");
