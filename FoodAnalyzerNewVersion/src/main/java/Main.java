@@ -192,17 +192,19 @@ public class Main {
 		        		System.out.print("Enter new username");
 		        		String newUsername = scanner.nextLine();
 		        		uc.updateUserName(userName_k,newUsername);
+		        		afterLoginAdmin();
 		        	}
 		        	if (input == 2) {
 		        		System.out.print("Enter new name");
 		        		String newName = scanner.nextLine();
 		        		uc.updateName(userName_k,newName);
-		        		
+		        		afterLoginAdmin();
 		        	}
 		        	if (input == 3) {
 		        		System.out.print("Enter new password");
 		        		String newPassword = scanner.nextLine();
 		        		uc.updatePassword(userName_k,newPassword);
+		        		afterLoginAdmin();
 		        	}
 		        	if (input == 0) {
 		        		afterLoginAdmin();
