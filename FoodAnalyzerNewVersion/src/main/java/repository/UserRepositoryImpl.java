@@ -18,20 +18,10 @@ import java.util.List;
 
 public class UserRepositoryImpl implements UserRepository {
 
-    private static String connectionString;
-
-    public UserRepositoryImpl() {
-        //users = loadUsers();
-        connectionString = "mongodb+srv://smagroup475:poiuy98765@cluster0.rz7navz.mongodb.net/?retryWrites=true&w=majority"; // Modify this based on your MongoDB server configuration
-
-        
-    }
-
-  
-    
+    private static String connectionString= "mongodb+srv://smagroup475:poiuy98765@cluster0.rz7navz.mongodb.net/?retryWrites=true&w=majority";
 
     @Override
-    public void addUser(User user) {
+    public Document addUser(User user) {
     	try (MongoClient mongoClient = MongoClients.create(connectionString)) {
             // Connect to the "cluster0" database
             MongoDatabase database = mongoClient.getDatabase("cluster0");
@@ -52,16 +42,17 @@ public class UserRepositoryImpl implements UserRepository {
                 		.append("FavoriteList", user.getFavoriteList());
 
                 collection.insertOne(document);
+                return document;
 
-                System.out.println("User inserted successfully.");
-            } else {
-                System.out.println("Username already exists. Please choose a different username.");
-            }
+                //System.out.println("User inserted successfully.");
+            } 
+                //System.out.println("Username already exists. Please choose a different username.");
+            
 
         } catch (Exception e) {
-            // Log the exception or handle it more gracefully
-            e.printStackTrace();
+            
         }
+		return null;
         
     }
 
@@ -81,8 +72,7 @@ public class UserRepositoryImpl implements UserRepository {
             return collection.find(query).first();
 
         } catch (Exception e) {
-            // Log the exception or handle it more gracefully
-            e.printStackTrace();
+            
         }
 		return null;
 	}
@@ -104,7 +94,7 @@ public class UserRepositoryImpl implements UserRepository {
             System.out.println("Succefully deleated");
         } catch (Exception e) {
             // Log the exception or handle it more gracefully
-            e.printStackTrace();
+            //e.printStackTrace();
         }
 		
 	}
@@ -113,7 +103,7 @@ public class UserRepositoryImpl implements UserRepository {
 
 
 	@Override
-	public void updateUser(String userName, Document existingUserDocument) {
+	public UpdateResult updateUser(String userName, Document existingUserDocument) {
 		 try (MongoClient mongoClient = MongoClients.create(connectionString)) {
 		        // Connect to the "cluster0" database
 		        MongoDatabase database = mongoClient.getDatabase("cluster0");
@@ -130,17 +120,12 @@ public class UserRepositoryImpl implements UserRepository {
 		        // Perform the update
 		        UpdateResult updateResult = collection.updateOne(filter, updateDocument);
 
-		        if (updateResult.getModifiedCount() > 0) {
-		            System.out.println("User updated successfully.");
-		        } else {
-		            System.out.println("User not found or no changes made. Update failed.");
-		        }
+		        return updateResult;
 
 		    } catch (Exception e) {
-		        // Log the exception or handle it more gracefully
-		        e.printStackTrace();
+		        
 		    }
-		
+		return null;
 	}
 	//New methods 25.11.2023
 	public static List<String> getUserAllergiesByUsername(String username) {
@@ -161,12 +146,11 @@ public class UserRepositoryImpl implements UserRepository {
                 // Retrieve and return the user's allergies
                 return userDocument.getList("allergies", String.class);
             } else {
-                System.out.println("User not found.");
+                return null;
             }
 
         } catch (Exception e) {
-            // Log the exception or handle it more gracefully
-            e.printStackTrace();
+
         }
 
         return null;
