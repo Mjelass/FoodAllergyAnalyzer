@@ -22,7 +22,6 @@ public class CategoriesRepositoryImpl implements CategoriesRepository{
 	public static String connectionString;
 
     public CategoriesRepositoryImpl() {
-        //users = loadUsers();
         connectionString = "mongodb+srv://smagroup475:poiuy98765@cluster0.rz7navz.mongodb.net/?retryWrites=true&w=majority"; // Modify this based on your MongoDB server configuration
 
         
@@ -63,7 +62,6 @@ public class CategoriesRepositoryImpl implements CategoriesRepository{
 	        }
 
 	    } catch (Exception e) {
-	        // Log the exception or handle it more gracefully
 	        e.printStackTrace();
 	    }
 
@@ -102,7 +100,6 @@ public class CategoriesRepositoryImpl implements CategoriesRepository{
 		        }
 
 		    } catch (Exception e) {
-		        // Log the exception or handle it more gracefully
 		        e.printStackTrace();
 		    }
 
@@ -121,16 +118,5 @@ public class CategoriesRepositoryImpl implements CategoriesRepository{
 		    return allFoods;
 		}
 
-	@Override
-	public List<List<Food>> getCategories() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Food> getFoodsByCategory(String category) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }
