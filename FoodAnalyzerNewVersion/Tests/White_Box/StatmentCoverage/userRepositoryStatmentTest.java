@@ -16,7 +16,7 @@ class userRepositoryStatmentTest {
 	@Test
     public void testAddUser() {
         UserRepositoryImpl userRepository = new UserRepositoryImpl();
-        User user = new User("John Doe", "john.doe", "password123", Arrays.asList("Peanuts"), "User", Arrays.asList("Movie1"));
+        User user = new User("John Doe", "john.doe", "password123", Arrays.asList("Peanuts"), "User", Arrays.asList("Movie1"), "", "");
 
         userRepository.addUser(user);
 
@@ -28,7 +28,7 @@ class userRepositoryStatmentTest {
     @Test
     public void testFindUserByUsername() {
         UserRepositoryImpl userRepository = new UserRepositoryImpl();
-        User user = new User("John Doe", "john.doe", "password123", Arrays.asList("Peanuts"), "User", Arrays.asList("Movie1"));
+        User user = new User("John Doe", "john.doe", "password123", Arrays.asList("Peanuts"), "User", Arrays.asList("Movie1"), "", "");
 
         // Add a user to the collection for testing
         userRepository.addUser(user);
@@ -41,7 +41,7 @@ class userRepositoryStatmentTest {
     @Test
     public void testDeleteUserByUsername() {
         UserRepositoryImpl userRepository = new UserRepositoryImpl();
-        User user = new User("John Doe", "john.doe", "password123", Arrays.asList("Peanuts"), "User", Arrays.asList("Movie1"));
+        User user = new User("John Doe", "john.doe", "password123", Arrays.asList("Peanuts"), "User", Arrays.asList("Movie1"), "", "");
 
         // Add a user to the collection for testing
         userRepository.addUser(user);
@@ -57,7 +57,7 @@ class userRepositoryStatmentTest {
     @Test
     public void testUpdateUser() {
         UserRepositoryImpl userRepository = new UserRepositoryImpl();
-        User user = new User("John Doe", "john.doe", "password123", Arrays.asList("Peanuts"), "User", Arrays.asList("Movie1"));
+        User user = new User("John Doe", "john.doe", "password123", Arrays.asList("Peanuts"), "User", Arrays.asList("Movie1"), "", "");
 
         // Add a user to the collection for testing
         userRepository.addUser(user);
@@ -80,7 +80,7 @@ class userRepositoryStatmentTest {
     @Test
     public void testGetUserAllergiesByUsername() {
         UserRepositoryImpl userRepository = new UserRepositoryImpl();
-        User user = new User("John Doe", "john.doe", "password123", Arrays.asList("Peanuts"), "User", Arrays.asList("Movie1"));
+        User user = new User("John Doe", "john.doe", "password123", Arrays.asList("Peanuts"), "User", Arrays.asList("Movie1"), "", "");
 
         // Add a user to the collection for testing
         userRepository.addUser(user);

@@ -23,7 +23,7 @@ class CategoriesStatementTest {
     List<Food> firstCategory = categories.get(0);
     Food firstFood = firstCategory.get(0);
     String nameFirstFood=firstFood.getName();
-    User fakeUser = new User("John Doe", "john.doe", "password123", Arrays.asList("Peanuts", "Shellfish"), "User", Arrays.asList("FavoriteFood1", "FavoriteFood2"));
+    User fakeUser = new User("John Doe", "john.doe", "password123", Arrays.asList("Peanuts", "Shellfish"), "User", Arrays.asList("FavoriteFood1", "FavoriteFood2"), "", "");
 	
     @Test
     void testChooseCategoryInvalid() throws Exception {
@@ -73,9 +73,9 @@ class CategoriesStatementTest {
         System.setOut(new PrintStream(outputStream));
         CategoriesController.chooseFood(1,firstCategory); 
         assertEquals("You've chosen to look into "+nameFirstFood
-        		+".\n What interests you about this food ?\n"
-    			+"1) Go back\n"
-    			+"2) Its list of potential allergies\n"
+        		+"What interests you about this food ?"
+    			+"1) Go back"
+    			+"2) Its list of potential allergies"
     			+"0) Exit", 
     			outputStream.toString().trim());
         System.setOut(System.out);    

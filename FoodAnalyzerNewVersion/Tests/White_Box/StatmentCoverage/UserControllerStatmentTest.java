@@ -75,13 +75,15 @@ class UserControllerStatmentTest {
 	        String newPassword = "newpassword";
 	        String newName = "Updated Name";
 	        String newUsername = "new.john.doe";
+	        String newECEmail = "a@gmail.com";
+	        String newECNumber = "123456789";
 	        List<String> newAllergies = Arrays.asList("Updated Allergies");
 
 	        // Create a user for testing
 	        userController.createUserAccount("John Doe", currentUsername, "password123", Arrays.asList("Peanuts"));
 
 	        // Update the user account
-	        Document updatedUser = userController.UpdateUserAccount(newName, newUsername, newPassword, newAllergies, currentUsername);
+	        Document updatedUser = userController.UpdateUserAccount(newName, newUsername, newPassword, newAllergies, currentUsername, newECEmail, newECNumber);
 
 	        // Check if the user is updated in the repository
 	        assertNotNull(updatedUser);
@@ -189,7 +191,7 @@ class UserControllerStatmentTest {
 	        // Check if the password is updated in the user's account
 	        Document updatedUser = userController.CheckUserAccount(username);
 	        assertNotNull(updatedUser);
-	        assertTrue(userController.checkPassword(newPassword, updatedUser.getString("PasswordHash")));
+	        assertTrue(UserController.checkPassword(newPassword, updatedUser.getString("PasswordHash")));
 	    }
 
 	    @Test

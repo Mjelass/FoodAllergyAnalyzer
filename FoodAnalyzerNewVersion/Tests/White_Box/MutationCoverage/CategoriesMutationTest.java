@@ -24,14 +24,14 @@ public class CategoriesMutationTest {
 			static List<Food> firstCategory = categories.get(0); 
 			static Food firstFood = firstCategory.get(0); 
 			String nameFirstFood=firstFood.getName(); 
-			User fakeUser = new User("John Doe", "john.doe", "password123", Arrays.asList("Peanuts", "Shellfish"), "User", Arrays.asList("FavoriteFood1", "FavoriteFood2")); 
+			User fakeUser = new User("John Doe", "john.doe", "password123", Arrays.asList("Peanuts", "Shellfish"), "User", Arrays.asList("FavoriteFood1", "FavoriteFood2"), "", ""); 
 			
 			
 	public static String chooseCategoryMutation(int userChoice) { 
 				CategoriesRepositoryImpl categoriesRepository = new CategoriesRepositoryImpl(); List<List<Food>> categories = categoriesRepository.getAllCategories(); 
 				if (userChoice < 0 || userChoice > categories.size()) { 
 					System.out.print("Invalid choice."); 
-				} else if (userChoice == 1) {//mutation  
+				} else if (userChoice == 1) {//mutation 
 					System.out.print("Exiting."); } 
 				else { 
 					List<Food> chosenCategory = categories.get(userChoice - 1); 
@@ -72,7 +72,7 @@ public class CategoriesMutationTest {
 				System.out.println("Exiting."); } 
 			else { 
 				Food chosenFood = chosenCategory.get(userChoice2-1); 
-				System.out.println("You've chosen to look into "+chosenFood.getName() +".\n What interests you about this food ?\n" +"1) Go back\n" +"2) Its list of potential allergies\n" +"0) Exit"); 
+				System.out.println("You've chosen to look into "+chosenFood.getName() +"What interests you about this food ?" +"1) Go back" +"2) Its list of potential allergies" +"0) Exit"); 
 				} 
 		} 
 	@Test 
