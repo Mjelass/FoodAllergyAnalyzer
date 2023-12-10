@@ -159,7 +159,7 @@ public class Main {
 		System.out.println("6. update the information of a user");
 		System.out.println("7. delete a user");
 		System.out.println("0. Exit\n");
-
+ 
 		//Get user input
 		int userInput = inputOutput("Please press the number that corresponds to what you would like the food analyzer to do.");
 		if (userInput >= 0 && userInput <=7) {

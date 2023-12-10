@@ -177,5 +177,18 @@ public class FoodRepositoryImpl implements FoodRepository {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	public boolean checkIfFoodExists(String string) {
+		try (MongoClient mongoClient = MongoClients.create(connectionString)) {
+	        MongoDatabase database = mongoClient.getDatabase("cluster0");
+	        MongoCollection<Document> collection = database.getCollection("Food");
+	        Document foodDocument = collection.find(eq("name", string)).first();
+	        return foodDocument != null;
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return false;
+	    }
+		
+	}
+
 }
 
