@@ -38,13 +38,13 @@ class UserRepositoryMutationTest {
         UserRepositoryImpl userRepository = new UserRepositoryImpl();
 
         // Test adding a user with valid data
-        User user = new User("John Doe", "john.doe", "password123", Arrays.asList("Peanuts"), "User", Arrays.asList("Movie1"));
+        User user = new User("John Doe", "john.doe", "password123", Arrays.asList("Peanuts"), "User", Arrays.asList("Movie1"), "", "");
         userRepository.addUser(user );
         Document addedUser = userRepository.findUserbyUsername("john.doe");
         assertNotNull("User not added successfully", addedUser);
 
         // Test adding a user with null username
-        userRepository.addUser(new User("Alice", null, "password123", Arrays.asList("Peanuts"), "User", Arrays.asList("Movie1")));
+        userRepository.addUser(new User("Alice", null, "password123", Arrays.asList("Peanuts"), "User", Arrays.asList("Movie1"), "", ""));
 
         // Test adding a user with an existing username
         userRepository.addUser(user );
@@ -61,7 +61,7 @@ class UserRepositoryMutationTest {
         UserRepositoryImpl userRepository = new UserRepositoryImpl();
 
         // Test finding an existing user by username
-        User user = new User("John Doe", "john.doe", "password123", Arrays.asList("Peanuts"), "User", Arrays.asList("Movie1"));
+        User user = new User("John Doe", "john.doe", "password123", Arrays.asList("Peanuts"), "User", Arrays.asList("Movie1"), "", "");
         userRepository.addUser(user);
         Document userDocument = userRepository.findUserbyUsername("john.doe");
         assertNotNull("Existing user not found", userDocument);
@@ -102,7 +102,7 @@ class UserRepositoryMutationTest {
     @Test
     public void testUpdateUser() {
         UserRepositoryImpl userRepository = new UserRepositoryImpl();
-        User user = new User("John Doe", "john.doe", "password123", Arrays.asList("Peanuts"), "User", Arrays.asList("Movie1"));
+        User user = new User("John Doe", "john.doe", "password123", Arrays.asList("Peanuts"), "User", Arrays.asList("Movie1"), "", "");
         userRepository.addUser(user);
 
         // Test updating an existing user
@@ -126,7 +126,7 @@ class UserRepositoryMutationTest {
     @Test
     public void testGetUserAllergiesByUsername() {
         UserRepositoryImpl userRepository = new UserRepositoryImpl();
-        User user = new User("John Doe", "john.doe", "password123", Arrays.asList("Peanuts"), "User", Arrays.asList("Movie1"));
+        User user = new User("John Doe", "john.doe", "password123", Arrays.asList("Peanuts"), "User", Arrays.asList("Movie1"), "", "");
         userRepository.addUser(user);
 
         // Test getting allergies for an existing user

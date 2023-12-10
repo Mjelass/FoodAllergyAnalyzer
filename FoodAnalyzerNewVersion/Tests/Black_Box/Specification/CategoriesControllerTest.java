@@ -36,7 +36,7 @@ public class CategoriesControllerTest {
         System.setIn(inputStream);
 
         try {
-            for (int i = 0; i < userInputs.length; i++) { 
+            for (int i = 0; i < userInputs.length; i++) {
                 ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
                 System.setOut(new PrintStream(outputStream));
 
@@ -49,10 +49,11 @@ public class CategoriesControllerTest {
                 } else if (i - 1 == 0) {
                     assertEquals("Exiting.", outputStream.toString().trim());
                 } else if (i - 1 == 1) {
+                	//
                     assertEquals("Here are the foods in this category : Sausage roll", outputStream.toString().trim());
                 }
 
-                outputStream.reset(); 
+                outputStream.reset();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -111,7 +112,7 @@ public class CategoriesControllerTest {
         InputStream inputStream = new ByteArrayInputStream(String.join("\n", userInputs).getBytes());
         System.setIn(inputStream);
 
-        User fakeUser = new User("John Doe", "john.doe", "password123", Arrays.asList("Peanuts", "Shellfish"), "User", Arrays.asList("FavoriteFood1", "FavoriteFood2"));
+        User fakeUser = new User("John Doe", "john.doe", "password123", Arrays.asList("Peanuts", "Shellfish"), "User", Arrays.asList("FavoriteFood1", "FavoriteFood2"), "", "");
 
         try {
             for (int i = 0; i < userInputs.length; i++) {

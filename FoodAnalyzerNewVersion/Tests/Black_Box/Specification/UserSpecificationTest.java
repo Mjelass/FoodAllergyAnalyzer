@@ -17,7 +17,7 @@ class UserSpecificationTest {
 	        List<String> allergies = Arrays.asList("Peanuts", "Shellfish");
 	        List<String> favoriteList = Arrays.asList("Book", "Movie");
 
-	        User user = new User("John Doe", "john_doe", "password123", allergies, "Admin", favoriteList);
+	        User user = new User("John Doe", "john_doe", "password123", allergies, "Admin", favoriteList, "", "");
 
 	        assertEquals("John Doe", user.getName());
 	        assertEquals("john_doe", user.getUserName());
@@ -29,7 +29,7 @@ class UserSpecificationTest {
 
 	    @Test
 	    public void testSetters() {
-	        User user = new User("John Doe", "john_doe", "password123", new ArrayList<>(), "User", new ArrayList<>());
+	        User user = new User("John Doe", "john_doe", "password123", new ArrayList<>(), "User", new ArrayList<>(), "", "");
 
 	        user.setName("Jane Doe");
 	        assertEquals("Jane Doe", user.getName());
@@ -54,7 +54,7 @@ class UserSpecificationTest {
 
 	    @Test
 	    public void testEmptyConstructor() {
-	        User user = new User("", "", "", new ArrayList<>(), "", new ArrayList<>());
+	        User user = new User("", "", "", new ArrayList<>(), "", new ArrayList<>(), "", "");
 
 	        assertNotNull(user);
 	        assertEquals("", user.getName());

@@ -39,7 +39,11 @@ public class UserRepositoryImpl implements UserRepository {
                         .append("PasswordHash", user.getPassword()) 
                         .append("allergies", user.getAllergies())
                         .append("Role", user.getRole())
-                		.append("FavoriteList", user.getFavoriteList());
+                		.append("FavoriteList", user.getFavoriteList())
+                		.append("ECEmail", user.getEmergencyContactEmail())
+                		.append("ECNumber", user.getEmergencyContactNumber());
+                
+                
 
                 collection.insertOne(document);
                 return document;

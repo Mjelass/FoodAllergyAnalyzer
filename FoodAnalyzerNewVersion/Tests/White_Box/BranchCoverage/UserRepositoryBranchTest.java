@@ -16,7 +16,7 @@ class UserRepositoryBranchTest {
 	  @Test
 	    public void testAddUser() {
 	        UserRepositoryImpl userRepository = new UserRepositoryImpl();
-	        User user1 = new User("John Doe", "john.doe", "password123", Arrays.asList("Peanuts"), "User", Arrays.asList("Movie1"));
+	        User user1 = new User("John Doe", "john.doe", "password123", Arrays.asList("Peanuts"), "User", Arrays.asList("Movie1"), "", "");
 	        userRepository.addUser(user1);
 
 	        // Check if the user was added successfully (username doesn't exist)
@@ -28,11 +28,11 @@ class UserRepositoryBranchTest {
 	    @Test
 	    public void testAddUserExistingUsername() {
 	        UserRepositoryImpl userRepository = new UserRepositoryImpl();
-	        User user1 = new User("John Doe", "john.doe", "password123", Arrays.asList("Peanuts"), "User", Arrays.asList("Movie1"));
+	        User user1 = new User("John Doe", "john.doe", "password123", Arrays.asList("Peanuts"), "User", Arrays.asList("Movie1"), "", "");
 	        userRepository.addUser(user1);
 
 	        // Attempt to add a user with an existing username
-	        User user2 = new User("Jane Doe", "john.doe", "newpassword", Arrays.asList("No allergies"), "Admin", Arrays.asList("Movie2"));
+	        User user2 = new User("Jane Doe", "john.doe", "newpassword", Arrays.asList("No allergies"), "Admin", Arrays.asList("Movie2"), "", "");
 	        userRepository.addUser(user2);
 
 	        // Check if the system handled the existing username correctly
@@ -45,7 +45,7 @@ class UserRepositoryBranchTest {
 	    @Test
 	    public void testFindUserByUsername() {
 	        UserRepositoryImpl userRepository = new UserRepositoryImpl();
-	        User user1 = new User("John Doe", "john.doe", "password123", Arrays.asList("Peanuts"), "User", Arrays.asList("Movie1"));
+	        User user1 = new User("John Doe", "john.doe", "password123", Arrays.asList("Peanuts"), "User", Arrays.asList("Movie1"), "", "");
 	        userRepository.addUser(user1);
 
 	        // Check if the findUserbyUsername method returns the correct user
@@ -57,7 +57,7 @@ class UserRepositoryBranchTest {
 	    @Test
 	    public void testDeleteUserByUsername() {
 	        UserRepositoryImpl userRepository = new UserRepositoryImpl();
-	        User user1 = new User("John Doe", "john.doe", "password123", Arrays.asList("Peanuts"), "User", Arrays.asList("Movie1"));
+	        User user1 = new User("John Doe", "john.doe", "password123", Arrays.asList("Peanuts"), "User", Arrays.asList("Movie1"), "", "");
 	        userRepository.addUser(user1);
 
 	        // Delete the user and check if the user was removed
@@ -69,7 +69,7 @@ class UserRepositoryBranchTest {
 	    @Test
 	    public void testUpdateUser() {
 	        UserRepositoryImpl userRepository = new UserRepositoryImpl();
-	        User user1 = new User("John Doe", "john.doe", "password123", Arrays.asList("Peanuts"), "User", Arrays.asList("Movie1"));
+	        User user1 = new User("John Doe", "john.doe", "password123", Arrays.asList("Peanuts"), "User", Arrays.asList("Movie1"), "", "");
 	        userRepository.addUser(user1);
 
 	        // Update the user's information
@@ -95,7 +95,7 @@ class UserRepositoryBranchTest {
 	    @Test
 	    public void testGetUserAllergiesByUsername() {
 	        UserRepositoryImpl userRepository = new UserRepositoryImpl();
-	        User user1 = new User("John Doe", "john.doe", "password123", Arrays.asList("Peanuts"), "User", Arrays.asList("Movie1"));
+	        User user1 = new User("John Doe", "john.doe", "password123", Arrays.asList("Peanuts"), "User", Arrays.asList("Movie1"), "", "");
 	        userRepository.addUser(user1);
 
 	        // Check if the getUserAllergiesByUsername method returns the correct allergies

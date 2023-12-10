@@ -9,6 +9,8 @@ public class User {
 	private List<String> Allergies;
 	private String Role;
 	private List<String> FavoriteList;
+	private String EmergencyContactEmail;
+	private String EmergencyContactNumber;
 	
 	public List<String> getFavoriteList() {
 		return FavoriteList;
@@ -24,7 +26,7 @@ public class User {
 	}
 	
 	public User(String name, String userName, String password, List<String> allergies, String role,
-			List<String> favoriteList) {
+			List<String> favoriteList, String emergencyContactEmail, String emergencyContactNumber) {
 		super();
 		this.name = name;
 		UserName = userName;
@@ -32,6 +34,8 @@ public class User {
 		Allergies = allergies;
 		Role = role;
 		FavoriteList = favoriteList;
+		EmergencyContactEmail = emergencyContactEmail;
+		EmergencyContactNumber = emergencyContactNumber;
 	}
 	public String getName() {
 		return name;
@@ -57,6 +61,17 @@ public class User {
 	public void setAllergies(List<String> allergies) {
 		Allergies = allergies;
 	}
-	
+	public String getEmergencyContactEmail() {
+		return EmergencyContactEmail;
+	}
+	public void setEmergencyContactEmail(String newEmergencyContactEmail) {
+		EmergencyContactEmail = newEmergencyContactEmail;
+	}
+	public String getEmergencyContactNumber() {
+		return EmergencyContactNumber;
+	}
+	public void setEmergencyContactNumber(String newEmergencyContactNumber) {
+		EmergencyContactNumber = newEmergencyContactNumber;
+	}
 	
 }

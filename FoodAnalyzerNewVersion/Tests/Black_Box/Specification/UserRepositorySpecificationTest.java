@@ -17,7 +17,7 @@ class UserRepositorySpecificationTest {
 
     @Test
     public void testAddUser() {
-        User user = new User("John Doe", "john_doe", "password123", new ArrayList<>(), "user", null);
+        User user = new User("John Doe", "john_doe", "password123", new ArrayList<>(), "user", null, "", "");
         userRepository.addUser(user);
 
         Document retrievedUser = userRepository.findUserbyUsername("john_doe");
@@ -32,10 +32,10 @@ class UserRepositorySpecificationTest {
 
     @Test
     public void testAddUserDuplicateUsername() {
-        User existingUser = new User("Existing User", "existing_user", "existing_password", new ArrayList<>(), "user", null);
+        User existingUser = new User("Existing User", "existing_user", "existing_password", new ArrayList<>(), "user", null, "", "");
         userRepository.addUser(existingUser);
 
-        User duplicateUser = new User("Duplicate User", "existing_user", "password123", new ArrayList<>(), "user", null);
+        User duplicateUser = new User("Duplicate User", "existing_user", "password123", new ArrayList<>(), "user", null, "", "");
         userRepository.addUser(duplicateUser);
 
         Document retrievedUser = userRepository.findUserbyUsername("existing_user");
@@ -45,7 +45,7 @@ class UserRepositorySpecificationTest {
 
     @Test
     public void testFindUserByUsername() {
-        User user = new User("Find User", "find_user", "password123", new ArrayList<>(), "user", null);
+        User user = new User("Find User", "find_user", "password123", new ArrayList<>(), "user", null, "", "");
         userRepository.addUser(user);
 
         Document retrievedUser = userRepository.findUserbyUsername("find_user");
@@ -55,7 +55,7 @@ class UserRepositorySpecificationTest {
 
     @Test
     public void testDeleteUserByUsername() {
-        User user = new User("Delete User", "delete_user", "password123", new ArrayList<>(), "user", null);
+        User user = new User("Delete User", "delete_user", "password123", new ArrayList<>(), "user", null, "", "");
         userRepository.addUser(user);
 
         userRepository.deleteUserbyUsername("delete_user");
@@ -66,7 +66,7 @@ class UserRepositorySpecificationTest {
 
     @Test
     public void testUpdateUser() {
-        User user = new User("Update User", "update_user", "password123", new ArrayList<>(), "user", null);
+        User user = new User("Update User", "update_user", "password123", new ArrayList<>(), "user", null, "", "");
         userRepository.addUser(user);
 
         Document existingUserDocument = userRepository.findUserbyUsername("update_user");
@@ -83,7 +83,7 @@ class UserRepositorySpecificationTest {
 
     @Test
     public void testGetUserAllergiesByUsername() {
-        User user = new User("Allergy User", "allergy_user", "password123", List.of("Peanuts", "Shellfish"), "user", null);
+        User user = new User("Allergy User", "allergy_user", "password123", List.of("Peanuts", "Shellfish"), "user", null, "", "");
         userRepository.addUser(user);
 
         List<String> allergies = UserRepositoryImpl.getUserAllergiesByUsername("allergy_user");
