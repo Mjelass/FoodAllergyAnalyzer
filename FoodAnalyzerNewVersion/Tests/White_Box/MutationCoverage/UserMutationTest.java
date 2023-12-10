@@ -13,7 +13,7 @@ class UserMutationTest {
 	@Test
     public void testMutationCoverage() {
 		 // Original User object
-        User user = new User("John Doe", "john.doe", "password123", Arrays.asList("Peanuts"), "User", Arrays.asList("Movie1"));
+        User user = new User("John Doe", "john.doe", "password123", Arrays.asList("Peanuts"), "User", Arrays.asList("Movie1"), "", "");
 
         // Mutate the user's name (introduce a defect)
         user.setName("Mutated Name");

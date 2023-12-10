@@ -135,6 +135,7 @@ public class Main {
         String password_k = scanner.nextLine();
         if("admin".equals(userName_k) && "admin".equals(password_k)) {
         	loggedUSername="admin";
+        	System.out.println("Congratulation, You are Loged IN As an Admin!!");
         	afterLoginAdmin();
     	}
         boolean res = uc.UserLogin(userName_k,password_k);
@@ -150,7 +151,7 @@ public class Main {
 	}
 	
 	private static void afterLoginAdmin() {
-		System.out.println("Congratulation, You are Loged IN As an Admin!!");
+		
 		System.out.println("1. check the information of a product");
 		System.out.println("2. update the information of a product");
 		System.out.println("3. Add a new food product");
@@ -159,7 +160,7 @@ public class Main {
 		System.out.println("6. update the information of a user");
 		System.out.println("7. delete a user");
 		System.out.println("0. Exit\n");
- 
+
 		//Get user input
 		int userInput = inputOutput("Please press the number that corresponds to what you would like the food analyzer to do.");
 		if (userInput >= 0 && userInput <=7) {
@@ -185,32 +186,49 @@ public class Main {
 		        System.out.println("1 - Update username");
 		        System.out.println("2 - Update name");
 		        System.out.println("3 - Update password");
+		        System.out.println("4 - Update Emergency Contact Email");
+		        System.out.println("5 - Update Emergency Contact Number");
 		        System.out.println("0 - Go back");
 		        int input = inputOutput("Please press the number that corresponds to what you would like to do");
-		        if (input >= 0 && input <=3) {
+		        if (input >= 0 && input <=5) {
 		        	if (input == 1) {
-		        		System.out.print("Enter new username");
+		        		System.out.print("Enter new username : ");
 		        		String newUsername = scanner.nextLine();
 		        		uc.updateUserName(userName_k,newUsername);
 		        		afterLoginAdmin();
 		        	}
 		        	if (input == 2) {
-		        		System.out.print("Enter new name");
+		        		System.out.print("Enter new name : ");
 		        		String newName = scanner.nextLine();
 		        		uc.updateName(userName_k,newName);
 		        		afterLoginAdmin();
 		        	}
 		        	if (input == 3) {
-		        		System.out.print("Enter new password");
+		        		System.out.print("Enter new password : ");
 		        		String newPassword = scanner.nextLine();
 		        		uc.updatePassword(userName_k,newPassword);
+		        		afterLoginAdmin();
+		        	}
+		        	if (input == 4) {
+		        		System.out.print("Enter new Emergency Contact Email : ");
+		        		String newECEmail = scanner.nextLine();
+		        		uc.updateUserEmergencyEmail(userName_k, newECEmail);
+		        		afterLoginAdmin();
+		        	}
+		        	if (input == 5) {
+		        		System.out.print("Enter new Emergency Contact Email : ");
+		        		String newECNumber = scanner.nextLine();
+		        		uc.updateUserEmegencyNumber(userName_k, newECNumber);;
 		        		afterLoginAdmin();
 		        	}
 		        	if (input == 0) {
 		        		afterLoginAdmin();
 		        	}
 		        	
-		        }
+		        } else {
+	        		System.out.println("Pease write a number between 0 and 5!!!! ");
+	        		afterLoginAdmin();
+	        	}
 			}
 			if (userInput == 7)  {
 				Scanner scanner = new Scanner(System.in);
@@ -256,6 +274,8 @@ public class Main {
 		}
 		System.out.println("allergies :"+s);
 		System.out.println("Role :"+res.getString("Role"));
+		System.out.println("Emergency Contact Email :"+res.getString("ECEmail"));
+		System.out.println("Emergency Contact Number :"+res.getString("ECNumber"));
 		int userInput = inputOutput("Please press the number 0 to return.");
 		if (userInput == 0) {
 			if(loggedUSername.equals("admin")) {
@@ -281,7 +301,11 @@ public class Main {
         String allergies_k = scanner.nextLine();
         String[] elementsArray = allergies_k.split(",");
         List<String> allergies = new ArrayList<>(Arrays.asList(elementsArray));
-        uc.UpdateUserAccount(name_k,userName_k,password_k,allergies,loggedUSername);
+        System.out.print("Please enter the New Emergency Contact Email: ");
+        String ECEmail_k = scanner.nextLine();
+        System.out.print("Please enter the New Emergency Contact Number: ");
+        String ECNumber_k = scanner.nextLine();
+        uc.UpdateUserAccount(name_k,userName_k,password_k,allergies,loggedUSername, ECEmail_k, ECNumber_k);
         if(!loggedUSername.equals("admin")) {
         	loggedUSername = userName_k;
         }

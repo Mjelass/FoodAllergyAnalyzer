@@ -13,13 +13,15 @@ class UserStatmentTest {
 	 @Test 
 	    public void testStatementCoverage() {
 	        // Test constructor and getters
-	        User user = new User("John Doe", "john.doe", "password123", Arrays.asList("Peanuts"), "User", Arrays.asList("Movie1"));
+	        User user = new User("John Doe", "john.doe", "password123", Arrays.asList("Peanuts"), "User", Arrays.asList("Movie1"), "a@gamil.com", "123456789");
 	        assertEquals("John Doe", user.getName());
 	        assertEquals("john.doe", user.getUserName());
 	        assertEquals("password123", user.getPassword());
 	        assertEquals(Arrays.asList("Peanuts"), user.getAllergies());
 	        assertEquals("User", user.getRole());
 	        assertEquals(Arrays.asList("Movie1"), user.getFavoriteList());
+	        assertEquals("a@gamil.com", user.getEmergencyContactEmail());
+	        assertEquals("123456789", user.getEmergencyContactNumber());
 
 	        // Test setters
 	        user.setName("Jane Doe");
@@ -46,6 +48,14 @@ class UserStatmentTest {
 	        // Test setFavoriteList method
 	        user.setFavoriteList(Arrays.asList("Movie3"));
 	        assertEquals(Arrays.asList("Movie3"), user.getFavoriteList());
-	    }
+	        
+	        // Test setEmergencyContactEmail
+	        user.setEmergencyContactEmail("b@gmail.com");
+	        assertEquals("b@gmail.com", user.getEmergencyContactEmail());
+	        
+	        // Test setEmergencyContactNumber
+	        user.setEmergencyContactNumber("987654321");
+	        assertEquals("987654321", user.getEmergencyContactNumber());
+	    }	
 
 }

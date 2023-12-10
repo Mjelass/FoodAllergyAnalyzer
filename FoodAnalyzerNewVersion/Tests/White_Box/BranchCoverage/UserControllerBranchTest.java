@@ -44,14 +44,14 @@ class UserControllerBranchTest {
 	    @Test
 	    public void testUpdateUserAccountValidUser() {
 	    	userController.createUserAccount("johnEE", "newuser", "newpassword", Arrays.asList("Eggs"));
-	        Document updatedUser = userController.UpdateUserAccount("Updated Name", "john.doe", "newpassword", Arrays.asList("Updated Allergies"), "newuser");
+	        Document updatedUser = userController.UpdateUserAccount("Updated Name", "john.doe", "newpassword", Arrays.asList("Updated Allergies"), "newuser", "a@gmail.com", "123456789");
 	        assertNotNull(updatedUser);
 	        assertEquals("Updated Name", updatedUser.getString("name"));
 	    }
 
 	    @Test
 	    public void testUpdateUserAccountInvalidUser() {
-	        assertNull(userController.UpdateUserAccount("Updated Name", "nonexistentuser", "newpassword", Arrays.asList("Updated Allergies"), "john.doe"));
+	        assertNull(userController.UpdateUserAccount("Updated Name", "nonexistentuser", "newpassword", Arrays.asList("Updated Allergies"), "john.doe", "a@gmail.com", "123456789"));
 	    }
 
 	    @Test
@@ -122,7 +122,7 @@ class UserControllerBranchTest {
 	        userController.updatePassword("john.doe", "newpassword");
 	        Document updatedUser = userController.CheckUserAccount("john.doe");
 	        assertNotNull(updatedUser);
-	        assertTrue(userController.checkPassword("newpassword", updatedUser.getString("PasswordHash")));
+	        assertTrue(UserController.checkPassword("newpassword", updatedUser.getString("PasswordHash")));
 	    }
 
 	    @Test

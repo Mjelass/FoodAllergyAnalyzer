@@ -73,7 +73,7 @@ public class UserController {
 	 */
 	public void createUserAccount(String name, String userName, String password, List<String> allergies) {
 		String PasswordHash = hashPassword(password);
-        User newUser = new User(name, userName, PasswordHash, allergies, "user",null); // Create a new user
+        User newUser = new User(name, userName, PasswordHash, allergies, "user",null, "", ""); // Create a new user
         userRepository.addUser(newUser); // Add the user to the repository
     }
 	/**
@@ -93,7 +93,7 @@ public class UserController {
 	 * @return 
 	 * @return User
 	 */
-	public Document UpdateUserAccount(String name,String UserName,String Password,List<String> Allergies,String CurrentUserName) {
+	public Document UpdateUserAccount(String name,String UserName,String Password,List<String> Allergies,String CurrentUserName, String ECEmail, String ECNumber) {
 	    // Retrieve the existing user document from the repository
 	    Document existingUserDocument = userRepository.findUserbyUsername(CurrentUserName);
 
@@ -104,6 +104,8 @@ public class UserController {
 	        existingUserDocument.put("userName", UserName);
 	        existingUserDocument.put("PasswordHash", hashPassword(Password));
 	        existingUserDocument.put("allergies", Allergies);
+	        existingUserDocument.put("ECEmail", ECEmail);
+	        existingUserDocument.put("ECNumber", ECNumber);
 
 	        // Update the user document in the repository
 	        userRepository.updateUser(CurrentUserName, existingUserDocument);
@@ -211,4 +213,29 @@ public class UserController {
 	        System.out.println("User not found. Update failed.");
 	    }
 	}
+	//EE = Emergency email
+		public void updateUserEmergencyEmail(String userName, String newEE) {
+		    Document existingUserDocument = userRepository.findUserbyUsername(userName);
+
+		    if (existingUserDocument != null) {
+		        existingUserDocument.put("ECEmail", newEE);
+		        userRepository.updateUser(userName, existingUserDocument);
+		        System.out.println("Emergency Contact Email updated successfully.");
+		    } else {
+		        System.out.println("User not found. Update failed.");
+		    }
+		}
+		
+		// EN = emergency Number
+		public void updateUserEmegencyNumber(String userName, String newEN) {
+		    Document existingUserDocument = userRepository.findUserbyUsername(userName);
+
+		    if (existingUserDocument != null) {
+		        existingUserDocument.put("ECNumber", newEN);
+		        userRepository.updateUser(userName, existingUserDocument);
+		        System.out.println("Emergency Contact Number updated successfully.");
+		    } else {
+		        System.out.println("User not found. Update failed.");
+		    }
+		}
 }
