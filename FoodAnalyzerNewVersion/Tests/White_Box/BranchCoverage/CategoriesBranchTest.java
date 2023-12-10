@@ -42,7 +42,7 @@ class CategoriesBranchTest {
             action.run();
             return outputStream.toString();
         } finally {
-            System.setOut(System.out);
+            System.setOut(System.out); 
         }
     }
     @Test
@@ -74,9 +74,9 @@ class CategoriesBranchTest {
                     System.setOut(new PrintStream(outputStream));
                     CategoriesController.chooseFood(1, firstCategory);
                     assertEquals("You've chosen to look into "+nameFirstFood
-                    		+"What interests you about this food ?"
-                			+"1) Go back"
-                			+"2) Its list of potential allergies"
+                    		+".\n What interests you about this food ?\n"
+                			+"1) Go back\n"
+                			+"2) Its list of potential allergies\n"
                 			+"0) Exit", 
                 			outputStream.toString().trim());
                 }

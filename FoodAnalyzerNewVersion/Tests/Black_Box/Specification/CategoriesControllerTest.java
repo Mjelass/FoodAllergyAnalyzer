@@ -52,7 +52,7 @@ public class CategoriesControllerTest {
                     assertEquals("Here are the foods in this category : Sausage roll", outputStream.toString().trim());
                 }
 
-                outputStream.reset();
+                outputStream.reset(); 
             }
         } catch (Exception e) {
             e.printStackTrace();

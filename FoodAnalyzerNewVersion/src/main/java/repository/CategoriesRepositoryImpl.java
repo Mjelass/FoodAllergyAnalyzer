@@ -29,7 +29,7 @@ public class CategoriesRepositoryImpl implements CategoriesRepository{
 
     @Override
 	public List<List<Food>> getAllCategories() {
-	    List<List<Food>> categories = new ArrayList<>();
+	    List<List<Food>> categories = new ArrayList<>(); 
 
 	    try (MongoClient mongoClient = MongoClients.create(connectionString)) {
 	        // Connect to the "cluster0" database

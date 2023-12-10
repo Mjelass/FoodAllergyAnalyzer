@@ -31,7 +31,7 @@ public class CategoriesController {
         } else if (userChoice == 0) {
             exiting(0);
         } else {
-            List<Food> chosenCategory = categories.get(userChoice - 1);
+            List<Food> chosenCategory = categories.get(userChoice - 1); 
     	    showFoods(chosenCategory);
         }
 	}
@@ -47,7 +47,7 @@ public class CategoriesController {
             List<Food> chosenCategory = categories.get(userChoice - 1);
             System.out.print("Here are the foods in this category : ");
     	    for (Food food : chosenCategory) {
-    	        System.out.print(food.getName());
+    	        System.out.println(food.getName());
     	    }
     	    
         }
@@ -80,9 +80,9 @@ public class CategoriesController {
 	    } else {
 	        Food chosenFood = chosenCategory.get(userChoice2-1);
 	        System.out.println("You've chosen to look into "+chosenFood.getName()
-	        +"What interests you about this food ?"
-			+"1) Go back"
-			+"2) Its list of potential allergies"
+	        +".\n What interests you about this food ?\n"
+			+"1) Go back\n"
+			+"2) Its list of potential allergies\n"
 			+"0) Exit");
 	    } 
 	}
