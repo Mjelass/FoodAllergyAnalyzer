@@ -36,7 +36,7 @@ public class CategoriesControllerTest {
         System.setIn(inputStream);
 
         try {
-            for (int i = 0; i < userInputs.length; i++) {
+            for (int i = 0; i < userInputs.length; i++) { 
                 ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
                 System.setOut(new PrintStream(outputStream));
 

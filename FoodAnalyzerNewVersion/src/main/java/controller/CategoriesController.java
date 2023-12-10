@@ -68,7 +68,7 @@ public class CategoriesController {
 	        exiting(0);
 	    } else {
 	        Food chosenFood = chosenCategory.get(userChoice2-1);
-	        showInterest(chosenFood);
+	        showInterest(chosenFood); 
 	    }
 	}
 	
