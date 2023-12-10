@@ -174,8 +174,27 @@ public class FoodRepositoryImpl implements FoodRepository {
 	}
 	@Override
 	public Food findFoodByName(String name) {
-		// TODO Auto-generated method stub
+		try (MongoClient mongoClient = MongoClients.create(connectionString)) {
+	        MongoDatabase database = mongoClient.getDatabase("cluster0");
+	        MongoCollection<Document> collection = database.getCollection("Food");
+	        Document foodDocument = collection.find(eq("name", name)).first();
+
+	        if (foodDocument != null) {
+	            // Extract the food data from the document and create a Food object
+	            String foodName = foodDocument.getString("name");
+	            List<String> ingredients = foodDocument.getList("ingridients", String.class);
+	            List<String> allergies = foodDocument.getList("allergies", String.class);
+	            String category = foodDocument.getString("Category");
+	            long price = foodDocument.getLong("Price");
+
+	            return new Food(foodName, ingredients, allergies, category, price);
+	        } else {
+	            return null; // or throw an exception, depending on your design choice
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
 		return null;
+	    }
 	}
 	public boolean checkIfFoodExists(String string) {
 		try (MongoClient mongoClient = MongoClients.create(connectionString)) {

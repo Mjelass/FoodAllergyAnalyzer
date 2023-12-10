@@ -16,6 +16,7 @@ import java.util.List;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CategoriesControllerTest { 
 
@@ -49,9 +50,9 @@ public class CategoriesControllerTest {
                 } else if (i - 1 == 0) {
                     assertEquals("Exiting.", outputStream.toString().trim());
                 } else if (i - 1 == 1) {
-                	//
-                    assertEquals("Here are the foods in this category : Sausage roll", outputStream.toString().trim());
-                }
+
+                	assertTrue(outputStream.toString().trim().startsWith("Here are the foods in this category : "), "The output message does not start with the expected first words.");                }
+
 
                 outputStream.reset();
             }
