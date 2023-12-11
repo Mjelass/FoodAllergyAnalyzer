@@ -44,7 +44,7 @@ public class FoodControllerTest {
         assertTrue(foodRepository.checkIfFoodExists("TestFood"));
         
     }*/
-    /*@Test
+    @Test
     public void testCheckProduct( ) {
     	 String inputCheck = "TestFood\n";
     	 
@@ -56,7 +56,7 @@ public class FoodControllerTest {
     	 String consoleOutput = output.toString();
     	 assertTrue(consoleOutput.contains("TestFood"));
     	 
-    }  */
+    }  
   
     @Test
     public void testDeleteFood() {
