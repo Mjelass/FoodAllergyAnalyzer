@@ -100,17 +100,16 @@ public class ExtraInformationStatementTest {
 	        System.setOut(new PrintStream(outputStream));
 	        ExtraInformationController.chooseTopic(6); 
 	        assertEquals("Top 10 Most Common Food Allergies:"
-    	            +"1. Peanuts: Approximately 2% of the global population has a peanut allergy."
-    	            +"2. Tree Nuts: Tree nut allergies, including almonds, walnuts, and cashews, affect around 1% of people."
-    	            +"3. Milk: Dairy allergies, particularly cow's milk, are prevalent in about 2-3% of young children."
-    	            +"4. Eggs: Egg allergies impact roughly 1-2% of children, and many outgrow this allergy over time."
-    	            +"5. Wheat: Wheat allergies, distinct from gluten sensitivity, affect approximately 0.4% of the population."
-    	            +"6. Soy: Soy allergies are estimated to affect 0.4% of children and are often outgrown."
-    	            +"7. Fish: Fish allergies are less common, impacting about 0.1-0.2% of the population."
-    	            +"8. Shellfish: Shellfish allergies, including shrimp and crab, affect around 1.2% of the population."
-    	            +"9. Sesame: Sesame allergies are becoming increasingly recognized, with an estimated prevalence of 0.1-0.2%."
-    	            +"10. Gluten: While celiac disease is distinct, gluten sensitivity affects a small percentage of individuals."
-    	            +"If you want to know more you about a certain allergy you can type in a number 1-10 as listes above (0 to exit):", 
+	                +"1. Peanuts: Approximately 2% of the global population has a peanut allergy."
+	                +"2. Tree Nuts: Tree nut allergies, including almonds, walnuts, and cashews, affect around 1% of people."
+	                +"3. Milk: Dairy allergies, particularly cow's milk, are prevalent in about 2-3% of young children."
+	                +"4. Eggs: Egg allergies impact roughly 1-2% of children, and many outgrow this allergy over time."
+	                +"5. Wheat: Wheat allergies, distinct from gluten sensitivity, affect approximately 0.4% of the population."
+	                +"6. Soy: Soy allergies are estimated to affect 0.4% of children and are often outgrown."
+	                +"7. Fish: Fish allergies are less common, impacting about 0.1-0.2% of the population."
+	                +"8. Shellfish: Shellfish allergies, including shrimp and crab, affect around 1.2% of the population."
+	                +"9. Sesame: Sesame allergies are becoming increasingly recognized, with an estimated prevalence of 0.1-0.2%."
+	                +"10. Gluten: While celiac disease is distinct, gluten sensitivity affects a small percentage of individuals.", 
 	                outputStream.toString().trim());
 	        System.setOut(System.out);    
 	        }

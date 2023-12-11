@@ -18,9 +18,9 @@ public class CategoriesController {
         System.out.println("Here are the categories of food with numbers:");
         CategoriesRepositoryImpl categoriesRepository = new CategoriesRepositoryImpl();
         List<List<Food>> categories = categoriesRepository.getAllCategories();
-        for (int i = 0; i < categories.size(); i++) {
+        for (int i = 1; i < categories.size(); i++) {
             List<Food> category = categories.get(i);
-            System.out.println((i + 1) + ") " + "Category: " + category.get(0).getCategory());
+            System.out.println((i) + ") " + "Category: " + category.get(0).getCategory());
         }
         System.out.println("Enter the number of the category you want to explore (0 to exit):");
         Scanner scanner = new Scanner(System.in);
@@ -31,7 +31,7 @@ public class CategoriesController {
         } else if (userChoice == 0) {
             exiting(0);
         } else {
-            List<Food> chosenCategory = categories.get(userChoice - 1);
+            List<Food> chosenCategory = categories.get(userChoice);
     	    showFoods(chosenCategory);
         }
 	}
@@ -44,7 +44,7 @@ public class CategoriesController {
         } else if (userChoice == 0) {
             System.out.print("Exiting."); 
         } else {
-            List<Food> chosenCategory = categories.get(userChoice - 1);
+            List<Food> chosenCategory = categories.get(userChoice);
             System.out.print("Here are the foods in this category : ");
     	    for (Food food : chosenCategory) {
     	        System.out.print(food.getName());
@@ -55,7 +55,7 @@ public class CategoriesController {
     }
 	    
 	public static void showFoods(List<Food> chosenCategory) {
-	    System.out.println("Choose a food to look into by entering its number (0 to exit):");
+	    System.out.println("\nChoose a food to look into by entering its number (0 to exit):");
 	    for (int i = 0; i < chosenCategory.size(); i++) {
 	        System.out.println((i + 1) + ") " + chosenCategory.get(i).getName());
 	    }
@@ -80,10 +80,10 @@ public class CategoriesController {
 	    } else {
 	        Food chosenFood = chosenCategory.get(userChoice2-1);
 	        System.out.println("You've chosen to look into "+chosenFood.getName()
-	        +"What interests you about this food ?"
-			+"1) Go back"
-			+"2) Its list of potential allergies"
-			+"0) Exit");
+	        +".\nWhat interests you about this food ?\n"
+			+"1) Go back\n"
+			+"2) Its list of potential allergies\n"
+			+"0) Exit\n");
 	    } 
 	}
 
@@ -133,10 +133,20 @@ public class CategoriesController {
 	
 	
 
-	public static void showOptions(String userName) {		 
-			CategoriesRepositoryImpl categoriesRepository = new CategoriesRepositoryImpl();
-		    List<String> myAllergies = UserRepositoryImpl.getUserAllergiesByUsername(userName);
-		    List<Food> allFoods = categoriesRepository.getAllFoods();
+	public static void showOptions(String userName) {
+
+		CategoriesRepositoryImpl categoriesRepository = new CategoriesRepositoryImpl();
+	    List<String> myAllergies = UserRepositoryImpl.getUserAllergiesByUsername(userName);
+	    List<Food> allFoods = categoriesRepository.getAllFoods();
+	    
+	    if (myAllergies==null) {
+        	System.out.println("Your have no relevant allergies. Exiting");
+            exiting(0);
+		}
+        	System.out.println("Please choose an option :");
+            System.out.println("1) Check foods to avoid");
+            System.out.println("2) Check foods to eat");
+            System.out.println("0) Exit");
 		    Scanner scanner = new Scanner(System.in);
 	        int userChoice4 = scanner.nextInt();
 	        chooseOption(userChoice4,userName);
@@ -214,11 +224,15 @@ public class CategoriesController {
 	
 	public static boolean containsAny(List<String> foodAllergies, List<String> userAllergies) {
         for (String allergy : userAllergies) {
+        	if (foodAllergies==null) {
+        		return false;
+        	}else {
             if (foodAllergies.contains(allergy)) {
                 return true; 
             }
+        	}
         }
-        return false; 
+		return false;
 
 	}
 	public static void exiting(int userChoice0) {
