@@ -3,9 +3,12 @@ import java.io.BufferedReader;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -14,11 +17,13 @@ import main.java.repository.FoodRepositoryImpl;
 import main.java.repository.UserRepositoryImpl;
 import main.java.model.Food;
 import main.java.repository.Food_API;
+import main.java.repository.ChatBot;
 
 import main.java.model.User;
 import main.java.controller.CategoriesController;
 import main.java.controller.ExtraInformationController;
 import main.java.controller.FoodController;
+import main.java.controller.MedicationController;
 import main.java.controller.UserController;
 
 /**
@@ -360,11 +365,13 @@ public class Main {
 		System.out.println("8. User preference search based on Category and User allergy ");
 		System.out.println("9. Show Most Common Types of Foods");
 		System.out.println("10. Food Alerts From Govt.");
+		System.out.println("11. ChatBot.");
+		System.out.println("12. Medication List");
 		System.out.println("0. Exit\n");
 
 		//Get user input
 		int userInput = inputOutput("Please press the number that corresponds to what you would like the food analyzer to do.");
-		if (userInput >= 0 && userInput <=10) {
+		if (userInput >= 0 && userInput <=12) {
 			if (userInput == 1) CheckAccount(loggedUSername);
 			if (userInput == 2) UpdateUserInformation();
 			if (userInput == 3) checkProd();		
@@ -375,6 +382,8 @@ public class Main {
 			if (userInput == 8) showPreference();
 			if (userInput == 9) CategoriesController.RankCategories();		
 			if (userInput == 10) Food_API.main(null);	
+			if (userInput == 11) ChatBot.main(null);
+			if (userInput == 12) manageMedicationList();
 			if (userInput == 0) System.exit(0);
 		} else {
 			System.out.println("Please enter a number from 0 - 4");
@@ -401,6 +410,115 @@ public class Main {
 	    }
 	    return filteredFoods;
 	}
+	private static MedicationController medicationController = new MedicationController();
+
+	public static void manageMedicationList() {
+	    System.out.println("1. Show Medication List");
+	    System.out.println("2. Add Medication");
+	    System.out.println("3. Remove Medication");
+	    System.out.println("4. Update Medication");
+	    System.out.println("0. Return");
+
+	    // Get user input
+	    int userInput = inputOutput("Please press the number that corresponds to what you would like to do with the medication list.");
+	    switch (userInput) {
+	        case 1:
+	        	showMedicationList();
+	            break;
+	        case 2:
+	            addMedication();
+	            break;
+	        case 3:
+	            removeMedication();
+	            break;
+	        case 4:
+	            updateMedication();
+	            break;
+	        case 0:
+	            afterLoginUser();
+	            break;
+	        default:
+	            System.out.println("Please enter a valid option.");
+	            manageMedicationList();
+	            break;
+	    }
+	}
+	private static void showMedicationList() {
+        medicationController.listMedications();
+        System.out.println("9. Return to Medication List");
+        
+        // Get user input
+        int userInput = inputOutput("Please press the number that corresponds to your choice.");
+        if (userInput == 9) {
+            manageMedicationList();
+        } else {
+            System.out.println("Invalid option. Returning to main menu.");
+            manageMedicationList();
+        }
+    }
+
+	private static void addMedication() {
+	    Scanner scanner = new Scanner(System.in);
+
+	    // Get user input for medication details
+	    System.out.print("Enter medication name: ");
+	    String name = scanner.nextLine();
+
+	    System.out.print("Enter expiration date (yyyy-MM-dd): ");
+	    String dateString = scanner.nextLine();
+	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	    Date expirationDate;
+	    try {
+	        expirationDate = dateFormat.parse(dateString);
+	    } catch (ParseException e) {
+	        System.out.println("Invalid date format. Please enter a date in the format yyyy-MM-dd.");
+	        addMedication();
+	        return;
+	    }
+
+	    medicationController.addMedication(name, expirationDate);
+	    System.out.println("Medication added successfully!");
+	    manageMedicationList();
+	}
+
+	private static void removeMedication() {
+	    Scanner scanner = new Scanner(System.in);
+
+	    // Get user input for medication name
+	    System.out.print("Enter medication name to remove: ");
+	    String name = scanner.nextLine();
+
+	    medicationController.removeMedication(name);
+	    System.out.println("Medication removed successfully!");
+	    manageMedicationList();
+	}
+
+	private static void updateMedication() {
+	    Scanner scanner = new Scanner(System.in);
+
+	    // Get user input for medication details
+	    System.out.print("Enter medication name to update: ");
+	    String name = scanner.nextLine();
+
+	    System.out.print("Enter new expiration date (yyyy-MM-dd): ");
+	    String dateString = scanner.nextLine();
+	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	    Date expirationDate;
+	    try {
+	        expirationDate = dateFormat.parse(dateString);
+	    } catch (ParseException e) {
+	        System.out.println("Invalid date format. Please enter a date in the format yyyy-MM-dd.");
+	        // Provide the user with another chance to input the correct date
+	        updateMedication();
+	        return;
+	    }
+
+	    medicationController.updateMedication(name, expirationDate);
+	    System.out.println("Medication updated successfully!");
+	    manageMedicationList();
+	}
+
+
 
 	
 	public static void main(String[] args) {	
